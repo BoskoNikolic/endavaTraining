@@ -11,6 +11,7 @@ import org.testng.Assert;
 import com.endavatraining.util.Utils;
 import com.endavatraining.pages.LoginPage;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestLoginPage {
 

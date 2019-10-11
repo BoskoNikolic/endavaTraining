@@ -16,14 +16,14 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Utils {
 
-	/**
+    /**
      *
      * This method sets up browser options regarding the browser size and browser automated notion
      *
-	 * @author Srboljub.Todorvic
-	 * @author Jovan.Penic
-	 * @return ChromeOptions
-	 */
+     * @author Srboljub.Todorvic
+     * @author Jovan.Penic
+     * @return ChromeOptions
+     */
 
     public static Logger log = Logger.getLogger(Utils.class);
 
@@ -34,8 +34,10 @@ public class Utils {
         return options;
     }
 
-	/**
-	 * @author Luka.Ivancic
+
+
+    /**
+	 *
 	 * @param browser
 	 * @return loginPage
 	 */

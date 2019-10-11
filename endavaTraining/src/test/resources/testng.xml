@@ -6,11 +6,11 @@
 		<classes>
 			<class name="com.endavatraining.TestLoginPage" />
 		</classes>
-  </test> 
-  <test thread-count="5" name="TestHomePage">
+  </test>
+<test thread-count="5" name="TestHomePage">
   	<parameter name="browser" value="chrome" />
 		<classes>
 			<class name="com.endavatraining.TestHomePage" />
 		</classes>
-  </test> 
+  </test>
 </suite> <!-- Suite -->

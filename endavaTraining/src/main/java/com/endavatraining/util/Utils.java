@@ -3,6 +3,7 @@ package com.endavatraining.util;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.endavatraining.pages.LoginPage;
@@ -18,9 +19,13 @@ public class Utils {
 	public static LoginPage setUpWebBrowser(String browser) {
 		LoginPage loginPage;
 
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized");
+
+
 		if (browser.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
-			loginPage = new LoginPage(new ChromeDriver());
+			loginPage = new LoginPage(new ChromeDriver(options));
 		} else {
 			throw new RuntimeException();
 		}

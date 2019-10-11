@@ -11,16 +11,16 @@ public class BasePage {
 	protected BasePage(WebDriver driver) {
 		this.driver = driver;
 	}
- 
+
 	protected boolean isElementPresent(By by){
-	        try{
-	            driver.findElement(by);
-	            return true;
-	        }
-	        catch(NoSuchElementException e){
-	            return false;
-	        }
-	    }
+		try{
+			driver.findElement(by);
+			return true;
+		}
+		catch(NoSuchElementException e){
+			return false;
+		}
+	}
 	    	  
 	public void quit() {
 		if (this.driver != null) {

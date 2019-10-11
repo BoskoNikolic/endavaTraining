@@ -1,6 +1,7 @@
 package com.endavatraining;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -33,8 +34,8 @@ public class TestLoginPage {
 	 * visible on the page
 	 */
 	@Test
+
 	public void testLoginPageIsOpened() {
-		loginPage = new LoginPage(new ChromeDriver());
 		loginPage.open();
 		new WebDriverWait(loginPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));

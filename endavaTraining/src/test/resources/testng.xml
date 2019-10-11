@@ -12,5 +12,5 @@
 		<classes>
 			<class name="com.endavatraining.TestHomePage" />
 		</classes>
-  </test> 
+  </test>
 </suite> <!-- Suite -->

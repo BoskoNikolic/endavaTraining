@@ -19,12 +19,10 @@ public class Utils {
 	public static LoginPage setUpWebBrowser(String browser) {
 		LoginPage loginPage;
 
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--start-maximized");
-
-
 		if (browser.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
+			ChromeOptions options = new ChromeOptions();
+			options.addArguments("--start-maximized");
 			loginPage = new LoginPage(new ChromeDriver(options));
 		} else {
 			throw new RuntimeException();

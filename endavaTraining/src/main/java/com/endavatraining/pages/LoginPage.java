@@ -15,14 +15,16 @@ public class LoginPage extends BasePage {
 	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
-
+	
 
 	public void open() {
 		driver.get(ENDAVATRAINING_URL);
 	}
 
 	public By getLoginButton() {
+
 		return loginButton;
+
 	}
 
 	public HomePage openAs(String username, String password){

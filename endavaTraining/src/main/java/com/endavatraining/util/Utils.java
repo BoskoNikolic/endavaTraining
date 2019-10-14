@@ -22,6 +22,7 @@ public class Utils {
     public static ChromeOptions setUpBrowserOptions() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         return options;
     }
 
@@ -31,6 +32,7 @@ public class Utils {
      */
     public static LoginPage setUpWebBrowser(String browser) {
         LoginPage loginPage;
+
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             loginPage = new LoginPage(new ChromeDriver(setUpBrowserOptions()));

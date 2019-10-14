@@ -3,19 +3,17 @@ package com.endavatraining;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import com.endavatraining.util.Utils;
 import com.endavatraining.pages.LoginPage;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestLoginPage {
 
 	private LoginPage loginPage;
+	private String username = "admin";
+	private String password = "password";
 
 	@BeforeTest
 	@Parameters({ "browser" })
@@ -34,8 +32,24 @@ public class TestLoginPage {
 				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
 	}
 
+	/**
+	 *
+	 * Test validates that username and password fields are populated with correct credentials,
+	 * by checking if they are visible in username and password text boxes.
+	 * Then test validates that username and password fields are NOT populated after clicking log In,
+	 * by checking if username and password text boxes after clicking on Log In are empty.
+	 *
+	 *  @author Jovan.Penic
+	 */
+	@Test
+	public void testLoginUsernameAndPasswordsArePopulated(){
+		loginPage.open();
+		assert loginPage.areValuesEnteredInTextFields(username, password) : "Username or password fields are NOT populated with correct credentials!";
+		assert loginPage.isUserPasswordTextFieldEmpty() : "Text fields username and password are populated after clicking on Log In!";
+	}
 
-	@AfterMethod
+
+	@AfterTest
 	public void tearDown() {
 		if (loginPage != null)
 			loginPage.quit();

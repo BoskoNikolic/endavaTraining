@@ -34,7 +34,6 @@ public class TestLoginPage {
 	 */
 	@Test
 	public void testLoginPageIsOpened() {
-//		loginPage = new LoginPage(new ChromeDriver());
 		loginPage.open();
 		new WebDriverWait(loginPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));

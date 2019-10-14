@@ -13,6 +13,8 @@ public class TestLoginPage {
     private LoginPage loginPage;
     private static String falseUsername = "user1";
     private static String falsePassword = "password1";
+	private String username = "admin";
+	private String password = "password";
 
     @BeforeTest
     @Parameters({"browser"})
@@ -41,6 +43,21 @@ public class TestLoginPage {
         loginPage.userLogin(falseUsername, falsePassword);
         assert loginPage.isErrorTextPresent() : "Error message is not present";
     }
+	/**
+	 *
+	 * Test validates that username and password fields are populated with correct credentials,
+	 * by checking if they are visible in username and password text boxes.
+	 * Then test validates that username and password fields are NOT populated after clicking log In,
+	 * by checking if username and password text boxes after clicking on Log In are empty.
+	 *
+	 *  @author Jovan.Penic
+	 */
+	@Test
+	public void testLoginUsernameAndPasswordsArePopulated(){
+		loginPage.open();
+		assert loginPage.areValuesEnteredInTextFields(username, password) : "Username or password fields are NOT populated with correct credentials!";
+		assert loginPage.isUserPasswordTextFieldEmpty() : "Text fields username and password are populated after clicking on Log In!";
+	}
 
 
     @AfterTest

@@ -12,16 +12,17 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Utils {
 
     /**
+     * Setting chrome options at one place
+     *
+     * @return ChromeOptions
      * @author Srboljub.Todorovic
      * @author Jovan.Penic
-     * @return ChromeOptions
      */
-	public static ChromeOptions setUpBrowserOptions() {
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--start-maximized");
-		options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-		return options;
-	}
+    public static ChromeOptions setUpBrowserOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        return options;
+    }
 
     /**
      * @param browser

@@ -12,6 +12,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Utils {
 
 	/**
+     *
+     * This method sets up browser options regarding the browser size and browser automated notion
+     *
 	 * @author Srboljub.Todorvic
 	 * @author Jovan.Penic
 	 * @return ChromeOptions

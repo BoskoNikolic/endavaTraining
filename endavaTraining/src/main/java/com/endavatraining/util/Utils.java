@@ -12,31 +12,39 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Utils {
 
 	/**
-	 * 
-	 * @param browser
-	 * @return LoginPage
+	 * @author Srboljub.Todorvic
+	 * @author Jovan.Penic
+	 * @return ChromeOptions
 	 */
-	public static LoginPage setUpWebBrowser(String browser) {
-		LoginPage loginPage;
+    public static ChromeOptions setUpBrowserOptions() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        return options;
+    }
 
-		if (browser.equalsIgnoreCase("chrome")) {
-			WebDriverManager.chromedriver().setup();
-			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--start-maximized");
-			loginPage = new LoginPage(new ChromeDriver(options));
-		} else {
-			throw new RuntimeException();
-		}
-		return loginPage;
-	}
+    /**
+     * @param browser
+     * @return LoginPage
+     */
+    public static LoginPage setUpWebBrowser(String browser) {
+        LoginPage loginPage;
+        if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            loginPage = new LoginPage(new ChromeDriver(setUpBrowserOptions()));
+        } else {
+            throw new RuntimeException();
+        }
+        return loginPage;
+    }
 
 
-	/**
-	 * @param driver
-	 * @param locator
-	 */
-	public static void webDriverWait(WebDriver driver, By locator) {
-		new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
-	}
+    /**
+     * @param driver
+     * @param locator
+     */
+    public static void webDriverWait(WebDriver driver, By locator) {
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
 
 }

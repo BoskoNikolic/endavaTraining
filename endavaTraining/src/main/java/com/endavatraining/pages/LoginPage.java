@@ -19,13 +19,10 @@ public class LoginPage extends BasePage {
 
 	public void open() {
 		driver.get(ENDAVATRAINING_URL);
-	//	driver.manage().window().maximize();
 	}
 
 	public By getLoginButton() {
-
 		return loginButton;
-
 	}
 
 	public HomePage openAs(String username, String password){

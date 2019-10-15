@@ -1,8 +1,9 @@
 package com.endavatraining;
 
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 import com.endavatraining.util.Utils;
@@ -14,6 +15,8 @@ public class TestLoginPage {
 	private LoginPage loginPage;
 	private String username = "admin";
 	private String password = "password";
+	private By userNameBy = By.id("username");
+	private By passWordBy = By.id("password");
 
 	@BeforeTest
 	@Parameters({ "browser" })
@@ -44,8 +47,12 @@ public class TestLoginPage {
 	@Test
 	public void testLoginUsernameAndPasswordsArePopulated(){
 		loginPage.open();
-		assert loginPage.areValuesEnteredInTextFields(username, password) : "Username or password fields are NOT populated with correct credentials!";
-		assert loginPage.isUserPasswordTextFieldEmpty() : "Text fields username and password are populated after clicking on Log In!";
+		loginPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
+		Assert.assertEquals("admin", Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
+		Assert.assertEquals("password", Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
+		loginPage.clickRightUpperLoginButton();
+		Assert.assertTrue(Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty());
+		Assert.assertTrue(Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty());
 	}
 
 

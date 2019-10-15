@@ -18,8 +18,16 @@ public class HomePage extends BasePage {
 		return isElementPresent(homePageWelcomeMessage);
 	}
 
+	/**
+	 * Method is checking if Admin Tab is present on the page
+	 * @author Luka.Ivancic
+	 * @return adminTab true/adminTab false
+	 *
+	 * */
+
 	public boolean isAdminTabPresent(){
 		return isElementPresent(adminTab);
 	}
-
 }
+
+

@@ -11,6 +11,7 @@ public class LoginPage extends BasePage {
 	private By loginButton = By.xpath("//input[@value='Log In']");
 	private By userName = By.xpath("//input[@name='username']");
 	private By password = By.xpath("//input[@name='password']");
+	private By createAccountButton = By.linkText("Create account");
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -27,6 +28,7 @@ public class LoginPage extends BasePage {
 
 	}
 
+
 	public HomePage openAs(String username, String password){
 		open();
 		driver.findElement(this.userName).sendKeys(username);
@@ -36,4 +38,17 @@ public class LoginPage extends BasePage {
 		
 		return new HomePage(driver);		
 	}
+	/**
+	 * @Method opens Create account page
+	 * author: luka.ivancic
+	 * @return RegisterNewAccountPage
+	 *
+	 * */
+	public RegisterNewAccountPage openCreateAccount(){
+		open();
+		driver.findElement(createAccountButton).click();
+		return new RegisterNewAccountPage(driver);
+
+	}
+
 }

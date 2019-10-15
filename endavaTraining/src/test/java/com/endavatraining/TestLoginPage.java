@@ -18,11 +18,6 @@ public class TestLoginPage {
 
 	private LoginPage loginPage;
 
-//	@BeforeTest
-	public void setUp() {
-		WebDriverManager.chromedriver().setup();
-	}
-
 	@BeforeTest
 	@Parameters({ "browser" })
 	public void setUp(String browser) {

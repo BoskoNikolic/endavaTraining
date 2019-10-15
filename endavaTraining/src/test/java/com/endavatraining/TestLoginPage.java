@@ -1,5 +1,6 @@
 package com.endavatraining;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,11 +17,13 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class TestLoginPage {
 
 	private LoginPage loginPage;
+	public static Logger logger = Logger.getLogger(TestLoginPage.class);
 
 //	@BeforeTest
 	public void setUp() {
 		WebDriverManager.chromedriver().setup();
 	}
+
 
 	@BeforeTest
 	@Parameters({ "browser" })

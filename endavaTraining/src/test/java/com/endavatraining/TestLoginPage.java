@@ -11,6 +11,8 @@ import com.endavatraining.pages.LoginPage;
 public class TestLoginPage {
 
     private LoginPage loginPage;
+    private static String falseUsername = "user1";
+    private static String falsePassword = "password1";
 
     @BeforeTest
     @Parameters({"browser"})
@@ -35,7 +37,7 @@ public class TestLoginPage {
      */
     @Test
     public void testLoginWithFalseCredentials() {
-        loginPage = loginPage.openWithFalseCedentials("user1", "password1");
+        loginPage.userLogin(falseUsername, falsePassword);
         assert loginPage.isErrorTextPresent() : "Error message is not present";
     }
 

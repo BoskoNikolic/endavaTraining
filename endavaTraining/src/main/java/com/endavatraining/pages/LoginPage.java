@@ -6,45 +6,42 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
 
-	private static final String ENDAVATRAINING_URL = "http://172.17.167.71:9010";
+    private static final String ENDAVATRAINING_URL = "http://172.17.167.71:9010";
 
     private By loginButton = By.xpath("//input[@value='Log In']");
     private By userName = By.xpath("//input[@name='username']");
     private By password = By.xpath("//input[@name='password']");
-    private By errorLoginText = By.xpath("//*[@id='loginbox']/div[2]/div[2]/div");
+    private By errorLoginText = By.id("loginbox");
 
-	public LoginPage(WebDriver driver) {
-		super(driver);
-	}
+    public LoginPage(WebDriver driver) {
+        super(driver);
+    }
 
 
-	public void open() {
-		driver.get(ENDAVATRAINING_URL);
-	}
+    public void open() {
+        driver.get(ENDAVATRAINING_URL);
+    }
 
-	public By getLoginButton() {
+    public By getLoginButton() {
 
-		return loginButton;
+        return loginButton;
 
-	}
+    }
+
+    /*
+    * Creating method for user login
+     */
+    public void userLogin(String username, String password) {
+        open();
+        driver.findElement(this.userName).sendKeys(username);
+        driver.findElement(this.password).sendKeys(password);
+        driver.findElement(this.loginButton).click();
+    }
 
     public HomePage openAs(String username, String password) {
         open();
-        driver.findElement(this.userName).sendKeys(username);
-        driver.findElement(this.password).sendKeys(password);
-
-        driver.findElement(this.loginButton).click();
-
+        userLogin(username, password);
         return new HomePage(driver);
-    }
-
-    public LoginPage openWithFalseCedentials(String username, String password) {
-        open();
-        driver.findElement(this.userName).sendKeys(username);
-        driver.findElement(this.password).sendKeys(password);
-        driver.findElement(this.loginButton).click();
-
-        return new LoginPage(driver);
     }
 
     public boolean isErrorTextPresent() {

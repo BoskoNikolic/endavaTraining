@@ -8,7 +8,7 @@ public class LoginPage extends BasePage {
 
     private static final String ENDAVATRAINING_URL = "http://172.17.167.71:9010";
 
-    private By loginButton = By.id("form");
+    private By loginButton = By.xpath("//input[@value='Log In']");
     private By userName = By.id("username");
     private By password = By.id("password");
     private By errorLoginText = By.id("loginbox");

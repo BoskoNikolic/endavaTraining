@@ -42,6 +42,18 @@ public class Utils {
         return loginPage;
     }
 
+    /**
+     *
+     * This method returns value of attributes of any text field
+     *
+     * @author Jovan.Penic
+     * @param driver
+     * @param anyTextField
+     * @return
+     */
+    public static String getAtributeOfAnyTextField(WebDriver driver, By anyTextField){
+        return driver.findElement(anyTextField).getAttribute("value");
+    }
 
     /**
      * @param driver

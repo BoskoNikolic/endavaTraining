@@ -12,7 +12,8 @@ public class LoginPage extends BasePage {
     private By userName = By.id("username");
     private By password = By.id("password");
     private By errorLoginText = By.id("loginbox");
-	private  By upperRightLogInButton = By.xpath("//a[@href='/login']");
+	private By upperRightLogInButton = By.xpath("//a[@href='/login']");
+	private By createAccountButton = By.xpath("//a[@href='/register']");
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -37,8 +38,7 @@ public class LoginPage extends BasePage {
      */
     public void userLogin(String username, String password) {
         open();
-        driver.findElement(this.userName).sendKeys(username);
-        driver.findElement(this.password).sendKeys(password);
+        insertTextInUsernameAndPasswordLogInTextFields(username, password);
         driver.findElement(this.loginButton).click();
     }
 
@@ -47,6 +47,18 @@ public class LoginPage extends BasePage {
         userLogin(username, password);
         return new HomePage(driver);
     }
+
+	/**
+	 *
+	 *
+	 * @author Jovan.Penic
+	 * @return RegisterNewAccountPage
+	 */
+	public RegisterNewAccountPage openCreateAccount() {
+		open();
+		driver.findElement(createAccountButton).click();
+		return new RegisterNewAccountPage(driver);
+	}
 
     public boolean isErrorTextPresent() {
         return isElementPresent(errorLoginText);
@@ -60,39 +72,23 @@ public class LoginPage extends BasePage {
 	 * @param username
 	 * @param password
 	 */
-	public void insertTextInTextField(String username, String password) {
+	public void insertTextInUsernameAndPasswordLogInTextFields(String username, String password) {
 		driver.findElement(this.userName).sendKeys(username);
 		driver.findElement(this.password).sendKeys(password);
 	}
 
-	/**
-	 *
-	 * This method checks if values entered in username and password text fields are visible.
-	 *
-	 * @author Jovan.Penic
-	 * @param username
-	 * @param password
-	 * @return boolean
-	 */
-	public boolean areValuesEnteredInTextFields(String username, String password){
-		insertTextInTextField(username, password);
-		return (driver.findElement(this.userName).getAttribute("value").equals("admin") &&
-				driver.findElement(this.password).getAttribute("value").equals("password"));
-	}
+    /**
+     *
+     * This method finds and clicks on upper right Log In button
+     *
+     * @author Jovan.Penic
+     */
+    public void clickRightUpperLoginButton() {
+        driver.findElement(upperRightLogInButton).click();
+    }
 
-	/**
-	 *
-	 * This method checks if values entered in username and password text fields are visible after clicking on upper Log In button.
-	 *
-	 * @author Jovan.Penic
-	 * @return boolean
-	 */
-	public boolean isUserPasswordTextFieldEmpty(){
-		driver.findElement(upperRightLogInButton).click();
-		String userNameText = driver.findElement(this.userName).getAttribute("value");
-		String passWordText = driver.findElement(this.password).getAttribute("value");
-		return (userNameText.isEmpty() && passWordText.isEmpty());
-	}
+
+
 
 
 }

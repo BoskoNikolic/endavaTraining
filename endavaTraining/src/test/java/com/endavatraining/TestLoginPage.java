@@ -34,6 +34,7 @@ public class TestLoginPage {
     /*
      * Test validates that attempt to login with false credentials is not possible
      * by checking if log in error message is visible on the page
+     * @author Srboljub.Todorovic
      */
     @Test
     public void testLoginWithFalseCredentials() {

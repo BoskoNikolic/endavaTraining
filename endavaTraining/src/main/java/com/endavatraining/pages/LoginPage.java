@@ -29,7 +29,12 @@ public class LoginPage extends BasePage {
     }
 
     /*
-    * Creating method for user login
+    * This method is used for user login
+    *
+    * @author Srboljub.Todorovic
+    * @param username
+    * @param password
+    *
      */
     public void userLogin(String username, String password) {
         open();

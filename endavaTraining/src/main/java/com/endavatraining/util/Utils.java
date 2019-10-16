@@ -35,20 +35,37 @@ public class Utils {
     }
 
     /**
+     * @author Luka.Ivancic
      * @param browser
-     * @return LoginPage
+     * @return loginPage
      */
     public static LoginPage setUpWebBrowser(String browser) {
+
         LoginPage loginPage;
 
-		if (browser.equalsIgnoreCase("chrome")) {
-			WebDriverManager.chromedriver().setup();
-            loginPage = new LoginPage(new ChromeDriver(setUpBrowserOptions()));
-		} else {
-			throw new RuntimeException();
-		}
-		return loginPage;
-	}
+        if (browser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            loginPage = new LoginPage(new ChromeDriver());
+        }else if(browser.equalsIgnoreCase("firefox")){
+            WebDriverManager.firefoxdriver().setup();
+            loginPage = new LoginPage(new FirefoxDriver());
+        }else if (browser.equalsIgnoreCase("edge")){
+            WebDriverManager.edgedriver().setup();
+            loginPage = new LoginPage(new EdgeDriver());
+        }else if (browser.equalsIgnoreCase("opera")){
+            WebDriverManager.operadriver().setup();
+            loginPage = new LoginPage(new OperaDriver());
+        }else if (browser.equalsIgnoreCase("ie")){
+            WebDriverManager.iedriver().setup();
+            loginPage = new LoginPage(new InternetExplorerDriver());
+        }
+
+        else {
+            throw new RuntimeException();
+        }
+        return loginPage;
+    }
+
 
     /**
      *

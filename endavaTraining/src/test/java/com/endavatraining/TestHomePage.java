@@ -61,37 +61,37 @@ public class TestHomePage {
 		homePage = loginPage.openAs(username, password);
         homePage.logOutButton("Home");
 		new WebDriverWait(loginPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
+				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLogOutMessage()));
 
 		loginPage.userLogin(username,password);
 		homePage.logOutButton("Users");
 		new WebDriverWait(loginPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
+				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLogOutMessage()));
 
 		loginPage.userLogin(username,password);
 		homePage.logOutButton("Heroes");
 		new WebDriverWait(loginPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
+				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLogOutMessage()));
 
 		loginPage.userLogin(username,password);
 		homePage.logOutButton("Gallery");
 		new WebDriverWait(loginPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
+				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLogOutMessage()));
 
 		loginPage.userLogin(username,password);
 		homePage.logOutButton("API");
 		new WebDriverWait(loginPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
+				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLogOutMessage()));
 
 		loginPage.userLogin(username,password);
 		homePage.logOutButton("Broken Link");
 		new WebDriverWait(loginPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
+				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLogOutMessage()));
 
 		loginPage.userLogin(username,password);
 		homePage.logOutButton("Profile");
 		new WebDriverWait(loginPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
+				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLogOutMessage()));
 	}
 
 

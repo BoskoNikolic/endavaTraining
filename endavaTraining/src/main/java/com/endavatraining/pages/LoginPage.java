@@ -14,6 +14,7 @@ public class LoginPage extends BasePage {
 	private By loginButton = By.xpath("//input[@value='Log In']");
 	private By userName = By.xpath("//input[@name='username']");
 	private By password = By.xpath("//input[@name='password']");
+	private By logOutMessage = By.xpath("//div[@class='alert alert-success']");
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -34,6 +35,11 @@ public class LoginPage extends BasePage {
 
 	public By getLoginButton() {
 		return loginButton;
+
+	}
+
+	public By getLogOutMessage() {
+		return logOutMessage;
 
 	}
 

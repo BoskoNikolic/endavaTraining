@@ -11,7 +11,21 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class Utils {
 
 	/**
-	 * 
+	 *
+	 * This method sets up browser options regarding the browser size and browser automated notion
+	 *
+	 * @author Srboljub.Todorvic
+	 * @author Jovan.Penic
+	 * @return ChromeOptions
+	 */
+	public static ChromeOptions setUpBrowserOptions() {
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--start-maximized");
+		options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+		return options;
+	}
+
+	/**
 	 * @param browser
 	 * @return LoginPage
 	 */
@@ -20,7 +34,7 @@ public class Utils {
 
 		if (browser.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
-			loginPage = new LoginPage(new ChromeDriver());
+			loginPage = new LoginPage(new ChromeDriver(setUpBrowserOptions()));
 		} else {
 			throw new RuntimeException();
 		}

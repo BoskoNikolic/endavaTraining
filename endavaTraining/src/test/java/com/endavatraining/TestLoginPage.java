@@ -12,28 +12,41 @@ import com.endavatraining.pages.LoginPage;
 
 public class TestLoginPage {
 
-	private LoginPage loginPage;
-	private String username = "admin";
-	private String password = "password";
+    private LoginPage loginPage;
+    private static String falseUsername = "user1";
+    private static String falsePassword = "password1";
+	private static String username = "admin";
+	private static String password = "password";
 	private By userNameBy = By.id("username");
 	private By passWordBy = By.id("password");
 
-	@BeforeTest
-	@Parameters({ "browser" })
-	public void setUp(String browser) {
-		loginPage = Utils.setUpWebBrowser(browser);
-	}
-	
-	/*
-	 * Test validates that login page is opened by checking if log in button is
-	 * visible on the page
-	 */
-	@Test
-	public void testLoginPageIsOpened() {
-		loginPage.open();
-		new WebDriverWait(loginPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
-	}
+    @BeforeTest
+    @Parameters({"browser"})
+    public void setUp(String browser) {
+        loginPage = Utils.setUpWebBrowser(browser);
+    }
+
+    /*
+     * Test validates that login page is opened by checking if log in button is
+     * visible on the page
+     */
+    @Test
+    public void testLoginPageIsOpened() {
+        loginPage.open();
+        new WebDriverWait(loginPage.driver, 5)
+                .until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
+    }
+
+    /*
+     * Test validates that attempt to login with false credentials is not possible
+     * by checking if log in error message is visible on the page
+     * @author Srboljub.Todorovic
+     */
+    @Test
+    public void testLoginWithFalseCredentials() {
+        loginPage.userLogin(falseUsername, falsePassword);
+        assert loginPage.isErrorTextPresent() : "Error message is not present";
+    }
 
 	/**
 	 *
@@ -45,21 +58,21 @@ public class TestLoginPage {
 	 *  @author Jovan.Penic
 	 */
 	@Test
-	public void testLoginUsernameAndPasswordsArePopulated(){
+	public void testRightUpperLoginButtonClearsCredentialsTextFields(){
 		loginPage.open();
 		loginPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
-		Assert.assertEquals("admin", Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
-		Assert.assertEquals("password", Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
+		Assert.assertEquals( username, Utils.getAtributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated. Expected: " + username + ", but got: " + Utils.getAtributeOfAnyTextField(loginPage.driver, userNameBy));
+		Assert.assertEquals( password, Utils.getAtributeOfAnyTextField(loginPage.driver, passWordBy), "Entered text in password Log In field is NOT populated. Expected: " + password + ", but got: " + Utils.getAtributeOfAnyTextField(loginPage.driver, passWordBy));
 		loginPage.clickRightUpperLoginButton();
-		Assert.assertTrue(Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty());
-		Assert.assertTrue(Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty());
+		Assert.assertTrue(Utils.getAtributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty(), "Username Log In field IS populated. Expected empty text field, but got: " + Utils.getAtributeOfAnyTextField(loginPage.driver, userNameBy));
+		Assert.assertTrue(Utils.getAtributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + Utils.getAtributeOfAnyTextField(loginPage.driver, passWordBy));
 	}
 
 
-	@AfterTest
-	public void tearDown() {
-		if (loginPage != null)
-			loginPage.quit();
-	}
+    @AfterTest
+    public void tearDown() {
+        if (loginPage != null)
+            loginPage.quit();
+    }
 
 }

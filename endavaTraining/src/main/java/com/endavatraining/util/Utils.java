@@ -64,6 +64,4 @@ public class Utils {
         new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
-
-
 }

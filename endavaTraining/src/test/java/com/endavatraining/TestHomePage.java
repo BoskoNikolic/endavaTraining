@@ -25,11 +25,6 @@ public class TestHomePage {
 
 
 
-	//	@BeforeTest
-	public void setUp() {
-		WebDriverManager.chromedriver().setup();
-	}
-
 	@BeforeTest
 	@Parameters({ "browser" })
 	public void setUp(String browser) {
@@ -41,8 +36,7 @@ public class TestHomePage {
 	 */
 	@Test
 	public void testIsHomePageAvailable() {
-		log.info("Test is home page availabe" );
-		loginPage = new LoginPage(new ChromeDriver());
+        log.info("Test is home page availabe" );
 		homePage = loginPage.openAs(username, password);
 		assert homePage.isWelcomeTextPresent() : "Welcome text is not present";
 	}

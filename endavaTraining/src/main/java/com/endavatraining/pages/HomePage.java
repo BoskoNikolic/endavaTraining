@@ -10,6 +10,7 @@ public class HomePage extends BasePage {
 	private By homePageWelcomeMessage = By.xpath("//div[@class='panel-title text-center'][contains(.,'Hello, and welcome to our gamers page!')]");
 	public static Logger log = Logger.getLogger(HomePage.class);
 
+
 	public HomePage(WebDriver driver) {
 		super(driver);
 	}
@@ -18,5 +19,7 @@ public class HomePage extends BasePage {
 	public boolean isWelcomeTextPresent() {
 		return isElementPresent(homePageWelcomeMessage);
 	}
+
+
 
 }

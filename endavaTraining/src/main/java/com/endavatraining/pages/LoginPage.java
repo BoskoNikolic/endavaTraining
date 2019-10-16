@@ -15,7 +15,9 @@ public class LoginPage extends BasePage {
 	private By errorLoginText = By.id("loginbox");
     private By upperRightLogInButton = By.xpath("//a[@href='/login']");
 
-    public LoginPage(WebDriver driver) {
+
+
+	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
 	

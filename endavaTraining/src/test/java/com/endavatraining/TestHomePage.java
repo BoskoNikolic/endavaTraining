@@ -1,6 +1,7 @@
 package com.endavatraining;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,6 +23,8 @@ public class TestHomePage {
 	private String username = "user";
 	private String password = "password";
 	public static Logger log = Logger.getLogger(TestHomePage.class);
+	private By logOutMessage = By.xpath("//div[@class='alert alert-success']");
+
 
 
 
@@ -39,6 +42,50 @@ public class TestHomePage {
         log.info("Test is home page availabe" );
 		homePage = loginPage.openAs(username, password);
 		assert homePage.isWelcomeTextPresent() : "Welcome text is not present";
+	}
+
+	/**
+	 * Test validates that log out button works properly from every page
+	 * @author Danko.Lojanica
+	 */
+
+	@Test
+	public void testIsLogOutWorks() {
+		loginPage = new LoginPage(new ChromeDriver());
+		homePage = loginPage.openAs(username, password);
+		homePage.logOutButton("Home");
+		new WebDriverWait(loginPage.driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(logOutMessage));
+
+		loginPage.userLogin(username,password);
+		homePage.logOutButton("Users");
+		new WebDriverWait(loginPage.driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(logOutMessage));
+
+		loginPage.userLogin(username,password);
+		homePage.logOutButton("Heroes");
+		new WebDriverWait(loginPage.driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(logOutMessage));
+
+		loginPage.userLogin(username,password);
+		homePage.logOutButton("Gallery");
+		new WebDriverWait(loginPage.driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(logOutMessage));
+
+		loginPage.userLogin(username,password);
+		homePage.logOutButton("API");
+		new WebDriverWait(loginPage.driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(logOutMessage));
+
+		loginPage.userLogin(username,password);
+		homePage.logOutButton("Broken Link");
+		new WebDriverWait(loginPage.driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(logOutMessage));
+
+		loginPage.userLogin(username,password);
+		homePage.logOutButton("Profile");
+		new WebDriverWait(loginPage.driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(logOutMessage));
 	}
 
 

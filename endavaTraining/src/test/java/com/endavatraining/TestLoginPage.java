@@ -23,6 +23,7 @@ public class TestLoginPage {
 	private By userNameBy = By.id("username");
 	private By passWordBy = By.id("password");
 
+
 	@BeforeTest
 	@Parameters({"browser"})
 	public void setUp(String browser) {

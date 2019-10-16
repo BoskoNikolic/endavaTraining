@@ -1,5 +1,6 @@
 package com.endavatraining;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,9 +21,11 @@ public class TestHomePage {
 	private LoginPage loginPage;
 	private String username = "user";
 	private String password = "password";
+	public static Logger log = Logger.getLogger(TestHomePage.class);
 
 
-//	@BeforeTest
+
+	//	@BeforeTest
 	public void setUp() {
 		WebDriverManager.chromedriver().setup();
 	}
@@ -38,6 +41,7 @@ public class TestHomePage {
 	 */
 	@Test
 	public void testIsHomePageAvailable() {
+		log.info("Test is home page availabe" );
 		loginPage = new LoginPage(new ChromeDriver());
 		homePage = loginPage.openAs(username, password);
 		assert homePage.isWelcomeTextPresent() : "Welcome text is not present";

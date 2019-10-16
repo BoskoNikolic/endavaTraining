@@ -39,10 +39,9 @@ public class LoginPage extends BasePage {
 		return new HomePage(driver);		
 	}
 	/**
-	 * @Method opens Create account page
-	 * author: luka.ivancic
+	 * Opens Create account page
+	 * @author: luka.ivancic
 	 * @return RegisterNewAccountPage
-	 *
 	 * */
 	public RegisterNewAccountPage openCreateAccount(){
 		open();

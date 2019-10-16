@@ -40,8 +40,7 @@ public class TestRegisterNewAccountPage {
      * The test opens the Create Account page, enters the correct credentials, and submits the form
      * @author: luka.ivancic
      * */
-
-    @Test
+     @Test
     public void testCreateNewAccount(){
         registerNewAccountPage = loginPage.openCreateAccount();
         registerNewAccountPage.signUpNewUser(registrationCode,userName,firstName,lastName, about, secretQuestion, secretAnswer, password);

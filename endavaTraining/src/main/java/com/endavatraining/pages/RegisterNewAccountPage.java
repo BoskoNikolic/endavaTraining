@@ -26,8 +26,6 @@ public class RegisterNewAccountPage extends  BasePage {
      * @author luka.ivancic
      *
      * */
-
-
     public void signUpNewUser(String registrationCode, String userName, String firstName, String lastName, String about, String secretQuestion, String secretAnswer, String password){
 
         driver.findElement(this.registrationCode).sendKeys(registrationCode);

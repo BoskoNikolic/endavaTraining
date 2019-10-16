@@ -61,11 +61,11 @@ public class TestLoginPage {
 	public void testRightUpperLoginButtonClearsCredentialsTextFields(){
 		loginPage.open();
 		loginPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
-		Assert.assertEquals( username, Utils.getAtributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated. Expected: " + username + ", but got: " + Utils.getAtributeOfAnyTextField(loginPage.driver, userNameBy));
-		Assert.assertEquals( password, Utils.getAtributeOfAnyTextField(loginPage.driver, passWordBy), "Entered text in password Log In field is NOT populated. Expected: " + password + ", but got: " + Utils.getAtributeOfAnyTextField(loginPage.driver, passWordBy));
+		Assert.assertEquals( username, Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated.");
+		Assert.assertEquals( password, Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy), "Entered text in password Log In field is NOT populated. ");
 		loginPage.clickRightUpperLoginButton();
-		Assert.assertTrue(Utils.getAtributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty(), "Username Log In field IS populated. Expected empty text field, but got: " + Utils.getAtributeOfAnyTextField(loginPage.driver, userNameBy));
-		Assert.assertTrue(Utils.getAtributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + Utils.getAtributeOfAnyTextField(loginPage.driver, passWordBy));
+		Assert.assertTrue(Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty(), "Username Log In field IS populated. Expected empty text field, but got: " + Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
+		Assert.assertTrue(Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
 	}
 
 

@@ -12,6 +12,7 @@ public class LoginPage extends BasePage {
     private By password = By.id("password");
     private By errorLoginText = By.id("loginbox");
 	private By upperRightLogInButton = By.xpath("//a[@href='/login']");
+	private By createAccountButton = By.xpath("//a[@href='/register']");
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
@@ -49,6 +50,18 @@ public class LoginPage extends BasePage {
     public boolean isErrorTextPresent() {
         return isElementPresent(errorLoginText);
     }
+
+	/**
+	 *
+	 *
+	 * @author Jovan.Penic
+	 * @return RegisterNewAccountPage
+	 */
+	public RegisterNewAccountPage openCreateAccount() {
+		open();
+		driver.findElement(createAccountButton).click();
+		return new RegisterNewAccountPage(driver);
+	}
 
 	/**
 	 *

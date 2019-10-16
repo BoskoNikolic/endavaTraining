@@ -20,7 +20,7 @@ public class RegisterNewAccountPage extends BasePage {
      *
      * @author Jovan.Penic
      * @param enterRandomRegistrationCode
-     * @return
+     * @return boolean
      */
     public boolean isUserNameFieldPresentAfterSpecialCharacterEntryInRegistrationCodeField(String enterRandomRegistrationCode) {
         driver.findElement(registrationCodeField).sendKeys(enterRandomRegistrationCode);
@@ -32,6 +32,7 @@ public class RegisterNewAccountPage extends BasePage {
      * This method checks if registration code error is visible
      *
      * @author Jovan.Penic
+     * @return boolean
      */
     public boolean isErrorMessagePresentAfterFalseEntryInRegistrationCodeField() {
         return isElementPresent(registrationCodeErrorMessage);

@@ -32,8 +32,8 @@ public class TestRegisterNewAccountPage {
     @Test (priority = 0)
     public void test1IsUserFieldVisibleRegiCodeSpecialCharacters() {
         registerNewAccountPage = loginPage.openCreateAccount();
-        Assert.assertFalse(registerNewAccountPage.isUserNameFieldPresentAfterSpecialCharacterEntryInRegistrationCodeField(randomRegistrationCodeWithSpecCharacters), "Username field IS present after special character entry in registration code field");
-        Assert.assertTrue(registerNewAccountPage.isErrorMessagePresentAfterFalseEntryInRegistrationCodeField(), "Error message does NOT appear after special character entry in registration code field");
+        Assert.assertFalse(registerNewAccountPage.isUserNameFieldPresentAfterSpecialCharacterEntryInRegistrationCodeField(randomRegistrationCodeWithSpecCharacters), "Username field IS present after special character entry in registration code field. ");
+        Assert.assertTrue(registerNewAccountPage.isErrorMessagePresentAfterFalseEntryInRegistrationCodeField(), "Error message does NOT appear after special character entry in registration code field. ");
     }
 
     /**
@@ -46,8 +46,8 @@ public class TestRegisterNewAccountPage {
     @Test (priority = 1)
     public void test2IsUserFieldVisibleRegiCodeLettersAndNumbers() {
         registerNewAccountPage = loginPage.openCreateAccount();
-        Assert.assertTrue(registerNewAccountPage.isUserNameFieldPresentAfterSpecialCharacterEntryInRegistrationCodeField(randomRegistrationCodeWithLettersAndNumbers),"Username field is NOT present after random letters and numbers entry in registration code field");
-        Assert.assertFalse(registerNewAccountPage.isErrorMessagePresentAfterFalseEntryInRegistrationCodeField(), "Error message DOES appear after random letters and numbers entry in registration code field");
+        Assert.assertTrue(registerNewAccountPage.isUserNameFieldPresentAfterSpecialCharacterEntryInRegistrationCodeField(randomRegistrationCodeWithLettersAndNumbers),"Username field is NOT present after random letters and numbers entry in registration code field. ");
+        Assert.assertFalse(registerNewAccountPage.isErrorMessagePresentAfterFalseEntryInRegistrationCodeField(), "Error message DOES appear after random letters and numbers entry in registration code field. ");
     }
 
     @AfterTest

@@ -1,5 +1,6 @@
 package com.endavatraining.util;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -19,6 +20,9 @@ public class Utils {
 	 * @author Jovan.Penic
 	 * @return ChromeOptions
 	 */
+
+    public static Logger log = Logger.getLogger(Utils.class);
+
     public static ChromeOptions setUpBrowserOptions() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
@@ -33,14 +37,14 @@ public class Utils {
     public static LoginPage setUpWebBrowser(String browser) {
         LoginPage loginPage;
 
-        if (browser.equalsIgnoreCase("chrome")) {
-            WebDriverManager.chromedriver().setup();
+		if (browser.equalsIgnoreCase("chrome")) {
+			WebDriverManager.chromedriver().setup();
             loginPage = new LoginPage(new ChromeDriver(setUpBrowserOptions()));
-        } else {
-            throw new RuntimeException();
-        }
-        return loginPage;
-    }
+		} else {
+			throw new RuntimeException();
+		}
+		return loginPage;
+	}
 
     /**
      *
@@ -56,12 +60,12 @@ public class Utils {
     }
 
 
-    /**
-     * @param driver
-     * @param locator
-     */
-    public static void webDriverWait(WebDriver driver, By locator) {
-        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
+	/**
+	 * @param driver
+	 * @param locator
+	 */
+	public static void webDriverWait(WebDriver driver, By locator) {
+		new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
+	}
 
 }

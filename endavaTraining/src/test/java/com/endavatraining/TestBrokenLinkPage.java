@@ -5,6 +5,7 @@ import com.endavatraining.pages.BrokenLinkPage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -19,6 +20,8 @@ public class TestBrokenLinkPage extends BaseTest {
 
     private LoginPage loginPage;
     private By brokenLinkPageTab = By.linkText("Broken Link");
+    public static Logger log = Logger.getLogger(TestHomePage.class);
+
 
     @BeforeTest
     @Parameters({"browser"})
@@ -33,6 +36,7 @@ public class TestBrokenLinkPage extends BaseTest {
      */
     @Test
     public void testBrokenLinkPageIsOpened() {
+        log.info("Test to check if broken link page is visible" );
         HomePage homePage = loginPage.openAs(BaseTest.adminUsername, BaseTest.adminPassword);
         homePage.goToPage(brokenLinkPageTab);
 

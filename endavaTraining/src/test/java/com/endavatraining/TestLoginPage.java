@@ -1,5 +1,6 @@
 package com.endavatraining;
 
+import com.endavatraining.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -61,11 +62,11 @@ public class TestLoginPage {
 	public void testRightUpperLoginButtonClearsCredentialsTextFields(){
 		loginPage.open();
 		loginPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
-		Assert.assertEquals( username, Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated.");
-		Assert.assertEquals( password, Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy), "Entered text in password Log In field is NOT populated. ");
+		Assert.assertEquals( username, BasePage.getAttributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated.");
+		Assert.assertEquals( password, BasePage.getAttributeOfAnyTextField(loginPage.driver, passWordBy), "Entered text in password Log In field is NOT populated. ");
 		loginPage.clickRightUpperLoginButton();
-		Assert.assertTrue(Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty(), "Username Log In field IS populated. Expected empty text field, but got: " + Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
-		Assert.assertTrue(Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
+		Assert.assertTrue(BasePage.getAttributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty(), "Username Log In field IS populated. Expected empty text field, but got: " + BasePage.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
+		Assert.assertTrue(BasePage.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + BasePage.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
 	}
 
 

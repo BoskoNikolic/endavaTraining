@@ -14,16 +14,30 @@ public class RegisterNewAccountPage extends BasePage {
         super(driver);
     }
 
+
+    /**
+     *
+     * This method enters registration code in Registration Code text field
+     *
+     * @author Jovan.Penic
+     * @param registrationCode
+     * @return boolean
+     */
+    public void enterRegistrationCode(String registrationCode) {
+        driver.findElement(registrationCodeField).sendKeys(registrationCode);
+    }
+
+
     /**
      *
      * This method enters text in Registration Code text field and checks is mentioned element visible
      *
      * @author Jovan.Penic
-     * @param enterRandomRegistrationCode
+     * @param randomRegistrationCode
      * @return boolean
      */
-    public boolean isUserNameFieldPresentAfterSpecialCharacterEntryInRegistrationCodeField(String enterRandomRegistrationCode) {
-        driver.findElement(registrationCodeField).sendKeys(enterRandomRegistrationCode);
+    public boolean isUserNameFieldPresent(String randomRegistrationCode) {
+        enterRegistrationCode(randomRegistrationCode);
         return isElementPresent(userNameField);
     }
 
@@ -34,7 +48,7 @@ public class RegisterNewAccountPage extends BasePage {
      * @author Jovan.Penic
      * @return boolean
      */
-    public boolean isErrorMessagePresentAfterFalseEntryInRegistrationCodeField() {
+    public boolean isRegistrationCodeErrorMessagePresent() {
         return isElementPresent(registrationCodeErrorMessage);
     }
 

@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
 public class TestAdminPage extends BaseTest {
 
     private LoginPage loginPage;
+    private AdminPage adminPage;
     private By adminPageButton = By.linkText("Admin");
     public static Logger log = Logger.getLogger(HomePage.class);
 
@@ -38,11 +39,10 @@ public class TestAdminPage extends BaseTest {
      */
     @Test
     public void testAdminPageCheckbox() {
-        log.info("This test checks if checkbox on admin page is ticked and changes its state");
         HomePage homePage = loginPage.openAs(BaseTest.adminUsername, BaseTest.adminPassword);
         homePage.goToPage(adminPageButton);
 
-        AdminPage adminPage = new AdminPage(homePage.driver);
+        adminPage = new AdminPage(homePage.driver);
 
         Assert.assertTrue(adminPage.isCheckBoxSelected());
         adminPage.clickOnAllowUsersToShareRegCode();
@@ -54,6 +54,6 @@ public class TestAdminPage extends BaseTest {
 
     @AfterMethod
     public void tearDown() {
-        loginPage.quit();
+        adminPage.quit();
     }
 }

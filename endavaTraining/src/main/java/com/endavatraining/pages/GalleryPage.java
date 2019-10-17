@@ -1,10 +1,12 @@
 package com.endavatraining.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 
 public class GalleryPage extends BasePage {
 
     private LoginPage loginPage;
+    public static Logger log = Logger.getLogger(GalleryPage.class);
 //    private static String usernameLogInValue = "user";
 //    private static String passwordLogInValue = "password";
 

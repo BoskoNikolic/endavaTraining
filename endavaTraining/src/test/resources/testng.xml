@@ -19,5 +19,4 @@
 			<class name="com.endavatraining.TestRegisterNewAccountPage" />
 		</classes>
 	</test>
-
 </suite> <!-- Suite -->

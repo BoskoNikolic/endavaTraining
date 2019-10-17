@@ -3,6 +3,7 @@ package com.endavatraining;
 import com.endavatraining.pages.GalleryPage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -13,6 +14,7 @@ public class TestGalleryPage {
     private LoginPage loginPage;
     private static String usernameLogInValue = "user";
     private static String passwordLogInValue = "password";
+    public static Logger log = Logger.getLogger(TestGalleryPage.class);
     private By firstPictureInGallery  = By.xpath("//img[@onclick='openModal();currentSlide(1)']");
 
 
@@ -29,8 +31,9 @@ public class TestGalleryPage {
      *
      *  @author Jovan.Penic
      */
-    @Test (priority = 0)
+    @Test
     public void testAreImageCaptionsVisible() throws InterruptedException {
+        log.info("Test are image captions different for every picture");
         loginPage.userLogin(usernameLogInValue, passwordLogInValue);
         galleryPage = loginPage.openGalleryPage();
         galleryPage.driver.findElement(firstPictureInGallery).click();

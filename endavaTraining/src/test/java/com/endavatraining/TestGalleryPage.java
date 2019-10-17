@@ -15,8 +15,14 @@ public class TestGalleryPage {
     private static String usernameLogInValue = "user";
     private static String passwordLogInValue = "password";
     public static Logger log = Logger.getLogger(TestGalleryPage.class);
-    private By firstPictureInGallery  = By.xpath("//img[@onclick='openModal();currentSlide(1)']");
 
+    private By [] nizXPathSlajdovaUGaleriji = {By.xpath("//img[@onclick='currentSlide(1)']"), By.xpath("//img[@onclick='currentSlide(2)']"), By.xpath("//img[@onclick='currentSlide(3)']"), By.xpath("//img[@onclick='currentSlide(4)']")};
+
+    private By pictureInGallery = By.xpath("//img[@onclick='openModal();currentSlide(1)']");
+    private By firstSlide = By.xpath("//img[@onclick='currentSlide(1)']");
+    private By secondSlide = By.xpath("//img[@onclick='currentSlide(2)']");
+    private By thirdSlide = By.xpath("//img[@onclick='currentSlide(3)']");
+    private By fourthSlide = By.xpath("//img[@onclick='currentSlide(4)']");
 
     @BeforeTest
     @Parameters({"browser"})
@@ -31,13 +37,19 @@ public class TestGalleryPage {
      *
      *  @author Jovan.Penic
      */
+
     @Test
-    public void testAreImageCaptionsVisible() throws InterruptedException {
+    public void testAreImageCaptionsVisible() {
         log.info("Test are image captions different for every picture");
         loginPage.userLogin(usernameLogInValue, passwordLogInValue);
         galleryPage = loginPage.openGalleryPage();
-        galleryPage.driver.findElement(firstPictureInGallery).click();
-        Thread.sleep(2000);
+
+//        Assert.assertNotEquals(GalleryPage.getAttributeOfAnyTextField(galleryPage.driver, firstSlide, "alt"), galleryPage.driver.findElement(firstSlide).getAttribute("alt"), "Captions of slide 1 and slide 2 ARE the same.");
+        for (int i = 0; i < nizXPathSlajdovaUGaleriji.length; i++) {
+            for (int j = i + 1; j < nizXPathSlajdovaUGaleriji.length; j++) {
+            Assert.assertNotEquals(GalleryPage.getAttributeOfAnyTextField(galleryPage.driver, nizXPathSlajdovaUGaleriji[i], "alt"), GalleryPage.getAttributeOfAnyTextField(galleryPage.driver, nizXPathSlajdovaUGaleriji[j], "alt"), "Captions of slide " + i + " and slide " + j + " ARE the same.");
+            }
+        }
 
 //        Assert.assertFalse(registerNewAccountPage.isUserNameFieldPresentAfterSpecialCharacterEntryInRegistrationCodeField(randomRegistrationCodeWithSpecCharacters), "Username field IS present after special character entry in registration code field. ");
  //       Assert.assertTrue(registerNewAccountPage.isErrorMessagePresentAfterFalseEntryInRegistrationCodeField(), "Error message does NOT appear after special character entry in registration code field. ");
@@ -46,8 +58,6 @@ public class TestGalleryPage {
 
     @AfterTest
     public void tearDown() {
-        if (loginPage != null)
-            loginPage.quit();
         if (galleryPage != null)
             galleryPage.quit();
     }

@@ -27,7 +27,6 @@ public class HomePage extends BasePage {
      */
 
     public void goToPage(By pageTab) {
-    	log.info("This method changes page from home to pageTab page");
         driver.findElement(pageTab).click();
     }
 

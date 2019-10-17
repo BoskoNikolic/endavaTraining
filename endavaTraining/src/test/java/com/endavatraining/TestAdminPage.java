@@ -1,6 +1,7 @@
 package com.endavatraining;
 
 import com.endavatraining.pages.AdminPage;
+import com.endavatraining.pages.BasePage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
@@ -18,7 +19,7 @@ import org.testng.annotations.Test;
  *
  */
 
-public class TestAdminPage extends BaseTest {
+public class TestAdminPage{
 
     private LoginPage loginPage;
     private AdminPage adminPage;
@@ -39,12 +40,12 @@ public class TestAdminPage extends BaseTest {
      */
     @Test
     public void testAdminPageCheckbox() {
-        HomePage homePage = loginPage.openAs(BaseTest.adminUsername, BaseTest.adminPassword);
+        HomePage homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
         homePage.goToPage(adminPageButton);
 
         adminPage = new AdminPage(homePage.driver);
 
-        Assert.assertTrue(adminPage.isCheckBoxSelected());
+        Assert.assertTrue(adminPage.isCheckBoxSelected(), "Checkbox is not ticked by default");
         adminPage.clickOnAllowUsersToShareRegCode();
         Assert.assertFalse(adminPage.isCheckBoxSelected());
         adminPage.clickOnAllowUsersToShareRegCode();

@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>endavaTraining</groupId>
+  <artifactId>endavaTraining</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+  	<java.version>1.8</java.version>
+  	<testng.version>6.14.3</testng.version>
+  	<selenium.version>3.141.59</selenium.version>
+  	<webdrivermanager.version>3.7.1</webdrivermanager.version>
+  	<maven.compiler.version>3.7.0</maven.compiler.version>
+  	<maven.surefire.version>2.20</maven.surefire.version>
+  	<maven.failsafe.version>2.20</maven.failsafe.version>
+  </properties>
+  	
+  <dependencies>
+  	<dependency>
+  		<groupId>org.testng</groupId>
+		<artifactId>testng</artifactId>
+		<version>${testng.version}</version>
+  	</dependency>
+  	<dependency>
+		<groupId>org.seleniumhq.selenium</groupId>
+		<artifactId>selenium-java</artifactId>
+		<version>${selenium.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>io.github.bonigarcia</groupId>
+		<artifactId>webdrivermanager</artifactId>
+		<version>${webdrivermanager.version}</version>
+	</dependency>
+	<dependency>
+  <groupId>org.slf4j</groupId>
+  <artifactId>slf4j-simple</artifactId>
+  <version>1.7.21</version>
+</dependency>
+	<dependency>
+		<groupId>log4j</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.17</version>
+	</dependency>
+  </dependencies>
+  	
+  <build>
+  	<resources>
+  		<resource>
+				<directory>src/main/java/com/endavatraining/util</directory>
+				<filtering>true</filtering>
+			</resource>
+		<resource>
+			<directory>src/test/resources</directory>
+			<filtering>true</filtering>
+		</resource>
+	</resources>
+    <plugins>
+    	<plugin>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>${maven.compiler.version} </version>
+			<configuration>
+				<source>${java.version}</source>
+				<target>${java.version}</target>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-surefire-plugin</artifactId>
+			<version>${maven.surefire.version}</version>
+			<!-- Skip running *Test.java tests within test phase, as those are integration 
+				tests -->
+			<configuration>
+				<skipTests>true</skipTests>
+			</configuration>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-failsafe-plugin</artifactId>
+			<version>${maven.failsafe.version}</version>
+			<configuration>
+				<suiteXmlFiles>
+					<suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
+				</suiteXmlFiles>
+			</configuration>
+			<executions>
+				<execution>
+					<goals>
+						<goal>integration-test</goal>
+						<goal>verify</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+    </plugins>
+  </build>
+</project>

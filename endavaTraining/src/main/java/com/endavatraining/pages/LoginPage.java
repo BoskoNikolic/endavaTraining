@@ -14,6 +14,7 @@ public class LoginPage extends BasePage {
 	private By password = By.id("password");
 	private By errorLoginText = By.id("loginbox");
     private By upperRightLogInButton = By.xpath("//a[@href='/login']");
+	private By createAccountButton = By.linkText("Create account");
 
     public LoginPage(WebDriver driver) {
 		super(driver);
@@ -79,4 +80,14 @@ public class LoginPage extends BasePage {
     public void clickRightUpperLoginButton() {
         driver.findElement(upperRightLogInButton).click();
     }
+
+	public RegisterNewAccountPage openCreateAccount(){
+		open();
+		driver.findElement(createAccountButton).click();
+		return new RegisterNewAccountPage(driver);
+
+	}
+
+
+
 }

@@ -7,7 +7,6 @@ import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -20,7 +19,9 @@ import org.testng.annotations.*;
 public class TestBrokenLinkPage {
 
     private LoginPage loginPage;
+    private BrokenLinkPage brokenLinkPage;
     private By brokenLinkPageTab = By.linkText("Broken Link");
+    private static final String EXPECTED_TITLE = "Alice in Wonderland";
     public static Logger log = Logger.getLogger(TestBrokenLinkPage.class);
 
 
@@ -38,26 +39,24 @@ public class TestBrokenLinkPage {
 
     @Test
     public void testBrokenLinkPageIsOpened() {
-        log.info("Test to check if broken link page is visible");
 
-        HomePage homePage = loginPage.openAs(BasePage.adminUsername, BasePage.adminPassword);
+        HomePage homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
         homePage.goToPage(brokenLinkPageTab);
 
-        BrokenLinkPage brokenLinkPage = new BrokenLinkPage(homePage.driver);
+        brokenLinkPage = new BrokenLinkPage(homePage.driver);
 
         for (By button : brokenLinkPage.listOfElements()) {
             Assert.assertTrue(brokenLinkPage.isElementNotPresentOnPage(button));
         }
         Assert.assertTrue(brokenLinkPage.isMainTitlePresent());
-        String expectedTitle = "Alice in Wonderland";
         String mainTitle = brokenLinkPage.driver.findElement(brokenLinkPage.getMainTitle()).getText();
-        Assert.assertEquals(mainTitle, expectedTitle);
+        Assert.assertEquals(mainTitle, EXPECTED_TITLE, "Main title differs from expected");
     }
 
 
     @AfterMethod
     public void tearDown() {
-        if (loginPage != null)
-            loginPage.quit();
+        if (brokenLinkPage != null)
+            brokenLinkPage.quit();
     }
 }

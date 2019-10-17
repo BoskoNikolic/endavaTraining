@@ -23,6 +23,7 @@ public class TestGalleryPage {
     private By secondSlide = By.xpath("//img[@onclick='currentSlide(2)']");
     private By thirdSlide = By.xpath("//img[@onclick='currentSlide(3)']");
     private By fourthSlide = By.xpath("//img[@onclick='currentSlide(4)']");
+    //private By idFirstSlide = By.id();
 
     @BeforeTest
     @Parameters({"browser"})

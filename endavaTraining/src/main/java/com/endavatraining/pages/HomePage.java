@@ -16,7 +16,7 @@ public class HomePage extends BasePage {
 	
 
 	public boolean isWelcomeTextPresent() {
-		log.debug("Is welcome text present?");
+		log.debug("Welcome text found");
 		return isElementPresent(homePageWelcomeMessage);
 	}
 

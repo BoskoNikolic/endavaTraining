@@ -27,7 +27,6 @@ public class LoginPage extends BasePage {
 	}
 
 	public By getLoginButton() {
-		log.debug("Get Log In button");
 		return loginButton;
 
 	}

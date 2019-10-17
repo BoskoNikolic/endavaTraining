@@ -1,5 +1,6 @@
 package com.endavatraining.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -8,7 +9,7 @@ public class RegisterNewAccountPage extends BasePage {
     private By userNameField = By.xpath("//div[@id='registeruserinfo' and contains(@style,'display: block')]/div[1]");
     private By registrationCodeField = By.id("registrationCode");
     private By registrationCodeErrorMessage = By.xpath("//div[@id='regiCodeMessage'][contains(.,\"Bla bla incorect registration code format!\")]");
-
+    public static Logger log = Logger.getLogger(RegisterNewAccountPage.class);
 
     public RegisterNewAccountPage(WebDriver driver) {
         super(driver);
@@ -24,6 +25,7 @@ public class RegisterNewAccountPage extends BasePage {
      * @return boolean
      */
     public void enterRegistrationCode(String registrationCode) {
+        log.debug("Enter registration code");
         driver.findElement(registrationCodeField).sendKeys(registrationCode);
     }
 
@@ -37,6 +39,7 @@ public class RegisterNewAccountPage extends BasePage {
      * @return boolean
      */
     public boolean isUserNameFieldPresent(String randomRegistrationCode) {
+        log.debug("Is there username field?");
         enterRegistrationCode(randomRegistrationCode);
         return isElementPresent(userNameField);
     }
@@ -49,6 +52,7 @@ public class RegisterNewAccountPage extends BasePage {
      * @return boolean
      */
     public boolean isRegistrationCodeErrorMessagePresent() {
+        log.debug("Is registration code error message present?");
         return isElementPresent(registrationCodeErrorMessage);
     }
 

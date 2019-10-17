@@ -49,6 +49,7 @@ public class TestLoginPage {
      */
     @Test
     public void testLoginWithFalseCredentials() {
+		log.info("Test is login with false credentials  possible" );
         loginPage.userLogin(falseUsername, falsePassword);
         assert loginPage.isErrorTextPresent() : "Error message is not present";
     }
@@ -64,6 +65,7 @@ public class TestLoginPage {
      */
     @Test
     public void testRightUpperLoginButtonClearsCredentialsTextFields(){
+		log.info("Test is visible entering username and password, then test are they visible after click on Log In" );
         loginPage.open();
         loginPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
         Assert.assertEquals( username, BasePage.getAttributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated.");

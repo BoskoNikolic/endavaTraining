@@ -28,6 +28,7 @@ public class Utils {
     public static Logger log = Logger.getLogger(Utils.class);
 
     public static ChromeOptions setUpBrowserOptions() {
+		log.debug("Set up browser options");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
@@ -41,7 +42,7 @@ public class Utils {
 	 */
 	public static LoginPage setUpWebBrowser(String browser) {
 		LoginPage loginPage;
-
+		log.debug("Choose web browser");
 		if (browser.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
 			loginPage = new LoginPage(new ChromeDriver(setUpBrowserOptions()));

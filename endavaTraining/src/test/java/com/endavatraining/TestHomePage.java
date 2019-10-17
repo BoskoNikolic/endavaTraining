@@ -36,7 +36,7 @@ public class TestHomePage {
 	 */
 	@Test
 	public void testIsHomePageAvailable() {
-        log.info("Test is home page availabe" );
+        log.info("Test is home page available" );
 		homePage = loginPage.openAs(username, password);
 		assert homePage.isWelcomeTextPresent() : "Welcome text is not present";
 	}

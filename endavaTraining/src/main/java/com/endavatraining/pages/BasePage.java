@@ -15,6 +15,7 @@ public class BasePage {
 	}
  
 	protected boolean isElementPresent(By by){
+		log.debug("Is element present?");
 	        try{
 	            driver.findElement(by);
 	            return true;
@@ -25,6 +26,7 @@ public class BasePage {
 	    }
 	    	  
 	public void quit() {
+		log.debug("Quit browser");
 		if (this.driver != null) {
 			driver.quit();
 		}
@@ -40,6 +42,7 @@ public class BasePage {
 	 * @return
 	 */
 	public static String getAttributeOfAnyTextField(WebDriver driver, By anyTextField){
+		log.debug("Get attribute of any text field");
 		return driver.findElement(anyTextField).getAttribute("value");
 	}
 

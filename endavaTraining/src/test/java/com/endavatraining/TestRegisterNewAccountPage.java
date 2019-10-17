@@ -33,10 +33,10 @@ public class TestRegisterNewAccountPage {
      */
     @Test (priority = 0)
     public void testUserFieldVisibilityFalseRegCodeSpecChar() {
-        log.info("Testing visibility of user name field after entering wrong code with special characters" );
         registerNewAccountPage = loginPage.openCreateAccount();
         Assert.assertFalse(registerNewAccountPage.isUserNameFieldPresent(randomRegistrationCodeWithSpecCharacters), "Username field IS present after special character entry in registration code field. ");
         Assert.assertTrue(registerNewAccountPage.isRegistrationCodeErrorMessagePresent(), "Error message does NOT appear after special character entry in registration code field. ");
+        log.info("Tested visibility of user name field after entering wrong code with special characters" );
     }
 
     /**
@@ -48,10 +48,10 @@ public class TestRegisterNewAccountPage {
      */
     @Test (priority = 1)
     public void testUserFieldVisibilityFalseRegCode() {
-        log.info("Testing visibility of user name field after entering wrong code without special characters" );
         registerNewAccountPage = loginPage.openCreateAccount();
         Assert.assertFalse(registerNewAccountPage.isUserNameFieldPresent(randomRegistrationCodeWithLettersAndNumbers),"Username field IS present after random letters and numbers entry in registration code field. ");
         Assert.assertTrue(registerNewAccountPage.isRegistrationCodeErrorMessagePresent(), "Error message does NOT appear after random letters and numbers entry in registration code field. ");
+        log.info("Tested visibility of user name field after entering wrong code without special characters" );
     }
 
     @AfterTest

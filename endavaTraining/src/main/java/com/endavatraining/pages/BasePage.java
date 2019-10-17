@@ -15,7 +15,6 @@ public class BasePage {
 	}
  
 	protected boolean isElementPresent(By by){
-		log.debug("Searching element");
 	        try{
 	            driver.findElement(by);
 	            return true;

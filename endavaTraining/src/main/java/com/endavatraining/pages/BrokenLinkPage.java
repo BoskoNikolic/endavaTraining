@@ -68,5 +68,7 @@ public class BrokenLinkPage extends BasePage {
         return isElementPresent(mainTitle);
     }
 
-
+    public By getMainTitle() {
+        return mainTitle;
+    }
 }

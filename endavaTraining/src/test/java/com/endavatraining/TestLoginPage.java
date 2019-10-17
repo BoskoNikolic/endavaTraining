@@ -68,11 +68,11 @@ public class TestLoginPage {
 		log.info("Test is visible entering username and password, then test are they visible after click on Log In" );
         loginPage.open();
         loginPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
-        Assert.assertEquals( username, BasePage.getAttributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated.");
-        Assert.assertEquals( password, BasePage.getAttributeOfAnyTextField(loginPage.driver, passWordBy), "Entered text in password Log In field is NOT populated. ");
+        Assert.assertEquals( username, LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated.");
+        Assert.assertEquals( password, LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy), "Entered text in password Log In field is NOT populated. ");
         loginPage.clickRightUpperLoginButton();
-        Assert.assertTrue(BasePage.getAttributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty(), "Username Log In field IS populated. Expected empty text field, but got: " + BasePage.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
-        Assert.assertTrue(BasePage.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + BasePage.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
+        Assert.assertTrue(LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty(), "Username Log In field IS populated. Expected empty text field, but got: " + LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
+        Assert.assertTrue(LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
     }
 
 

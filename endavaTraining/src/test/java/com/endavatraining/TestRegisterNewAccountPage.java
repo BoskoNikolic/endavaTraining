@@ -16,7 +16,7 @@ public class TestRegisterNewAccountPage {
     private LoginPage loginPage;
     private static final String randomRegistrationCodeWithSpecCharacters = "+++123";
     private static final String randomRegistrationCodeWithLettersAndNumbers = "abc123";
-    public static Logger log = Logger.getLogger(TestHomePage.class);
+    public static Logger log = Logger.getLogger(TestRegisterNewAccountPage.class);
 
     @BeforeTest
     @Parameters({"browser"})

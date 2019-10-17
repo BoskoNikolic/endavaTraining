@@ -20,7 +20,7 @@ public class TestBrokenLinkPage extends BaseTest {
 
     private LoginPage loginPage;
     private By brokenLinkPageTab = By.linkText("Broken Link");
-    public static Logger log = Logger.getLogger(TestHomePage.class);
+    public static Logger log = Logger.getLogger(TestBrokenLinkPage.class);
 
 
     @BeforeTest

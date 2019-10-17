@@ -25,7 +25,7 @@ public class RegisterNewAccountPage extends BasePage {
      * @return boolean
      */
     public void enterRegistrationCode(String registrationCode) {
-        log.debug("Enter registration code");
+        log.debug("Inserting registration code");
         driver.findElement(registrationCodeField).sendKeys(registrationCode);
     }
 
@@ -39,7 +39,6 @@ public class RegisterNewAccountPage extends BasePage {
      * @return boolean
      */
     public boolean isUserNameFieldPresent(String randomRegistrationCode) {
-        log.debug("Is there username field?");
         enterRegistrationCode(randomRegistrationCode);
         return isElementPresent(userNameField);
     }
@@ -52,7 +51,6 @@ public class RegisterNewAccountPage extends BasePage {
      * @return boolean
      */
     public boolean isRegistrationCodeErrorMessagePresent() {
-        log.debug("Is registration code error message present?");
         return isElementPresent(registrationCodeErrorMessage);
     }
 

@@ -28,7 +28,7 @@ public class Utils {
     public static Logger log = Logger.getLogger(Utils.class);
 
     public static ChromeOptions setUpBrowserOptions() {
-		log.debug("Set up browser options");
+		log.debug("Setting up browser options");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});

@@ -36,7 +36,7 @@ public class TestLoginPage {
 	 */
 	@Test
 	public void testLoginPageIsOpened() {
-		log.info("Test is log in page opened");
+		log.info("Testing log in page opened");
 		loginPage.open();
 		new WebDriverWait(loginPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
@@ -49,7 +49,7 @@ public class TestLoginPage {
      */
     @Test
     public void testLoginWithFalseCredentials() {
-		log.info("Test is login with false credentials  possible" );
+		log.info("Testing login with false credentials  possible" );
         loginPage.userLogin(falseUsername, falsePassword);
         assert loginPage.isErrorTextPresent() : "Error message is not present";
     }
@@ -65,7 +65,7 @@ public class TestLoginPage {
      */
     @Test
     public void testRightUpperLoginButtonClearsCredentialsTextFields(){
-		log.info("Test is visible entering username and password, then test are they visible after click on Log In" );
+		log.info("Testing entering username and password, then testing visibility after clicking on Log In" );
         loginPage.open();
         loginPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
         Assert.assertEquals( username, LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated.");

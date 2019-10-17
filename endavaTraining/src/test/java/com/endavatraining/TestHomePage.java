@@ -4,10 +4,8 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.Assert;
+import org.testng.annotations.*;
 
 import com.endavatraining.util.Utils;
 import com.endavatraining.pages.HomePage;
@@ -25,7 +23,7 @@ public class TestHomePage {
 
 
 
-	@BeforeTest
+	@BeforeMethod
 	@Parameters({ "browser" })
 	public void setUp(String browser) {
 		loginPage = Utils.setUpWebBrowser(browser);
@@ -39,6 +37,17 @@ public class TestHomePage {
         log.info("Test is home page availabe" );
 		homePage = loginPage.openAs(username, password);
 		assert homePage.isWelcomeTextPresent() : "Welcome text is not present";
+	}
+
+	/**
+	 * Test validates that the Admin Tab is not present when logged in as a regular User
+	 *
+	 * */
+	@Test
+	public void testIsAdminTabAvailable(){
+		homePage = loginPage.openAs(username, password);
+		Assert.assertFalse(homePage.isAdminTabPresent(), "Admin tab is present");
+
 	}
 
 

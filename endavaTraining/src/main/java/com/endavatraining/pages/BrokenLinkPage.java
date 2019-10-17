@@ -18,24 +18,18 @@ public class BrokenLinkPage extends BasePage {
     private By adminButton = By.linkText("Admin");
     private By profileButton = By.linkText("Profile");
     private By logOutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
-    private By logInButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li/a");
-    private By mainTitle = By.xpath("/html/body/div[1]/div/div/div[1]/div");
+    private By mainTitle = By.xpath("//div[@class='panel-title text-center'][contains(.,'Alice in Wonderland')]");
 
     private List<By> buttons = new ArrayList();
 
-    public BrokenLinkPage(WebDriver driver) {
-        super(driver);
-    }
-
     /*
      *
-     * This method is used to check if a list of the navigation bar tabs are visible on Broken link page
+     * This method returns the list of elements of a page
      * @author Srboljub.Todorovic
+     * @return
      *
      */
-    public boolean isElementNotPresentOnPage() {
-        boolean elementIsNotPresent = true;
-
+    public List<By> listOfElements() {
         buttons.add(homeButton);
         buttons.add(usersButton);
         buttons.add(usersButton);
@@ -46,15 +40,26 @@ public class BrokenLinkPage extends BasePage {
         buttons.add(adminButton);
         buttons.add(profileButton);
         buttons.add(logOutButton);
-        buttons.add(logInButton);
 
-        for (By button : buttons) {
-            if (!isElementPresent(button)) {
-                elementIsNotPresent = true;
-            } else {
-                elementIsNotPresent = false;
-                break;
-            }
+        return buttons;
+    }
+
+    public BrokenLinkPage(WebDriver driver) {
+        super(driver);
+    }
+
+    /*
+     *
+     * This method is used to check if an element is visible on Broken link page
+     * @author Srboljub.Todorovic
+     *@param
+     * @return
+     *
+     */
+    public boolean isElementNotPresentOnPage(By element) {
+        boolean elementIsNotPresent = true;
+        if (isElementPresent(element)) {
+            elementIsNotPresent = false;
         }
         return elementIsNotPresent;
     }

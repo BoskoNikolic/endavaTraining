@@ -25,11 +25,11 @@ public class TestLoginPage {
 	private By passWordBy = By.id("password");
 
 	@BeforeTest
-	@Parameters({"browser"})
+	@Parameters({ "browser" })
 	public void setUp(String browser) {
 		loginPage = Utils.setUpWebBrowser(browser);
 	}
-
+	
 	/*
 	 * Test validates that login page is opened by checking if log in button is
 	 * visible on the page

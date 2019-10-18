@@ -4,12 +4,9 @@ import com.endavatraining.pages.LoginPage;
 import com.endavatraining.pages.RegisterNewAccountPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 
 public class TestRegisterNewAccountPage {
 
@@ -26,7 +23,6 @@ public class TestRegisterNewAccountPage {
     private String SECRET_QUESTION = "The Ultimate Question";
     private String SECRET_ANSWER = "42";
     private String PASSWORD = "Johndoerules123";
-    private By submitButton = By.id("submitButton");
 
     @BeforeTest
     @Parameters({"browser"})
@@ -65,7 +61,6 @@ public class TestRegisterNewAccountPage {
         log.info("Tested visibility of user name field after entering wrong code without special characters" );
     }
 
-
      /** The test opens the Create Account page, enters the correct credentials, and submits the form
      * @author: luka.ivancic
      * */
@@ -81,6 +76,21 @@ public class TestRegisterNewAccountPage {
     }
 
 }
+
+    /**
+     * This method runs after every test and takes screen shot if test fails
+     *
+     * @author Jovan.Penic
+     * @param result
+     */
+    @AfterMethod
+    public void testFailScreenshot(ITestResult result){
+        if (ITestResult.FAILURE == result.getStatus()){
+            Utils.captureScreenshot(registerNewAccountPage.driver, result.getName());
+            log.info("Screenshot of failure of test " + result.getName() +" is taken!");
+        }
+    }
+
 
     @AfterTest
     public void tearDown() {

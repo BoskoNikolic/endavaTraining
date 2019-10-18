@@ -46,4 +46,6 @@ public class BasePage {
 	public static String getAttributeOfAnyTextField(WebDriver driver, By anyTextField){
 		return driver.findElement(anyTextField).getAttribute("value");
 	}
+	
+	
 }

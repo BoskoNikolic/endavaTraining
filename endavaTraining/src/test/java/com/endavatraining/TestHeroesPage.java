@@ -1,0 +1,96 @@
+package com.endavatraining;
+
+import com.endavatraining.pages.BasePage;
+import com.endavatraining.pages.HeroesPage;
+import com.endavatraining.pages.HomePage;
+import com.endavatraining.pages.LoginPage;
+import com.endavatraining.util.Utils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+
+public class TestHeroesPage {
+
+    private LoginPage loginPage;
+    private HomePage homePage;
+    private By heroesPageTab = By.linkText("Heroes");
+    private HeroesPage heroesPage;
+    private By addNewHeroButton = By.linkText("Add New Hero");
+    private By addHeroName = By.xpath("//*[@id=\"name\"]");
+    private By addHeroLevel = By.id("level");
+    private By addHeroClass = By.id("type");
+    private Select drpClass;
+    private By addHeroSave = By.id("submitButton");
+    private boolean condition = true;
+
+
+    @BeforeTest
+    @Parameters({"browser"})
+    public void setUp(String browser) {
+        loginPage = Utils.setUpWebBrowser(browser);
+    }
+
+    /*
+     *
+     */
+    @Test(dataProvider = "DataProvider")
+    public void testAddingNewHero(String heroName, String heroLevel, String heroClass) {
+
+        while (condition){
+            homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
+            homePage.goToPage(heroesPageTab);
+
+            heroesPage = new HeroesPage(homePage.driver);
+            condition = false;
+
+        }
+        Assert.assertFalse(heroesPage.isHeroInTable(heroName), "Hero with this username already exists ");
+
+        WebDriverWait wait = new WebDriverWait(heroesPage.driver, 3);
+        heroesPage.getElement(addNewHeroButton).click();
+
+
+        wait.until(ExpectedConditions.elementToBeClickable(addHeroName));
+        heroesPage.getElement(addHeroName).sendKeys(heroName);
+
+        wait.until(ExpectedConditions.elementToBeClickable(addHeroLevel));
+        heroesPage.getElement(addHeroLevel).sendKeys(heroLevel);
+
+        wait.until(ExpectedConditions.elementToBeClickable(addHeroClass));
+        drpClass = new Select(heroesPage.getElement(addHeroClass));
+        drpClass.selectByVisibleText(heroClass);
+
+        wait.until(ExpectedConditions.elementToBeClickable(addHeroSave));
+        heroesPage.getElement(addHeroSave).click();
+
+        Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username already exists");
+
+
+    }
+
+    @DataProvider(name = "DataProvider")
+    public Object[][] getDataFromDataprovider() {
+        return new Object[][]
+                {
+                        {"0Perkan", "11", "Mesmer"},
+                        {"1Perkan", "22", "Necromancer"},
+                        {"2Perkan", "33", "Elementalist"},
+                        {"3Perkan", "44", "Ranger"},
+                        {"4Perkan", "55", "Thief"},
+                        {"5Perkan", "66", "Engineer"},
+                        {"6Perkan", "77", "Revenant"},
+                        {"7Perkan", "12", "Guardian"},
+                        {"8Perkan", "13", "Warrior"}
+                };
+
+    }
+
+    @AfterTest
+    public void tearDown() {
+        heroesPage.quit();
+    }
+}

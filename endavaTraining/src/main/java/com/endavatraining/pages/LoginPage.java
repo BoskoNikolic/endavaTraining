@@ -16,6 +16,8 @@ public class LoginPage extends BasePage {
     private By upperRightLogInButton = By.xpath("//a[@href='/login']");
 	private By createAccountButton = By.xpath("//a[@href='/register']");
 	private By galleryButton = By.xpath("//a[@href='/gallery']");
+	public static final String USERNAME_LOGIN_VALUE = "user";
+	public static final String PASSWORD_LOGIN_VALUE = "password";
 
     public LoginPage(WebDriver driver) {
 		super(driver);

@@ -10,7 +10,10 @@ public class BasePage {
 	public WebDriver driver;
 	public static Logger log = Logger.getLogger(BasePage.class);
 
-	protected BasePage(WebDriver driver) {
+    public static final String ADMIN_USERNAME = "admin";
+    public static final String ADMIN_PASSWORD = "password";
+
+    protected BasePage(WebDriver driver) {
 		this.driver = driver;
 	}
  

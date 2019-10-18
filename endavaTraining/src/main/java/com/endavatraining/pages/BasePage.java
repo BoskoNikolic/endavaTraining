@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 public class BasePage {
 
- 	public WebDriver driver;
+	public WebDriver driver;
 	public static Logger log = Logger.getLogger(BasePage.class);
 
     public static final String ADMIN_USERNAME = "admin";
@@ -46,8 +46,8 @@ public class BasePage {
 	public static String getAttributeOfAnyTextField(WebDriver driver, By anyTextField){
 		return driver.findElement(anyTextField).getAttribute("value");
 	}
-	
-	
-	
-	
+
+
+
+
 }

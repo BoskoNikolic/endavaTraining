@@ -76,15 +76,15 @@ public class TestHeroesPage {
     public Object[][] getDataFromDataprovider() {
         return new Object[][]
                 {
-                        {"0Perkan", "11", "Mesmer"},
-                        {"1Perkan", "22", "Necromancer"},
-                        {"2Perkan", "33", "Elementalist"},
-                        {"3Perkan", "44", "Ranger"},
-                        {"4Perkan", "55", "Thief"},
-                        {"5Perkan", "66", "Engineer"},
-                        {"6Perkan", "77", "Revenant"},
-                        {"7Perkan", "12", "Guardian"},
-                        {"8Perkan", "13", "Warrior"}
+                        {"0Hero", "11", "Mesmer"},
+                        {"1Hero", "22", "Necromancer"},
+                        {"2Hero", "33", "Elementalist"},
+                        {"3Hero", "44", "Ranger"},
+                        {"4Hero", "55", "Thief"},
+                        {"5Hero", "66", "Engineer"},
+                        {"6Hero", "77", "Revenant"},
+                        {"7Hero", "12", "Guardian"},
+                        {"8Hero", "13", "Warrior"}
                 };
 
     }

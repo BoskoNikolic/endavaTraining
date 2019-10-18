@@ -1,5 +1,6 @@
 package com.endavatraining;
 
+import com.endavatraining.pages.BasePage;
 import com.endavatraining.pages.GalleryPage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
@@ -19,7 +20,7 @@ public class TestGalleryPage {
     private By thirdSlide = By.xpath("//img[@onclick='currentSlide(3)']");
     private By fourthSlide = By.xpath("//img[@onclick='currentSlide(4)']");
     private By [] arrayOfSlideXPaths = {firstSlide, secondSlide, thirdSlide,fourthSlide};
-    private String [] arrayOfCaptions = new String[4];
+    private String [] arrayOfSlideCaptions = new String[4];
 
     @BeforeTest
     @Parameters({"browser"})
@@ -36,18 +37,18 @@ public class TestGalleryPage {
      */
     @Test
     public void testAreImageCaptionsDifferent() {
-        log.info("Testing are image captions different for every picture");
-        loginPage.userLogin(LoginPage.USERNAME_LOGIN_VALUE, LoginPage.PASSWORD_LOGIN_VALUE);
+        loginPage.userLogin(BasePage.USER_USERNAME, BasePage.USER_PASSWORD);
         galleryPage = loginPage.openGalleryPage();
         for (int i = 0; i < arrayOfSlideXPaths.length; i++){
             galleryPage.driver.findElement(arrayOfSlideXPaths[i]).click();
-            arrayOfCaptions[i] = galleryPage.driver.findElement(captionOfTheSlide).getText();
+            arrayOfSlideCaptions[i] = galleryPage.driver.findElement(captionOfTheSlide).getText();
         }
-        for (int i = 0; i < arrayOfCaptions.length; i++) {
-            for (int j = i + 1; j < arrayOfCaptions.length; j++) {
-                Assert.assertNotEquals(arrayOfCaptions[i], arrayOfCaptions[j], "Captions of slide " + (i+1) + " and slide " + (j+1) + " ARE the same.");
+        for (int i = 0; i < arrayOfSlideCaptions.length; i++) {
+            for (int j = i + 1; j < arrayOfSlideCaptions.length; j++) {
+                Assert.assertNotEquals(arrayOfSlideCaptions[i], arrayOfSlideCaptions[j], "Captions of slide " + (i+1) + " and slide " + (j+1) + " ARE the same.");
             }
         }
+        log.info("Tested image captions difference for every picture");
     }
 
     @AfterTest

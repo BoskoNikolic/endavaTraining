@@ -77,14 +77,14 @@ public class TestHeroesPage {
         return new Object[][]
                 {
                         {"0Hero", "11", "Mesmer"},
-                        {"1Hero", "22", "Necromancer"},
-                        {"2Hero", "33", "Elementalist"},
-                        {"3Hero", "44", "Ranger"},
-                        {"4Hero", "55", "Thief"},
-                        {"5Hero", "66", "Engineer"},
-                        {"6Hero", "77", "Revenant"},
-                        {"7Hero", "12", "Guardian"},
-                        {"8Hero", "13", "Warrior"}
+                        {"1Hero", "12", "Necromancer"},
+                        {"2Hero", "13", "Elementalist"},
+                        {"3Hero", "14", "Ranger"},
+                        {"4Hero", "15", "Thief"},
+                        {"5Hero", "16", "Engineer"},
+                        {"6Hero", "17", "Revenant"},
+                        {"7Hero", "18", "Guardian"},
+                        {"8Hero", "19", "Warrior"}
                 };
 
     }

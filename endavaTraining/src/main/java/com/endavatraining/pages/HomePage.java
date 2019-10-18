@@ -19,4 +19,16 @@ public class HomePage extends BasePage {
 		return isElementPresent(homePageWelcomeMessage);
 	}
 
+	/*
+	 *
+	 * This method is used to navigate from home page to another page
+	 * @author Srboljub.Todorovic
+	 * @param pageTab
+	 */
+	public void goToPage(By pageTab) {
+		driver.findElement(pageTab).click();
+	}
+
+
+
 }

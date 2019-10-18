@@ -6,7 +6,7 @@
 		<classes>
 			<class name="com.endavatraining.TestLoginPage" />
 		</classes>
-  </test> 
+  </test>
   <test thread-count="5" name="TestHomePage">
   	<parameter name="browser" value="chrome" />
 		<classes>
@@ -19,5 +19,4 @@
 			<class name="com.endavatraining.TestRegisterNewAccountPage" />
 		</classes>
 	</test>
-
 </suite> <!-- Suite -->

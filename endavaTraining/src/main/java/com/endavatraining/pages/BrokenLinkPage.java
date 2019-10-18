@@ -56,12 +56,8 @@ public class BrokenLinkPage extends BasePage {
      * @return
      *
      */
-    public boolean isElementNotPresentOnPage(By element) {
-        boolean elementIsNotPresent = true;
-        if (isElementPresent(element)) {
-            elementIsNotPresent = false;
-        }
-        return elementIsNotPresent;
+    public boolean isElementPresentOnPage(By element) {
+        return isElementPresent(element);
     }
 
     public boolean isMainTitlePresent() {
@@ -70,5 +66,9 @@ public class BrokenLinkPage extends BasePage {
 
     public By getMainTitle() {
         return mainTitle;
+    }
+
+    public String getMainTitleText() {
+        return driver.findElement(getMainTitle()).getText();
     }
 }

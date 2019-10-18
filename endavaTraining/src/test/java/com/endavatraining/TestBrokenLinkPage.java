@@ -46,10 +46,10 @@ public class TestBrokenLinkPage {
         brokenLinkPage = new BrokenLinkPage(homePage.driver);
 
         for (By button : brokenLinkPage.listOfElements()) {
-            Assert.assertTrue(brokenLinkPage.isElementNotPresentOnPage(button));
+            Assert.assertFalse(brokenLinkPage.isElementPresentOnPage(button), "This is not Broken link page");
         }
-        Assert.assertTrue(brokenLinkPage.isMainTitlePresent());
-        String mainTitle = brokenLinkPage.driver.findElement(brokenLinkPage.getMainTitle()).getText();
+        Assert.assertTrue(brokenLinkPage.isMainTitlePresent(), "The main title of the page isn't presented on the page");
+        String mainTitle = brokenLinkPage.getMainTitleText();
         Assert.assertEquals(mainTitle, EXPECTED_TITLE, "Main title differs from expected");
     }
 

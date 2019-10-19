@@ -67,7 +67,7 @@ public class TestHeroesPage {
         wait.until(ExpectedConditions.elementToBeClickable(addHeroSave));
         heroesPage.getElement(addHeroSave).click();
 
-        Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username already exists");
+        Assert.assertTrue(heroesPage.isHeroInTable(heroName), "New hero isn't added to the list ");
 
 
     }

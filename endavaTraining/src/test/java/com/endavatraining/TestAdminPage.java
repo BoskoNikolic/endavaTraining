@@ -8,10 +8,7 @@ import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 /*
  *
@@ -19,12 +16,12 @@ import org.testng.annotations.Test;
  *
  */
 
-public class TestAdminPage{
+public class TestAdminPage {
 
     private LoginPage loginPage;
+    private HomePage homePage;
     private AdminPage adminPage;
-    private By adminPageButton = By.linkText("Admin");
-    public static Logger log = Logger.getLogger(HomePage.class);
+    public static Logger log = Logger.getLogger(TestAdminPage.class);
 
 
     @BeforeTest
@@ -36,12 +33,11 @@ public class TestAdminPage{
     /*
      * Test validates default state of checkbox on admin page
      * @author Srboljub.Todorovic
-     *
      */
     @Test
     public void testAdminPageCheckbox() {
-        HomePage homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
-        homePage.goToPage(adminPageButton);
+        homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
+        homePage.goToPage(AdminPage.adminPageButton);
 
         adminPage = new AdminPage(homePage.driver);
 
@@ -50,10 +46,36 @@ public class TestAdminPage{
         Assert.assertFalse(adminPage.isCheckBoxSelected());
         adminPage.clickOnAllowUsersToShareRegCode();
         Assert.assertTrue(adminPage.isCheckBoxSelected());
+
+        adminPage.clickOnElement(AdminPage.logoutButton);
+        log.info("Tested functionality of a 'Allow users to share Registration Code' checkbox on admin page");
+
+    }
+
+    /*
+     * Test validates functionality of generate new code button on admin page
+     * @author Srboljub.Todorovic
+     *
+     */
+    @Test
+    public void testGenerateNewRegCodeButton() {
+        homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
+        homePage.goToPage(AdminPage.adminPageButton);
+
+        adminPage = new AdminPage(homePage.driver);
+
+        String regCode = adminPage.getRegCodeBoxText();
+
+        adminPage.clickOnElement(AdminPage.generateRegCodeButton);
+        String newRegCode = adminPage.getRegCodeBoxText();
+
+        Assert.assertFalse(regCode.equalsIgnoreCase(newRegCode), "Registration button does not refreshes registration code");
+        log.info("Tested functionality of 'Generate new code' button on admin page");
+
     }
 
 
-    @AfterMethod
+    @AfterTest
     public void tearDown() {
         adminPage.quit();
     }

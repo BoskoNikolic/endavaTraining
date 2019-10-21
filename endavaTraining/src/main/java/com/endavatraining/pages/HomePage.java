@@ -26,8 +26,8 @@ public class HomePage extends BasePage {
 	 * @param pageTab
 	 */
 	public void goToPage(By pageTab) {
-	    driver.findElement(pageTab).click();
-    }
+	  driver.findElement(pageTab).click();
+     	}
 	
 	
 

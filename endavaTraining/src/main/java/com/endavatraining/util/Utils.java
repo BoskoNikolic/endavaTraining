@@ -35,13 +35,14 @@ public class Utils {
      */
     public static void captureScreenshot(WebDriver webdriver, String screenshotName) {
         try {
+			log.debug("Taking screenshot of failed test.");
             TakesScreenshot screenShot = ((TakesScreenshot) webdriver);
             String screenshotTime = new SimpleDateFormat("ddMMyyyyhhmmss.SS").format(new Date());
             File imageFile = screenShot.getScreenshotAs(OutputType.FILE);
             File destinationFile = new File( System.getProperty("user.dir") + "\\FailedTestScreenShots\\" + screenshotName + screenshotTime + ".png");
             FileUtils.copyFile(imageFile, destinationFile);
         } catch (IOException ioException){
-            System.out.println("Exception while taking screenshot " + ioException.getMessage());
+            log.error("Error happened while trying to execute captureScreenshot method!");
         }
     }
 

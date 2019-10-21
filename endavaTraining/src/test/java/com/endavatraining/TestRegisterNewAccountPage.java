@@ -5,10 +5,12 @@ import com.endavatraining.pages.RegisterNewAccountPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
-public class TestRegisterNewAccountPage {
+public class TestRegisterNewAccountPage extends TestBase {
 
     private RegisterNewAccountPage registerNewAccountPage;
     private LoginPage loginPage;
@@ -31,14 +33,13 @@ public class TestRegisterNewAccountPage {
     }
 
     /**
-
      *
      * Test validates that username field is NOT visible after entering wrong code with special characters in Registration Code text field.
      * Then test validates if registration code error IS visible.
      *
      *  @author Jovan.Penic
      */
-    @Test (priority = 0)
+    @Test(priority = 0)
     public void testUserFieldVisibilityFalseRegCodeSpecChar() {
         registerNewAccountPage = loginPage.openCreateAccount();
         Assert.assertFalse(registerNewAccountPage.isUserNameFieldPresent(randomRegistrationCodeWithSpecCharacters), "Username field IS present after special character entry in registration code field. ");
@@ -72,25 +73,8 @@ public class TestRegisterNewAccountPage {
             registerNewAccountPage.submitButton().click();
         }else{
             Assert.assertTrue(registerNewAccountPage.submitButton().isEnabled(), "Sign Up button is disabled");
-
-    }
-
-}
-
-    /**
-     * This method runs after every test and takes screen shot if test fails
-     *
-     * @author Jovan.Penic
-     * @param result
-     */
-    @AfterMethod
-    public void testFailScreenshot(ITestResult result){
-        if (ITestResult.FAILURE == result.getStatus()){
-            Utils.captureScreenshot(registerNewAccountPage.driver, result.getName());
-            log.info("Screenshot of failure of test " + result.getName() +" is taken!");
         }
     }
-
 
     @AfterTest
     public void tearDown() {

@@ -16,7 +16,7 @@ public class BasePage {
     protected BasePage(WebDriver driver) {
 		this.driver = driver;
 	}
- 
+
 	protected boolean isElementPresent(By by){
 	        try{
 	            driver.findElement(by);
@@ -26,7 +26,7 @@ public class BasePage {
 	            return false;
 	        }
 	    }
-	    	  
+
 	public void quit() {
 		log.debug("Quitting browser");
 		if (this.driver != null) {

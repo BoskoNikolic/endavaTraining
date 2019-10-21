@@ -27,7 +27,7 @@ public class HomePage extends BasePage {
 	 */
 	public void goToPage(By pageTab) {
 	  driver.findElement(pageTab).click();
-     	}
+     }
 	
 	
 

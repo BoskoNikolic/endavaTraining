@@ -1,15 +1,17 @@
 package com.endavatraining;
 
-import com.endavatraining.pages.BasePage;
 import com.endavatraining.pages.GalleryPage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
-public class TestGalleryPage {
+public class TestGalleryPage extends TestBase {
 
     private GalleryPage galleryPage;
     private LoginPage loginPage;
@@ -19,8 +21,8 @@ public class TestGalleryPage {
     private By secondSlide = By.xpath("//img[@onclick='currentSlide(2)']");
     private By thirdSlide = By.xpath("//img[@onclick='currentSlide(3)']");
     private By fourthSlide = By.xpath("//img[@onclick='currentSlide(4)']");
-    private By [] arrayOfSlideXPaths = {firstSlide, secondSlide, thirdSlide,fourthSlide};
-    private String [] arrayOfSlideCaptions = new String[4];
+    private By [] arrayOfSlideXPaths = {firstSlide, secondSlide, thirdSlide, fourthSlide};
+    private String [] arrayOfSlideCaptions = {"Nature and sunrise", "Snow", "Mountains and fjords", "Northern Lights"};
 
     @BeforeTest
     @Parameters({"browser"})
@@ -29,26 +31,21 @@ public class TestGalleryPage {
     }
 
     /**
-     *
-     * Test validates that Captions of pictures in Gallery are different from one another
+     * Test validates that captions of images in Gallery tab exist
      * by logging in as user, clicking on Gallery tab, clicking on each image and comparing the captions of images
      *
      *  @author Jovan.Penic
      */
+
     @Test
     public void testAreImageCaptionsDifferent() {
-        loginPage.userLogin(BasePage.USER_USERNAME, BasePage.USER_PASSWORD);
+        loginPage.userLogin(USER_USERNAME, USER_PASSWORD);
         galleryPage = loginPage.openGalleryPage();
-        for (int i = 0; i < arrayOfSlideXPaths.length; i++){
-            galleryPage.driver.findElement(arrayOfSlideXPaths[i]).click();
-            arrayOfSlideCaptions[i] = galleryPage.driver.findElement(captionOfTheSlide).getText();
+        for (int i = 0; i < arrayOfSlideCaptions.length; i++){
+            galleryPage.clickOnImage(arrayOfSlideXPaths[i]);
+            Assert.assertEquals(arrayOfSlideCaptions[i], galleryPage.getCaptionOfTheSlide(captionOfTheSlide), "Caption of the slide " + arrayOfSlideCaptions[i] + " does NOT exist.");
+            log.info("Tested image caption existence in " + (i+1) + ". iteration.");
         }
-        for (int i = 0; i < arrayOfSlideCaptions.length; i++) {
-            for (int j = i + 1; j < arrayOfSlideCaptions.length; j++) {
-                Assert.assertNotEquals(arrayOfSlideCaptions[i], arrayOfSlideCaptions[j], "Captions of slide " + (i+1) + " and slide " + (j+1) + " ARE the same.");
-            }
-        }
-        log.info("Tested image captions difference for every picture");
     }
 
     @AfterTest
@@ -56,7 +53,6 @@ public class TestGalleryPage {
         if (galleryPage != null)
             galleryPage.quit();
     }
-
 
 
 

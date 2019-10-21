@@ -28,6 +28,7 @@ public class Utils {
     public static Logger log = Logger.getLogger(Utils.class);
 
     public static ChromeOptions setUpBrowserOptions() {
+		log.debug("Setting up browser options");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
@@ -40,12 +41,11 @@ public class Utils {
 	 * @return loginPage
 	 */
 	public static LoginPage setUpWebBrowser(String browser) {
-
 		LoginPage loginPage;
-
+		log.debug("Choose web browser");
 		if (browser.equalsIgnoreCase("chrome")) {
 			WebDriverManager.chromedriver().setup();
-			loginPage = new LoginPage(new ChromeDriver());
+			loginPage = new LoginPage(new ChromeDriver(setUpBrowserOptions()));
 		}else if(browser.equalsIgnoreCase("firefox")){
 			WebDriverManager.firefoxdriver().setup();
 			loginPage = new LoginPage(new FirefoxDriver());
@@ -67,25 +67,11 @@ public class Utils {
 	}
 
     /**
-     *
-     * This method returns value of attributes of any text field
-     *
-     * @author Jovan.Penic
      * @param driver
-     * @param anyTextField
-     * @return
+     * @param locator
      */
-    public static String getAttributeOfAnyTextField(WebDriver driver, By anyTextField){
-        return driver.findElement(anyTextField).getAttribute("value");
+    public static void webDriverWait(WebDriver driver, By locator) {
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-
-
-	/**
-	 * @param driver
-	 * @param locator
-	 */
-	public static void webDriverWait(WebDriver driver, By locator) {
-		new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(locator));
-	}
 
 }

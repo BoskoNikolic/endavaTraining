@@ -5,13 +5,14 @@ import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import com.endavatraining.util.Utils;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 
-public class TestHomePage {
+public class TestHomePage extends TestBase {
 
 	private HomePage homePage;
 	private LoginPage loginPage;
@@ -21,7 +22,7 @@ public class TestHomePage {
 
 
 
-	@BeforeMethod
+	@BeforeTest
 	@Parameters({ "browser" })
 	public void setUp(String browser) {
 		loginPage = Utils.setUpWebBrowser(browser);
@@ -35,14 +36,12 @@ public class TestHomePage {
 		homePage = loginPage.openAs(username, password);
 		assert homePage.isWelcomeTextPresent() : "Welcome text is not present";
 		log.info("Tested home page availability.");
-
 	}
 
 	/**
 	 * Test validates that log out button works properly from every page
 	 * @author Danko.Lojanica
 	 */
-
 	@Test
 	public void testIsLogOutWorks() {
 		homePage = loginPage.openAs(username, password);
@@ -83,7 +82,7 @@ public class TestHomePage {
 				HomePage.LOG_OUT_MESSAGE, "Log out failed");
 
 	}
-	@AfterMethod
+	@AfterTest
 	public void tearDown() {
 		if (homePage != null)
 			homePage.quit();

@@ -8,7 +8,7 @@ import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
  *
  */
 
-public class TestAdminPage{
+public class TestAdminPage extends TestBase {
 
     private LoginPage loginPage;
     private AdminPage adminPage;
@@ -53,7 +53,7 @@ public class TestAdminPage{
     }
 
 
-    @AfterMethod
+    @AfterTest
     public void tearDown() {
         adminPage.quit();
     }

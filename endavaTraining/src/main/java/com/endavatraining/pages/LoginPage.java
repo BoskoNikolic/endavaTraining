@@ -18,10 +18,11 @@ public class LoginPage extends BasePage {
 
 
 
+
 	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
-	
+
 
 	public void open() {
 		log.debug("Opening endava training site");

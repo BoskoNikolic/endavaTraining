@@ -11,6 +11,8 @@ public class BasePage {
 
     public WebDriver driver;
     public static Logger log = Logger.getLogger(BasePage.class);
+    public static final String ADMIN_USERNAME = "admin";
+    public static final String ADMIN_PASSWORD = "password";
     public static final String LOG_OUT_MESSAGE = "You have been logged out.";
 
     protected BasePage(WebDriver driver) {
@@ -40,6 +42,30 @@ public class BasePage {
         if (this.driver != null) {
             driver.quit();
         }
+    }
+
+    /**
+     *
+     * This method returns value of attributes of any text field
+     *
+     * @author Jovan.Penic
+     * @param driver
+     * @param anyTextField
+     * @return
+     */
+    public static String getAttributeOfAnyTextField(WebDriver driver, By anyTextField){
+        return driver.findElement(anyTextField).getAttribute("value");
+    }
+
+    /**
+     * This method returns text of any passed element
+     * @author Danko.Lojanica
+     * @param element
+     * @return
+     */
+    public String getTextOfElement(By element) {
+        return driver.findElement(element).getText();
+
     }
 
 }

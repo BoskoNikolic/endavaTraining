@@ -62,33 +62,39 @@ public class TestHomePage {
 		homePage = loginPage.openAs(username, password);
 		homePage.clickOnButton(homeButton);
 		homePage.clickOnButton(logOutButton);
-		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(), BasePage.LOG_OUT_MESSAGE, "Log out failed");
+		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
 
 		loginPage.userLogin(username,password);
 		homePage.clickOnButton(usersButton);
 		homePage.clickOnButton(logOutButton);
-		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),  BasePage.LOG_OUT_MESSAGE, "Log out failed");
+		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
 
 		loginPage.userLogin(username,password);
 		homePage.clickOnButton(heroesButton);
 		homePage.clickOnButton(logOutButton);
-		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),  BasePage.LOG_OUT_MESSAGE, "Log out failed");
+		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
 
 		loginPage.userLogin(username,password);
 		homePage.clickOnButton(galleryButton);
 		homePage.clickOnButton(logOutButton);
-		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),  BasePage.LOG_OUT_MESSAGE, "Log out failed");
+		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
 
 		loginPage.userLogin(username,password);
 		homePage.clickOnButton(apiButton);
 		homePage.clickOnButton(logOutButton);
-		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),  BasePage.LOG_OUT_MESSAGE, "Log out failed");
+		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
 
 
 		loginPage.userLogin(username,password);
 		homePage.clickOnButton(profileButton);
 		homePage.clickOnButton(logOutButton);
-		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),  BasePage.LOG_OUT_MESSAGE, "Log out failed");
+		Assert.assertEquals(homePage.driver.findElement(logOutMessage).getText(),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
 	}
 
 

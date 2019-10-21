@@ -25,9 +25,10 @@ public class HomePage extends BasePage {
 	* @author Srboljub.Todorovic
 	* @param pageTab
 	 */
-
 	public void goToPage(By pageTab) {
 	    driver.findElement(pageTab).click();
     }
+	
+	
 
 }

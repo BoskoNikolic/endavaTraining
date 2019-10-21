@@ -17,6 +17,7 @@ public class TestHeroesPage {
     private HeroesPage heroesPage;
     public static Logger log = Logger.getLogger(TestHeroesPage.class);
 
+
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {

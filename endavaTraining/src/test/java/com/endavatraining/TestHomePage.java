@@ -2,18 +2,17 @@ package com.endavatraining;
 
 import org.apache.log4j.Logger;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 
 import com.endavatraining.util.Utils;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 
-
-public class TestHomePage {
+public class TestHomePage extends TestBase {
 
 	private HomePage homePage;
 	private LoginPage loginPage;
@@ -40,9 +39,9 @@ public class TestHomePage {
 	}
 
 
-	@AfterMethod
+	@AfterTest
 	public void tearDown() {
-		loginPage.quit();
+		homePage.quit();
 	}
 
 }

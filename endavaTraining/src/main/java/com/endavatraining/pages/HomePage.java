@@ -20,11 +20,11 @@ public class HomePage extends BasePage {
 	}
 
 	/*
-	*
-	* This method is used to navigate from home page to another page
-	* @author Srboljub.Todorovic
-	* @param pageTab
-	*/
+	 *
+	 * This method is used to navigate from home page to another page
+	 * @author Srboljub.Todorovic
+	 * @param pageTab
+	 */
 	public void goToPage(By pageTab) {
 	    driver.findElement(pageTab).click();
     }

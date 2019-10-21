@@ -34,8 +34,6 @@ public class BasePage {
 
 	}
 
-
-
 	protected boolean isElementPresent(By by){
 
 	        try{
@@ -53,8 +51,6 @@ public class BasePage {
 	        }
 
 	    }
-
-
 
 	public void quit() {
 

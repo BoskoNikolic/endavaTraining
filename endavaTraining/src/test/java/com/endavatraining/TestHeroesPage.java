@@ -6,10 +6,6 @@ import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -20,7 +16,6 @@ public class TestHeroesPage {
     private HomePage homePage;
     private HeroesPage heroesPage;
     public static Logger log = Logger.getLogger(TestHeroesPage.class);
-
 
     @BeforeTest
     @Parameters({"browser"})

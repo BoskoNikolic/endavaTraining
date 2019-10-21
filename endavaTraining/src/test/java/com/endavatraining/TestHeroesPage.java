@@ -5,6 +5,7 @@ import com.endavatraining.pages.HeroesPage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -17,15 +18,8 @@ public class TestHeroesPage {
 
     private LoginPage loginPage;
     private HomePage homePage;
-    private By heroesPageTab = By.linkText("Heroes");
     private HeroesPage heroesPage;
-    private By addNewHeroButton = By.linkText("Add New Hero");
-    private By addHeroName = By.xpath("//*[@id=\"name\"]");
-    private By addHeroLevel = By.id("level");
-    private By addHeroClass = By.id("type");
-    private Select drpClass;
-    private By addHeroSave = By.id("submitButton");
-    private boolean condition = true;
+    public static Logger log = Logger.getLogger(TestHeroesPage.class);
 
 
     @BeforeTest
@@ -35,56 +29,48 @@ public class TestHeroesPage {
     }
 
     /*
-     *
+     *Test validates that it is possible to add multiple inputs into hero table with different
+     * values from drop down menu option
+     * @author Srboljub.Todorovic
+     * @param dataProvider
      */
     @Test(dataProvider = "DataProvider")
     public void testAddingNewHero(String heroName, String heroLevel, String heroClass) {
 
-        while (condition){
-            homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
-            homePage.goToPage(heroesPageTab);
+        homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
 
-            heroesPage = new HeroesPage(homePage.driver);
-            condition = false;
+        heroesPage = new HeroesPage(homePage.driver);
+        heroesPage.clickOnElement(HeroesPage.heroesPageTab);
 
-        }
-        Assert.assertFalse(heroesPage.isHeroInTable(heroName), "Hero with this username already exists ");
+        Assert.assertFalse(heroesPage.isHeroInTable(heroName), "Hero with this username already exists in table!");
 
-        WebDriverWait wait = new WebDriverWait(heroesPage.driver, 3);
-        heroesPage.getElement(addNewHeroButton).click();
+        heroesPage.clickOnElement(HeroesPage.addNewHeroButton);
+        heroesPage.sendKeysToElement(HeroesPage.addHeroName, heroName);
+        heroesPage.sendKeysToElement(HeroesPage.addHeroLevel, heroLevel);
+        heroesPage.dropDownMenuSelect(HeroesPage.addHeroClass, heroClass);
+        heroesPage.clickOnElement(HeroesPage.addHeroSave);
 
+        Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not added!");
+        log.info("Verifies that new hero is added (shown on table).");
 
-        wait.until(ExpectedConditions.elementToBeClickable(addHeroName));
-        heroesPage.getElement(addHeroName).sendKeys(heroName);
+        heroesPage.deleteHeroInTable(heroName);
 
-        wait.until(ExpectedConditions.elementToBeClickable(addHeroLevel));
-        heroesPage.getElement(addHeroLevel).sendKeys(heroLevel);
-
-        wait.until(ExpectedConditions.elementToBeClickable(addHeroClass));
-        drpClass = new Select(heroesPage.getElement(addHeroClass));
-        drpClass.selectByVisibleText(heroClass);
-
-        wait.until(ExpectedConditions.elementToBeClickable(addHeroSave));
-        heroesPage.getElement(addHeroSave).click();
-
-        Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username already exists");
-
-
+        heroesPage.clickOnElement(HeroesPage.logoutButton);
     }
 
     @DataProvider(name = "DataProvider")
     public Object[][] getDataFromDataprovider() {
         return new Object[][]
                 {
-                        {"0Perkan", "11", "Mesmer"},
-                        {"1Perkan", "22", "Necromancer"},
-                        {"2Perkan", "33", "Elementalist"},
-                        {"3Perkan", "44", "Ranger"},
-                        {"4Perkan", "55", "Thief"},
-                        {"5Perkan", "66", "Engineer"},
-                        {"6Perkan", "77", "Revenant"},
-                        {"7Perkan", "12", "Guardian"},
-                        {"8Perkan", "13", "Warrior"}
+                        {"0Hero", "1", "Mesmer"},
+                        {"1Hero", "1", "Necromancer"},
+                        {"2Hero", "1", "Elementalist"},
+                        {"3Hero", "1", "Ranger"},
+                        {"4Hero", "1", "Thief"},
+                        {"5Hero", "1", "Engineer"},
+                        {"6Hero", "1", "Revenant"},
+                        {"7Hero", "1", "Guardian"},
+                        {"8Hero", "1", "Warrior"}
                 };
 
     }
@@ -93,4 +79,5 @@ public class TestHeroesPage {
     public void tearDown() {
         heroesPage.quit();
     }
+
 }

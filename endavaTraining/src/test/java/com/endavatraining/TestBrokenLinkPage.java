@@ -1,6 +1,5 @@
 package com.endavatraining;
 
-import com.endavatraining.pages.BasePage;
 import com.endavatraining.pages.BrokenLinkPage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
@@ -8,7 +7,10 @@ import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 /*
  *
@@ -16,7 +18,7 @@ import org.testng.annotations.*;
  *
  */
 
-public class TestBrokenLinkPage {
+public class TestBrokenLinkPage extends TestBase {
 
     private LoginPage loginPage;
     private BrokenLinkPage brokenLinkPage;
@@ -40,7 +42,7 @@ public class TestBrokenLinkPage {
     @Test
     public void testBrokenLinkPageIsOpened() {
 
-        HomePage homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
+        HomePage homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
         homePage.goToPage(brokenLinkPageTab);
 
         brokenLinkPage = new BrokenLinkPage(homePage.driver);
@@ -54,7 +56,7 @@ public class TestBrokenLinkPage {
     }
 
 
-    @AfterMethod
+    @AfterTest
     public void tearDown() {
         if (brokenLinkPage != null)
             brokenLinkPage.quit();

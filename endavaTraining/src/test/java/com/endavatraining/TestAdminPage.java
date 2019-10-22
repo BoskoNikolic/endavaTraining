@@ -6,9 +6,11 @@ import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 /*
  *
@@ -47,7 +49,7 @@ public class TestAdminPage {
         adminPage.clickOnAllowUsersToShareRegCode();
         Assert.assertTrue(adminPage.isCheckBoxSelected());
 
-        adminPage.clickOnElement(AdminPage.logoutButton);
+        adminPage.logout();
         log.info("Tested functionality of a 'Allow users to share Registration Code' checkbox on admin page");
 
     }
@@ -66,10 +68,11 @@ public class TestAdminPage {
 
         String regCode = adminPage.getRegCodeBoxText();
 
-        adminPage.clickOnElement(AdminPage.generateRegCodeButton);
+        adminPage.generateNewRegCode();
+
         String newRegCode = adminPage.getRegCodeBoxText();
 
-        Assert.assertFalse(regCode.equalsIgnoreCase(newRegCode), "Registration button does not refreshes registration code");
+        Assert.assertNotEquals(regCode, newRegCode, "Registration button does not refreshes registration code");
         log.info("Tested functionality of 'Generate new code' button on admin page");
 
     }

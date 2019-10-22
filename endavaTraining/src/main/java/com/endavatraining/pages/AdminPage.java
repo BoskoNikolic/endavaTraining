@@ -28,7 +28,10 @@ public class AdminPage extends BasePage {
         return driver.findElement(regCodeField).getText();
     }
 
-    public void clickOnElement(By element) {
-        driver.findElement(element).click();
+    public void generateNewRegCode() {
+        clickOnButton(generateRegCodeButton);
+    }
+    public void logout() {
+        clickOnButton(logoutButton);
     }
 }

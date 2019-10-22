@@ -1,6 +1,6 @@
 package com.endavatraining.pages;
 
-
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -21,6 +21,7 @@ public class HomePage extends BasePage {
 	private By title= By.className("panel-title text-center");
 	private By samsara= By.cssSelector("a.navbar-brand");
 	private By body = By.cssSelector("body");
+    public static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
 		super(driver);

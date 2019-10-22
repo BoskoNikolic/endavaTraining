@@ -31,12 +31,12 @@ public class TestHeroesPage extends TestBase {
      * Test validates that it is possible to add multiple inputs into hero table with different
      * values from drop down menu option
      * @author Srboljub.Todorovic
-     * @param dataProvider
+     * @param  String heroName, String heroLevel, String heroClass
      */
     @Test(dataProvider = "DataProvider")
     public void testAddingNewHero(String heroName, String heroLevel, String heroClass) {
 
-        homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
 
         heroesPage = new HeroesPage(homePage.driver);
         heroesPage.openHeroPage();
@@ -58,12 +58,12 @@ public class TestHeroesPage extends TestBase {
     /*
      * Test erases inputs from previous test
      * @author Srboljub.Todorovic
-     * @param dataProvider
+     * @param  String heroName, String heroLevel, String heroClass
      */
     @Test(dataProvider = "DataProvider", dependsOnMethods = {"testAddingNewHero"})
     public void deleteAddedHeroes(String heroName, String heroLevel, String heroClass) {
 
-        homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
 
         heroesPage = new HeroesPage(homePage.driver);
         heroesPage.openHeroPage();

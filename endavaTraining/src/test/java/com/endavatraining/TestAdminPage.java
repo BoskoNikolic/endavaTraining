@@ -24,7 +24,7 @@ public class TestAdminPage{
     private LoginPage loginPage;
     private AdminPage adminPage;
     private By adminPageButton = By.linkText("Admin");
-    public static Logger log = Logger.getLogger(HomePage.class);
+    public static Logger log = Logger.getLogger(TestAdminPage.class);
 
 
     @BeforeTest

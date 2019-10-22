@@ -14,7 +14,7 @@ public class HeroesPage extends BasePage {
 
     private List<WebElement> rows;
     private WebDriverWait wait = new WebDriverWait(driver, 3);
-    private Select drpClass;
+
 
     private By heroTableBody = By.xpath("//table[@id=\"heroes-table\"]/tbody/tr");
     public static By heroesPageTab = By.linkText("Heroes");
@@ -30,49 +30,6 @@ public class HeroesPage extends BasePage {
     }
 
     /*
-     *This method returns element from the page
-     * @author Srboljub.Todorovic
-     * @param By
-     * @return WebElement
-     */
-
-    public WebElement getElement(By locator) {
-        return driver.findElement(locator);
-    }
-
-    /*
-     *This method clicks onto chosen element
-     * @author Srboljub.Todorovic
-     * @param By
-     */
-    public void clickOnElement(By button) {
-        wait.until(ExpectedConditions.elementToBeClickable(button));
-        getElement(button).click();
-    }
-
-    /*
-     *This method sends text into chosen text field
-     * @author Srboljub.Todorovic
-     * @param By, String
-     */
-    public void sendKeysToElement(By field, String keys) {
-        wait.until(ExpectedConditions.elementToBeClickable(field));
-        getElement(field).sendKeys(keys);
-    }
-
-    /*
-     *This method selects desirable option from drop down menu options
-     * @author Srboljub.Todorovic
-     * @param By, String
-     */
-    public void dropDownMenuSelect(By dropMenu, String drpText) {
-        wait.until(ExpectedConditions.elementToBeClickable(dropMenu));
-        drpClass = new Select(getElement(dropMenu));
-        drpClass.selectByVisibleText(drpText);
-    }
-
-
-    /*
      * This method checks if the hero with given name already exists in table
      * @author Srboljub.Todorovic
      * @param String
@@ -81,7 +38,7 @@ public class HeroesPage extends BasePage {
     public boolean isHeroInTable(String heroName) {
         rows = driver.findElements(heroTableBody);
         for (int i = 0; i < rows.size(); i++) {
-            if (heroName.equals(driver.findElement(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[1]")).getText())) {
+            if (heroName.equals(getTextOfElement(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[1]")))) {
                 return true;
             }
         }
@@ -96,10 +53,10 @@ public class HeroesPage extends BasePage {
     public void deleteHeroInTable(String heroName) {
         rows = driver.findElements(heroTableBody);
         for (int i = 0; i < rows.size() - 1; i++) {
-            if (heroName.equals(driver.findElement(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[1]")).getText())) {
-                driver.findElement(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[5]/a[3]")).click();
+            if (heroName.equals(getTextOfElement(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[1]")))) {
+                clickOnButton(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[5]/a[3]"));
                 wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"deleteHeroModal\"]/div/div/div[3]/form/button[2]")));
-                driver.findElement(By.xpath("//*[@id=\"deleteHeroModal\"]/div/div/div[3]/form/button[2]")).click();
+                clickOnButton(By.xpath("//*[@id=\"deleteHeroModal\"]/div/div/div[3]/form/button[2]"));
             }
         }
     }

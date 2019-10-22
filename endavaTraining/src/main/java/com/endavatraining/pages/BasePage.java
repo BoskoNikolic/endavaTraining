@@ -4,6 +4,9 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 
@@ -13,10 +16,12 @@ public class BasePage {
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "password";
 
+	private Select dropClass;
+
     protected BasePage(WebDriver driver) {
 		this.driver = driver;
 	}
- 
+
 	protected boolean isElementPresent(By by){
 	        try{
 	            driver.findElement(by);
@@ -26,7 +31,7 @@ public class BasePage {
 	            return false;
 	        }
 	    }
-	    	  
+
 	public void quit() {
 		log.debug("Quitting browser");
 		if (this.driver != null) {
@@ -47,7 +52,47 @@ public class BasePage {
 		return driver.findElement(anyTextField).getAttribute("value");
 	}
 
+    /**
+     * This method clicks on button that is passed
+     * @author Danko.Lojanica
+     * @param button
+     */
+     public void clickOnButton(By button){
+        driver.findElement(button).click();
+    }
 
+    /**
+     * This method returns text of any passed element
+     * @author Danko.Lojanica
+     * @param element
+     * @return
+     */
+    public String getTextOfElement(By element) {
+        return driver.findElement(element).getText();
 
+    }
+
+	/*
+	 *This method sends text into chosen text field
+	 * @author Srboljub.Todorovic
+	 * @param By, String
+	 */
+	public void typeTextOnElement(By field, String keys) {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		wait.until(ExpectedConditions.elementToBeClickable(field));
+		driver.findElement(field).sendKeys(keys);
+	}
+
+	/*
+	 *This method selects desirable option from drop down menu options
+	 * @author Srboljub.Todorovic
+	 * @param By, String
+	 */
+	public void dropDownMenuSelect(By dropMenu, String dropText) {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		wait.until(ExpectedConditions.elementToBeClickable(dropMenu));
+		dropClass = new Select(driver.findElement(dropMenu));
+		dropClass.selectByVisibleText(dropText);
+	}
 
 }

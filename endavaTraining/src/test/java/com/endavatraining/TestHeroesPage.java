@@ -13,7 +13,6 @@ import org.testng.annotations.*;
 public class TestHeroesPage {
 
     private LoginPage loginPage;
-    private HomePage homePage;
     private HeroesPage heroesPage;
     public static Logger log = Logger.getLogger(TestHeroesPage.class);
 
@@ -33,40 +32,41 @@ public class TestHeroesPage {
     @Test(dataProvider = "DataProvider")
     public void testAddingNewHero(String heroName, String heroLevel, String heroClass) {
 
-        homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
+        HomePage homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
 
         heroesPage = new HeroesPage(homePage.driver);
-        heroesPage.clickOnElement(HeroesPage.heroesPageTab);
+        heroesPage.clickOnButton(HeroesPage.heroesPageTab);
 
         Assert.assertFalse(heroesPage.isHeroInTable(heroName), "Hero with this username already exists in table!");
 
-        heroesPage.clickOnElement(HeroesPage.addNewHeroButton);
-        heroesPage.sendKeysToElement(HeroesPage.addHeroName, heroName);
-        heroesPage.sendKeysToElement(HeroesPage.addHeroLevel, heroLevel);
+        heroesPage.clickOnButton(HeroesPage.addNewHeroButton);
+        heroesPage.typeTextOnElement(HeroesPage.addHeroName, heroName);
+        heroesPage.typeTextOnElement(HeroesPage.addHeroLevel, heroLevel);
         heroesPage.dropDownMenuSelect(HeroesPage.addHeroClass, heroClass);
-        heroesPage.clickOnElement(HeroesPage.addHeroSave);
+        heroesPage.clickOnButton(HeroesPage.addHeroSave);
 
         Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not added!");
         log.info("Verifies that new hero is added (shown on table).");
 
         heroesPage.deleteHeroInTable(heroName);
+        log.info("Deleting inserted values so the test could be performed multiple times with same set of data");
 
-        heroesPage.clickOnElement(HeroesPage.logoutButton);
+        heroesPage.clickOnButton(HeroesPage.logoutButton);
     }
 
     @DataProvider(name = "DataProvider")
     public Object[][] getDataFromDataprovider() {
         return new Object[][]
                 {
-                        {"0Hero", "1", "Mesmer"},
-                        {"1Hero", "1", "Necromancer"},
-                        {"2Hero", "1", "Elementalist"},
-                        {"3Hero", "1", "Ranger"},
-                        {"4Hero", "1", "Thief"},
-                        {"5Hero", "1", "Engineer"},
-                        {"6Hero", "1", "Revenant"},
-                        {"7Hero", "1", "Guardian"},
-                        {"8Hero", "1", "Warrior"}
+                        {"Hero", "1", "Mesmer"},
+                        {"Hero", "1", "Necromancer"},
+                        {"Hero", "1", "Elementalist"},
+                        {"Hero", "1", "Ranger"},
+                        {"Hero", "1", "Thief"},
+                        {"Hero", "1", "Engineer"},
+                        {"Hero", "1", "Revenant"},
+                        {"Hero", "1", "Guardian"},
+                        {"Hero", "1", "Warrior"}
                 };
 
     }

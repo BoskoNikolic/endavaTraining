@@ -61,4 +61,63 @@ public class HeroesPage extends BasePage {
         }
     }
 
+    /*
+     * This method opens hero page
+     * @author Srboljub.Todorovic
+     */
+    public void openHeroPage() {
+        clickOnButton(heroesPageTab);
+    }
+
+    /*
+     * This method opens add new hero window
+     * @author Srboljub.Todorovic
+     */
+    public void openAddNewHero() {
+        clickOnButton(addNewHeroButton);
+    }
+
+    /*
+     * This method types text into hero name field
+     * @author Srboljub.Todorovic
+     * @param String
+     */
+    public void insertHeroName(String heroName) {
+        typeTextOnElement(addHeroName,heroName);
+    }
+
+    /*
+     * This method types text into hero level field
+     * @author Srboljub.Todorovic
+     * @param String
+     */
+    public void insertHeroLevel(String heroLevel) {
+        typeTextOnElement(addHeroLevel,heroLevel);
+    }
+
+    /*
+     * This method selects provided hero class from drop down menu
+     * @author Srboljub.Todorovic
+     * @param String
+     */
+    public void insertHeroClass(String heroClass) {
+        dropDownMenuSelect(addHeroClass, heroClass);
+    }
+
+    /*
+     * This method saves hero with provided attributes
+     * @author Srboljub.Todorovic
+     */
+    public void saveNewHero() {
+        clickOnButton(addHeroSave);
+    }
+
+    /*
+     * This method does logout function
+     * @author Srboljub.Todorovic
+     */
+    public void logout() {
+        clickOnButton(logoutButton);
+    }
+
 }

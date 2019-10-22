@@ -10,9 +10,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 
-	public WebDriver driver;
+	public static WebDriver driver;
 	public static Logger log = Logger.getLogger(BasePage.class);
-
+	public static final String LOG_OUT_MESSAGE = "You have been logged out.";
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "password";
 
@@ -71,7 +71,6 @@ public class BasePage {
         return driver.findElement(element).getText();
 
     }
-
 	/*
 	 *This method sends text into chosen text field
 	 * @author Srboljub.Todorovic

@@ -16,10 +16,13 @@ public class LoginPage extends BasePage {
     private By upperRightLogInButton = By.xpath("//a[@href='/login']");
 	private By createAccountButton = By.xpath("//a[@href='/register']");
 
-    public LoginPage(WebDriver driver) {
+
+
+
+	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
-	
+
 
 	public void open() {
 		log.debug("Opening endava training site");

@@ -10,13 +10,21 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-public class TestRegisterNewAccountPage {
+public class TestRegisterNewAccountPage extends TestBase {
 
     private RegisterNewAccountPage registerNewAccountPage;
     private LoginPage loginPage;
     private static final String randomRegistrationCodeWithSpecCharacters = "+++123";
     private static final String randomRegistrationCodeWithLettersAndNumbers = "abc123";
     public static Logger log = Logger.getLogger(TestRegisterNewAccountPage.class);
+    private static final String REGISTRATION_CODE = "kFVVSfsKyBGBXvBySBvxM8j2oohutQLJ";
+    private String USER_NAME = "johndoe123";
+    private String FIRST_NAME = "John";
+    private String LAST_NAME = "Doe";
+    private String ABOUT = "Something about Joe";
+    private String SECRET_QUESTION = "The Ultimate Question";
+    private String SECRET_ANSWER = "42";
+    private String PASSWORD = "Johndoerules123";
 
     @BeforeTest
     @Parameters({"browser"})
@@ -31,7 +39,7 @@ public class TestRegisterNewAccountPage {
      *
      *  @author Jovan.Penic
      */
-    @Test (priority = 0)
+    @Test(priority = 0)
     public void testUserFieldVisibilityFalseRegCodeSpecChar() {
         registerNewAccountPage = loginPage.openCreateAccount();
         Assert.assertFalse(registerNewAccountPage.isUserNameFieldPresent(randomRegistrationCodeWithSpecCharacters), "Username field IS present after special character entry in registration code field. ");
@@ -54,11 +62,24 @@ public class TestRegisterNewAccountPage {
         log.info("Tested visibility of user name field after entering wrong code without special characters" );
     }
 
+     /** The test opens the Create Account page, enters the correct credentials, and submits the form
+     * @author: luka.ivancic
+     * */
+    @Test (priority = 2)
+    public void testCreateNewAccount(){
+        registerNewAccountPage = loginPage.openCreateAccount();
+        registerNewAccountPage.signUpNewUser(REGISTRATION_CODE,USER_NAME,FIRST_NAME,LAST_NAME, ABOUT, SECRET_QUESTION, SECRET_ANSWER, PASSWORD);
+        if(registerNewAccountPage.submitButton().isEnabled()){
+            registerNewAccountPage.submitButton().click();
+        }else{
+            Assert.assertTrue(registerNewAccountPage.submitButton().isEnabled(), "Sign Up button is disabled");
+        }
+    }
+
     @AfterTest
     public void tearDown() {
         if (registerNewAccountPage != null)
             registerNewAccountPage.quit();
     }
-
 
 }

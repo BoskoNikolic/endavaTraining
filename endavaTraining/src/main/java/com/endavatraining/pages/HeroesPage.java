@@ -67,6 +67,7 @@ public class HeroesPage extends BasePage {
      * @author Srboljub.Todorovic
      */
     public void openHeroPage() {
+        wait.until(ExpectedConditions.elementToBeClickable(heroesPageTab));
         clickOnButton(heroesPageTab);
     }
 

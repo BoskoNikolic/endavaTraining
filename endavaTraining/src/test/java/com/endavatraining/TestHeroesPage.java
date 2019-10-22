@@ -1,6 +1,5 @@
 package com.endavatraining;
 
-import com.endavatraining.pages.BasePage;
 import com.endavatraining.pages.HeroesPage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
@@ -14,10 +13,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.AfterTest;
 
 
-public class TestHeroesPage {
+public class TestHeroesPage extends TestBase {
 
     private LoginPage loginPage;
     private HeroesPage heroesPage;
+    private HomePage homePage;
     public static Logger log = Logger.getLogger(TestHeroesPage.class);
 
 
@@ -28,15 +28,15 @@ public class TestHeroesPage {
     }
 
     /*
-     *Test validates that it is possible to add multiple inputs into hero table with different
+     * Test validates that it is possible to add multiple inputs into hero table with different
      * values from drop down menu option
      * @author Srboljub.Todorovic
-     * @param dataProvider
+     * @param  String heroName, String heroLevel, String heroClass
      */
     @Test(dataProvider = "DataProvider")
     public void testAddingNewHero(String heroName, String heroLevel, String heroClass) {
 
-        HomePage homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
 
         heroesPage = new HeroesPage(homePage.driver);
         heroesPage.openHeroPage();
@@ -52,8 +52,24 @@ public class TestHeroesPage {
         Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not added!");
         log.info("Verifies that new hero is added (shown on table).");
 
+        heroesPage.logout();
+    }
+
+    /*
+     * Test erases inputs from previous test
+     * @author Srboljub.Todorovic
+     * @param  String heroName, String heroLevel, String heroClass
+     */
+    @Test(dataProvider = "DataProvider", dependsOnMethods = {"testAddingNewHero"})
+    public void deleteAddedHeroes(String heroName, String heroLevel, String heroClass) {
+
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+
+        heroesPage = new HeroesPage(homePage.driver);
+        heroesPage.openHeroPage();
+
         heroesPage.deleteHeroInTable(heroName);
-        log.info("Deleting inserted values so the test could be performed multiple times with same set of data");
+        log.info("Erasing inserted values so the previous test could be performed multiple times with same set of data");
 
         heroesPage.logout();
     }

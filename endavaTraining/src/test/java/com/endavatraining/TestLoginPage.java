@@ -24,6 +24,7 @@ public class TestLoginPage extends TestBase {
 	private By userNameBy = By.id("username");
 	private By passWordBy = By.id("password");
 
+
 	@BeforeTest
 	@Parameters({"browser"})
 	public void setUp(String browser) {
@@ -36,6 +37,7 @@ public class TestLoginPage extends TestBase {
 	 */
 	@Test
 	public void testLoginPageIsOpened() {
+		log.info("Test is log in page opened");
 		loginPage.open();
 		new WebDriverWait(loginPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));

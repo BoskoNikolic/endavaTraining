@@ -13,7 +13,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 
-public class TestLoginPage {
+public class TestLoginPage extends TestBase {
 
 	private LoginPage loginPage;
 	private static String falseUsername = "user1";
@@ -23,7 +23,6 @@ public class TestLoginPage {
 	private static String password = "password";
 	private By userNameBy = By.id("username");
 	private By passWordBy = By.id("password");
-
 
 	@BeforeTest
 	@Parameters({"browser"})

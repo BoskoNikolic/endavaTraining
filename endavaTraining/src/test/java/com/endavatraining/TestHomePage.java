@@ -83,19 +83,22 @@ public class TestHomePage extends TestBase {
 
 	}
 
-    /**
-     * Test validates that Share with friends button works properly
-     * @author Danko Lojanica
-     */
-    @Test
-    public void testShareWithFriends() {
-        loginPage.open();
-        homePage = loginPage.openAs(username, password);
-        homePage.clickOnButton(homePage.getSamsara());
-        homePage.clickOnButton(homePage.getShareWithFriends());
-        String message = homePage.alertMethod();
-        Assert.assertEquals(message, "http://172.17.167.71:9010", "Provided link is not correct");
-    }
+	/**
+	 * Test validates that Share with friends button works properly
+	 * @author Danko Lojanica
+	 */
+	@Test
+	public void testShareWithFriends() {
+
+		loginPage.open();
+		homePage = loginPage.openAs(username, password);
+		homePage.clickOnSamsaraButton();
+		homePage.clickOnShareWithFriendsButton();
+		String message = homePage.alertMethod();
+		Assert.assertEquals(message, "http://172.17.167.71:9010", "Provided link is not correct");
+
+	}
+
 
 	@AfterTest
 	public void tearDown() {

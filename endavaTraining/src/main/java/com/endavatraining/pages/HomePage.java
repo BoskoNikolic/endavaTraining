@@ -68,21 +68,10 @@ public class HomePage extends BasePage {
 		return logOutTitle;
 	}
 
-	public By getShareWithFriends() {
-		return shareWithFriends;
-	}
-
 	public By getTitle() {
 		return title;
 	}
 
-	public By getSamsara() {
-		return samsara;
-	}
-
-	public By getBody() {
-		return body;
-	}
 
 	/*
 	 *
@@ -94,6 +83,21 @@ public class HomePage extends BasePage {
 		driver.findElement(pageTab).click();
 	}
 
+	/**
+	 * This method clicks on samsara button
+	 * @author Danko.Lojanica
+	 */
+	public void clickOnSamsaraButton(){
+		driver.findElement(samsara).click();
+	}
+
+	/**
+	 * This method clicks on share with friends button
+	 * @author Danko.Lojanica
+	 */
+	public void clickOnShareWithFriendsButton(){
+		driver.findElement(shareWithFriends).click();
+	}
 
 
 }

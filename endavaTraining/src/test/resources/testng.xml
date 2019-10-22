@@ -25,12 +25,10 @@
 			<class name="com.endavatraining.TestBrokenLinkPage" />
 		</classes>
 	</test>
-
-	<test thread-count="5" name="TestAdminPage">
+    <test thread-count="5" name="TestAdminPage">
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class name="com.endavatraining.TestAdminPage" />
 		</classes>
 	</test>
-
 </suite> <!-- Suite -->

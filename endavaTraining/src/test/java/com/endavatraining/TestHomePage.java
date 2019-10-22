@@ -2,9 +2,9 @@ package com.endavatraining;
 
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
-import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
+import com.endavatraining.util.Utils;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;

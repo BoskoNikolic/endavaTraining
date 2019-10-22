@@ -1,21 +1,17 @@
 package com.endavatraining;
 
+import com.endavatraining.pages.HomePage;
+import com.endavatraining.pages.LoginPage;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
+import org.testng.Assert;
+import com.endavatraining.util.Utils;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.endavatraining.util.Utils;
-import com.endavatraining.pages.HomePage;
-import com.endavatraining.pages.LoginPage;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-
-public class TestHomePage {
+public class TestHomePage extends TestBase {
 
 	private HomePage homePage;
 	private LoginPage loginPage;
@@ -41,10 +37,54 @@ public class TestHomePage {
 		log.info("Tested home page availability.");
 	}
 
+	/**
+	 * Test validates that log out button works properly from every page
+	 * @author Danko.Lojanica
+	 */
+	@Test
+	public void testIsLogOutWorks() {
+		homePage = loginPage.openAs(username, password);
+		homePage.clickOnButton(homePage.getHomeButton());
+		homePage.clickOnButton(homePage.getLogOutButton());
+		Assert.assertEquals(homePage.getTextOfElement(homePage.getLogOutTitle()),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
 
-	@AfterMethod
+		loginPage.userLogin(username, password);
+		homePage.clickOnButton(homePage.getUsersButton());
+		homePage.clickOnButton(homePage.getLogOutButton());
+		Assert.assertEquals(homePage.getTextOfElement(homePage.getLogOutTitle()),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
+
+		loginPage.userLogin(username, password);
+		homePage.clickOnButton(homePage.getHeroesButton());
+		homePage.clickOnButton(homePage.getLogOutButton());
+		Assert.assertEquals(homePage.getTextOfElement(homePage.getLogOutTitle()),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
+
+		loginPage.userLogin(username, password);
+		homePage.clickOnButton(homePage.getGalleryButton());
+		homePage.clickOnButton(homePage.getLogOutButton());
+		Assert.assertEquals(homePage.getTextOfElement(homePage.getLogOutTitle()),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
+
+		loginPage.userLogin(username, password);
+		homePage.clickOnButton(homePage.getApiButton());
+		homePage.clickOnButton(homePage.getLogOutButton());
+		Assert.assertEquals(homePage.getTextOfElement(homePage.getLogOutTitle()),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
+
+
+		loginPage.userLogin(username, password);
+		homePage.clickOnButton(homePage.getProfileButton());
+		homePage.clickOnButton(homePage.getLogOutButton());
+		Assert.assertEquals(homePage.getTextOfElement(homePage.getLogOutTitle()),
+				HomePage.LOG_OUT_MESSAGE, "Log out failed");
+
+	}
+	@AfterTest
 	public void tearDown() {
-		loginPage.quit();
+		if (homePage != null)
+			homePage.quit();
 	}
 
 }

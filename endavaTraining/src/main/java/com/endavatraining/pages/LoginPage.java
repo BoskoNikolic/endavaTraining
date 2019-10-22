@@ -15,11 +15,15 @@ public class LoginPage extends BasePage {
 	private By errorLoginText = By.id("loginbox");
     private By upperRightLogInButton = By.xpath("//a[@href='/login']");
 	private By createAccountButton = By.xpath("//a[@href='/register']");
+	private By galleryButton = By.xpath("//a[@href='/gallery']");
 
-    public LoginPage(WebDriver driver) {
+
+
+
+	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
-	
+
 
 	public void open() {
 		log.debug("Opening endava training site");
@@ -40,8 +44,8 @@ public class LoginPage extends BasePage {
     *
      */
     public void userLogin(String username, String password) {
-		log.debug("Logging In user");
         open();
+		log.debug("Logging In user");
         insertTextInUsernameAndPasswordLogInTextFields(username, password);
         driver.findElement(this.loginButton).click();
     }
@@ -95,6 +99,18 @@ public class LoginPage extends BasePage {
         return new RegisterNewAccountPage(driver);
     }
 
+    /**
+     *
+     * This method clicks on and opens Gallery Page
+     *
+     * @author Jovan.Penic
+     * @return GalleryPage
+     */
+    public GalleryPage openGalleryPage() {
+        log.debug("Open gallery");
+        driver.findElement(galleryButton).click();
+        return new GalleryPage(driver);
+    }
 
 
 }

@@ -7,16 +7,14 @@ import org.openqa.selenium.WebDriver;
 
 public class BasePage {
 
-	public WebDriver driver;
+	public static WebDriver driver;
 	public static Logger log = Logger.getLogger(BasePage.class);
-
-    public static final String ADMIN_USERNAME = "admin";
-    public static final String ADMIN_PASSWORD = "password";
+	public static final String LOG_OUT_MESSAGE = "You have been logged out.";
 
     protected BasePage(WebDriver driver) {
 		this.driver = driver;
 	}
- 
+
 	protected boolean isElementPresent(By by){
 	        try{
 	            driver.findElement(by);
@@ -26,7 +24,7 @@ public class BasePage {
 	            return false;
 	        }
 	    }
-	    	  
+
 	public void quit() {
 		log.debug("Quitting browser");
 		if (this.driver != null) {
@@ -47,7 +45,22 @@ public class BasePage {
 		return driver.findElement(anyTextField).getAttribute("value");
 	}
 
+    /**
+     * This method clicks on button that is passed
+     * @author Danko.Lojanica
+     * @param button
+     */
+     public void clickOnButton(By button){
+        driver.findElement(button).click();
+    }
 
-
-
+    /**
+     * This method returns text of any passed element
+     * @author Danko.Lojanica
+     * @param element
+     * @return
+     */
+    public String getTextOfElement(By element) {
+        return driver.findElement(element).getText();
+    }
 }

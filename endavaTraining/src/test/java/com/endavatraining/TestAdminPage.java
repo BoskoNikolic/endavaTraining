@@ -21,6 +21,7 @@ import org.testng.annotations.Test;
 public class TestAdminPage extends TestBase {
 
     private LoginPage loginPage;
+    private HomePage homePage;
     private AdminPage adminPage;
     private By adminPageButton = By.linkText("Admin");
     public static Logger log = Logger.getLogger(TestAdminPage.class);
@@ -49,6 +50,33 @@ public class TestAdminPage extends TestBase {
         Assert.assertFalse(adminPage.isCheckBoxSelected());
         adminPage.clickOnAllowUsersToShareRegCode();
         Assert.assertTrue(adminPage.isCheckBoxSelected());
+
+        adminPage.logout();
+        log.info("Tested functionality of a 'Allow users to share Registration Code' checkbox on admin page");
+
+    }
+
+    /*
+     * Test validates functionality of generate new code button on admin page
+     * @author Srboljub.Todorovic
+     *
+     */
+    @Test
+    public void testGenerateNewRegCodeButton() {
+        homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
+        homePage.goToPage(AdminPage.adminPageButton);
+
+        adminPage = new AdminPage(homePage.driver);
+
+        String regCode = adminPage.getRegCodeBoxText();
+
+        adminPage.generateNewRegCode();
+
+        String newRegCode = adminPage.getRegCodeBoxText();
+
+        Assert.assertNotEquals(regCode, newRegCode, "Registration button does not refreshes registration code");
+        log.info("Tested functionality of 'Generate new code' button on admin page");
+
     }
 
 

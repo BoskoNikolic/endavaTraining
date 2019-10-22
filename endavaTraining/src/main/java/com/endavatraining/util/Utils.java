@@ -1,8 +1,10 @@
 package com.endavatraining.util;
 
-import com.endavatraining.pages.LoginPage;
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,9 +14,37 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import com.endavatraining.pages.LoginPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Utils {
+
+    public static Logger log = Logger.getLogger(Utils.class);
+
+    /**
+     *
+     * This method will take screenshot and save it in FailedTestScreenShots folder
+     *
+     * @author Jovan.Penic
+     * @param webdriver
+     * @param screenshotName
+     */
+    public static void captureScreenshot(WebDriver webdriver, String screenshotName) {
+        try {
+			log.debug("Taking screenshot of failed test.");
+            TakesScreenshot screenShot = ((TakesScreenshot) webdriver);
+            String screenshotTime = new SimpleDateFormat("ddMMyyyyhhmmss.SS").format(new Date());
+            File imageFile = screenShot.getScreenshotAs(OutputType.FILE);
+            File destinationFile = new File( System.getProperty("user.dir") + "\\FailedTestScreenShots\\" + screenshotName + screenshotTime + ".png");
+            FileUtils.copyFile(imageFile, destinationFile);
+        } catch (IOException ioException){
+            log.error("Error happened while trying to execute captureScreenshot method!");
+        }
+    }
 
 	/**
      *
@@ -24,9 +54,6 @@ public class Utils {
 	 * @author Jovan.Penic
 	 * @return ChromeOptions
 	 */
-
-    public static Logger log = Logger.getLogger(Utils.class);
-
     public static ChromeOptions setUpBrowserOptions() {
 		log.debug("Setting up browser options");
         ChromeOptions options = new ChromeOptions();

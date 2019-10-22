@@ -6,6 +6,7 @@ import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -18,11 +19,12 @@ import org.testng.annotations.Test;
  *
  */
 
-public class TestAdminPage {
+public class TestAdminPage extends TestBase {
 
     private LoginPage loginPage;
     private HomePage homePage;
     private AdminPage adminPage;
+    private By adminPageButton = By.linkText("Admin");
     public static Logger log = Logger.getLogger(TestAdminPage.class);
 
 
@@ -35,11 +37,12 @@ public class TestAdminPage {
     /*
      * Test validates default state of checkbox on admin page
      * @author Srboljub.Todorovic
+     *
      */
     @Test
     public void testAdminPageCheckbox() {
-        homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
-        homePage.goToPage(AdminPage.adminPageButton);
+        HomePage homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
+        homePage.goToPage(adminPageButton);
 
         adminPage = new AdminPage(homePage.driver);
 

@@ -1,18 +1,19 @@
 package com.endavatraining;
 
+import com.endavatraining.pages.LoginPage;
+import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 
-import com.endavatraining.util.Utils;
-import com.endavatraining.pages.LoginPage;
-
-
-public class TestLoginPage {
+public class TestLoginPage extends TestBase {
 
 	private LoginPage loginPage;
 	private static String falseUsername = "user1";
@@ -35,7 +36,6 @@ public class TestLoginPage {
 	 */
 	@Test
 	public void testLoginPageIsOpened() {
-		log.info("Test is log in page opened");
 		loginPage.open();
 		new WebDriverWait(loginPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
@@ -65,11 +65,13 @@ public class TestLoginPage {
     public void testRightUpperLoginButtonClearsCredentialsTextFields(){
         loginPage.open();
         loginPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
-        Assert.assertEquals( username, Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated.");
-        Assert.assertEquals( password, Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy), "Entered text in password Log In field is NOT populated. ");
+        Assert.assertEquals( username, LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy), "Entered text in username Log In field is NOT populated.");
+        Assert.assertEquals( password, LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy), "Entered text in password Log In field is NOT populated. ");
+		log.info("Tested that username and password fields are populated with correct credentials");
         loginPage.clickRightUpperLoginButton();
-        Assert.assertTrue(Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty(), "Username Log In field IS populated. Expected empty text field, but got: " + Utils.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
-        Assert.assertTrue(Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + Utils.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
+        Assert.assertTrue(LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty(), "Username Log In field IS populated. Expected empty text field, but got: " + LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
+        Assert.assertTrue(LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
+		log.info("Tested that username and password fields are NOT populated after clicking Log In");
     }
 
 

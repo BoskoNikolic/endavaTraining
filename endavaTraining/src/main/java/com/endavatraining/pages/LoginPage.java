@@ -14,40 +14,44 @@ public class LoginPage extends BasePage {
 	private By password = By.id("password");
 	private By errorLoginText = By.id("loginbox");
     private By upperRightLogInButton = By.xpath("//a[@href='/login']");
+	private By createAccountButton = By.xpath("//a[@href='/register']");
+	private By galleryButton = By.xpath("//a[@href='/gallery']");
 
-    public LoginPage(WebDriver driver) {
+
+
+
+	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
-	
+
 
 	public void open() {
-		log.debug("Open endava training site");
-
+		log.debug("Opening endava training site");
 		driver.get(ENDAVATRAINING_URL);
 	}
 
 	public By getLoginButton() {
-
 		return loginButton;
 
 	}
 
-	/*
-	 * This method is used for user login
-	 *
-	 * @author Srboljub.Todorovic
-	 * @param username
-	 * @param password
-	 *
-	 */
-	public void userLogin(String username, String password) {
-		open();
-		driver.findElement(this.userName).sendKeys(username);
-		driver.findElement(this.password).sendKeys(password);
-		driver.findElement(this.loginButton).click();
-	}
+    /*
+    * This method is used for user login
+    *
+    * @author Srboljub.Todorovic
+    * @param username
+    * @param password
+    *
+     */
+    public void userLogin(String username, String password) {
+        open();
+		log.debug("Logging In user");
+        insertTextInUsernameAndPasswordLogInTextFields(username, password);
+        driver.findElement(this.loginButton).click();
+    }
 
 	public HomePage openAs(String username, String password) {
+		log.debug("Logging In as user and opening Home Page");
 		open();
 		userLogin(username, password);
 		return new HomePage(driver);
@@ -68,6 +72,7 @@ public class LoginPage extends BasePage {
     public void insertTextInUsernameAndPasswordLogInTextFields(String username, String password) {
         driver.findElement(this.userName).sendKeys(username);
         driver.findElement(this.password).sendKeys(password);
+		log.debug("Inserted text in user name and in password field");
     }
 
     /**
@@ -78,5 +83,34 @@ public class LoginPage extends BasePage {
      */
     public void clickRightUpperLoginButton() {
         driver.findElement(upperRightLogInButton).click();
+		log.debug("Clicked on upper right Log In button");
     }
+
+    /**
+     *
+     *
+     * @author Jovan.Penic
+     * @return RegisterNewAccountPage
+     */
+    public RegisterNewAccountPage openCreateAccount() {
+		log.debug("Clicking on create account on Log In page");
+        open();
+        driver.findElement(createAccountButton).click();
+        return new RegisterNewAccountPage(driver);
+    }
+
+    /**
+     *
+     * This method clicks on and opens Gallery Page
+     *
+     * @author Jovan.Penic
+     * @return GalleryPage
+     */
+    public GalleryPage openGalleryPage() {
+        log.debug("Open gallery");
+        driver.findElement(galleryButton).click();
+        return new GalleryPage(driver);
+    }
+
+
 }

@@ -1,7 +1,6 @@
 package com.endavatraining;
 
 import com.endavatraining.pages.AdminPage;
-import com.endavatraining.pages.BasePage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
@@ -64,7 +63,7 @@ public class TestAdminPage extends TestBase {
      */
     @Test
     public void testGenerateNewRegCodeButton() {
-        homePage = loginPage.openAs(BasePage.ADMIN_USERNAME, BasePage.ADMIN_PASSWORD);
+        homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
         homePage.goToPage(AdminPage.adminPageButton);
 
         adminPage = new AdminPage(homePage.driver);

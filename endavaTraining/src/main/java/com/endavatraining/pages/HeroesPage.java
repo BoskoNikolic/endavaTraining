@@ -25,6 +25,7 @@ public class HeroesPage extends BasePage {
     public static By addHeroClass = By.id("type");
     public static By addHeroSave = By.id("submitButton");
     public static By logoutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
+    public static By heroLevelErrorMessage = By.xpath("//div[@id='levelMessage'][contains(.,\"Level is a number between 0 and 80\")]");
 
     public HeroesPage(WebDriver driver) {
         super(driver);
@@ -121,5 +122,18 @@ public class HeroesPage extends BasePage {
     public void logout() {
         clickOnButton(logoutButton);
     }
+
+    /**
+     *
+     * This method checks if hero level code error is visible
+     *
+     * @author Jovan.Penic
+     * @return boolean
+     */
+    public boolean isHeroLevelErrorMessagePresent() {
+        return isElementPresent(heroLevelErrorMessage);
+    }
+
+
 
 }

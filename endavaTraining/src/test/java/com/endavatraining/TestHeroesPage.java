@@ -91,8 +91,27 @@ public class TestHeroesPage extends TestBase {
 
     }
 
+    /**
+     *
+     * Test validates that user can't create new hero, when hero level is beyond limit, by logging in as user,
+     * clicking on Heroes tab and on Add New Hero button, entering level beyond limit and checking if error message is visible.
+     *
+     *  @author Jovan.Penic
+     */
+    @Test (priority = 0)
+    public void testUserCanNotCreateNewHeroBeyondHeroLevel() {
+        loginPage.userLogin(USER_USERNAME, USER_PASSWORD);
+        heroesPage = new HeroesPage(loginPage.driver);
+        heroesPage.openHeroPage();
+        heroesPage.openAddNewHero();
+        heroesPage.insertHeroLevel(heroLevelBeyondLimit);
+        Assert.assertTrue(heroesPage.isHeroLevelErrorMessagePresent(), "User can add new hero with level beyond limit. ");
+    }
+
+
     @AfterTest
     public void tearDown() {
+        if(heroesPage != null)
         heroesPage.quit();
     }
 

@@ -1,18 +1,19 @@
 package com.endavatraining;
 
+import com.endavatraining.pages.LoginPage;
+import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
 
-import com.endavatraining.util.Utils;
-import com.endavatraining.pages.LoginPage;
-
-
-public class TestLoginPage {
+public class TestLoginPage extends TestBase {
 
 	private LoginPage loginPage;
 	private static String falseUsername = "user1";
@@ -22,6 +23,7 @@ public class TestLoginPage {
 	private static String password = "password";
 	private By userNameBy = By.id("username");
 	private By passWordBy = By.id("password");
+
 
 	@BeforeTest
 	@Parameters({"browser"})
@@ -35,6 +37,7 @@ public class TestLoginPage {
 	 */
 	@Test
 	public void testLoginPageIsOpened() {
+		log.info("Test is log in page opened");
 		loginPage.open();
 		new WebDriverWait(loginPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));

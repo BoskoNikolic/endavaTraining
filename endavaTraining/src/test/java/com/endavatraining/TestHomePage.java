@@ -85,8 +85,6 @@ public class TestHomePage extends TestBase {
 	public void tearDown() {
 		if (homePage != null)
 			homePage.quit();
-		if (loginPage != null)
-		    loginPage.quit();
 	}
 
 }

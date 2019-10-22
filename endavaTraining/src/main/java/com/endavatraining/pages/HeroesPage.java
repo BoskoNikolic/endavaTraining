@@ -17,6 +17,7 @@ public class HeroesPage extends BasePage {
 
 
     private By heroTableBody = By.xpath("//table[@id=\"heroes-table\"]/tbody/tr");
+    private By deleteHeroButton = By.xpath("//*[@id=\"deleteHeroModal\"]/div/div/div[3]/form/button[2]");
     public static By heroesPageTab = By.linkText("Heroes");
     public static By addNewHeroButton = By.linkText("Add New Hero");
     public static By addHeroName = By.xpath("//*[@id=\"name\"]");
@@ -55,8 +56,8 @@ public class HeroesPage extends BasePage {
         for (int i = 0; i < rows.size() - 1; i++) {
             if (heroName.equals(getTextOfElement(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[1]")))) {
                 clickOnButton(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[5]/a[3]"));
-                wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"deleteHeroModal\"]/div/div/div[3]/form/button[2]")));
-                clickOnButton(By.xpath("//*[@id=\"deleteHeroModal\"]/div/div/div[3]/form/button[2]"));
+                wait.until(ExpectedConditions.elementToBeClickable(deleteHeroButton));
+                clickOnButton(deleteHeroButton);
             }
         }
     }

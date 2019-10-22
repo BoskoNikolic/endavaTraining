@@ -35,6 +35,7 @@ public class TestHomePage extends TestBase {
 		homePage = loginPage.openAs(username, password);
 		assert homePage.isWelcomeTextPresent() : "Welcome text is not present";
 		log.info("Tested home page availability.");
+		homePage.clickOnButton(homePage.getLogOutButton());
 	}
 
 	/**
@@ -81,6 +82,21 @@ public class TestHomePage extends TestBase {
 				HomePage.LOG_OUT_MESSAGE, "Log out failed");
 
 	}
+
+    /**
+     * Test validates that Share with friends button works properly
+     * @author Danko Lojanica
+     */
+    @Test
+    public void testShareWithFriends() {
+        loginPage.open();
+        homePage = loginPage.openAs(username, password);
+        homePage.clickOnButton(homePage.getSamsara());
+        homePage.clickOnButton(homePage.getShareWithFriends());
+        String message = homePage.alertMethod();
+        Assert.assertEquals(message, "http://172.17.167.71:9010", "Provided link is not correct");
+    }
+
 	@AfterTest
 	public void tearDown() {
 		if (homePage != null)

@@ -17,6 +17,10 @@ public class HomePage extends BasePage {
 	private By brokenLinkButton = By.linkText("Broken Link");
 	private By profileButton = By.linkText("Profile");
 	private By logOutTitle = By.xpath("//div[@class='alert alert-success']");
+	private By shareWithFriends= By.xpath("//*[text()='Share with friends!']");
+	private By title= By.className("panel-title text-center");
+	private By samsara= By.cssSelector("a.navbar-brand");
+	private By body = By.cssSelector("body");
 
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -64,6 +68,21 @@ public class HomePage extends BasePage {
 		return logOutTitle;
 	}
 
+	public By getShareWithFriends() {
+		return shareWithFriends;
+	}
+
+	public By getTitle() {
+		return title;
+	}
+
+	public By getSamsara() {
+		return samsara;
+	}
+
+	public By getBody() {
+		return body;
+	}
 
 	/*
 	 *

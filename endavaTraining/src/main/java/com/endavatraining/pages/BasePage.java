@@ -14,6 +14,7 @@ public class BasePage {
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "password";
 
+
     protected BasePage(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -86,4 +87,5 @@ public class BasePage {
 		alert.accept();
 		return alertMessage;
 	}
+
 }

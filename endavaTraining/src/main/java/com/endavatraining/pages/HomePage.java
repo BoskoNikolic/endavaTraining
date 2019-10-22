@@ -99,5 +99,12 @@ public class HomePage extends BasePage {
 		driver.findElement(shareWithFriends).click();
 	}
 
+	/**
+	 * This method clicks on users button button
+	 * @author Danko.Lojanica
+	 */
+	public void clickOnUsersButton(){
+		driver.findElement(usersButton).click();
+	}
 
 }

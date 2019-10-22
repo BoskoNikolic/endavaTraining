@@ -13,8 +13,6 @@ public class BasePage {
 	public static WebDriver driver;
 	public static Logger log = Logger.getLogger(BasePage.class);
 	public static final String LOG_OUT_MESSAGE = "You have been logged out.";
-    public static final String ADMIN_USERNAME = "admin";
-    public static final String ADMIN_PASSWORD = "password";
 
 	private Select dropClass;
 
@@ -69,7 +67,6 @@ public class BasePage {
      */
     public String getTextOfElement(By element) {
         return driver.findElement(element).getText();
-
     }
 	/*
 	 *This method sends text into chosen text field

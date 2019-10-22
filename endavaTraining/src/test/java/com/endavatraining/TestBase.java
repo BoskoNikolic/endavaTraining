@@ -11,8 +11,12 @@ import org.testng.annotations.Parameters;
 
 public class TestBase {
 
-    public static Logger log = Logger.getLogger(TestBase.class);
     protected static BasePage basePage;
+    public static Logger log = Logger.getLogger(TestBase.class);
+    public static final String ADMIN_USERNAME = "admin";
+    public static final String ADMIN_PASSWORD = "password";
+    public static final String USER_USERNAME = "user";
+    public static final String USER_PASSWORD = "password";
 
     @BeforeClass
     @Parameters({"browser"})

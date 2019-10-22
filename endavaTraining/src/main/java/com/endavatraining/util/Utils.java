@@ -23,6 +23,8 @@ import java.util.Date;
 
 public class Utils {
 
+    public static Logger log = Logger.getLogger(Utils.class);
+
     /**
      *
      * This method will take screenshot and save it in FailedTestScreenShots folder
@@ -52,8 +54,6 @@ public class Utils {
 	 * @author Jovan.Penic
 	 * @return ChromeOptions
 	 */
-    public static Logger log = Logger.getLogger(Utils.class);
-
     public static ChromeOptions setUpBrowserOptions() {
 		log.debug("Setting up browser options");
         ChromeOptions options = new ChromeOptions();

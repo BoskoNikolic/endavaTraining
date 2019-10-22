@@ -1,5 +1,6 @@
 package com.endavatraining;
 
+import com.endavatraining.pages.BasePage;
 import com.endavatraining.pages.BrokenLinkPage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
@@ -11,6 +12,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 /*
  *

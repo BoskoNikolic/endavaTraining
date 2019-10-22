@@ -36,7 +36,7 @@ public class TestHeroesPage extends TestBase {
     @Test(dataProvider = "DataProvider")
     public void testAddingNewHero(String heroName, String heroLevel, String heroClass) {
 
-        homePage = loginPage.openAs(homePage.ADMIN_USERNAME, homePage.ADMIN_PASSWORD);
+        homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
 
         heroesPage = new HeroesPage(homePage.driver);
         heroesPage.openHeroPage();
@@ -63,7 +63,7 @@ public class TestHeroesPage extends TestBase {
     @Test(dataProvider = "DataProvider", dependsOnMethods = {"testAddingNewHero"})
     public void deleteAddedHeroes(String heroName, String heroLevel, String heroClass) {
 
-        homePage = loginPage.openAs(homePage.ADMIN_USERNAME, homePage.ADMIN_PASSWORD);
+        homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
 
         heroesPage = new HeroesPage(homePage.driver);
         heroesPage.openHeroPage();

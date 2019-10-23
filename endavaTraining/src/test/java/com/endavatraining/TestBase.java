@@ -17,6 +17,7 @@ public class TestBase {
     public static final String ADMIN_PASSWORD = "password";
     public static final String USER_USERNAME = "user";
     public static final String USER_PASSWORD = "password";
+    public static final String HERO_ALREADY_EXISTS = "Hero with this name already exists!";
 
     @BeforeClass
     @Parameters({"browser"})

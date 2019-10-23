@@ -32,6 +32,7 @@ public class TestHomePage extends TestBase {
 	 */
 	@Test
 	public void testIsHomePageAvailable() {
+        log.info("Test is home page availabe" );
 		homePage = loginPage.openAs(username, password);
 		assert homePage.isWelcomeTextPresent() : "Welcome text is not present";
 		log.info("Tested home page availability.");
@@ -68,6 +69,7 @@ public class TestHomePage extends TestBase {
 		Assert.assertEquals(homePage.getTextOfElement(homePage.getLogOutTitle()),
 				HomePage.LOG_OUT_MESSAGE, "Log out failed");
 
+
 		loginPage.userLogin(username, password);
 		homePage.clickOnButton(homePage.getApiButton());
 		homePage.clickOnButton(homePage.getLogOutButton());
@@ -84,6 +86,17 @@ public class TestHomePage extends TestBase {
 	}
 
 	/**
+	 * Test validates that the Admin Tab is not present when logged in as a regular User
+	 *
+	 * */
+	@Test
+	public void testIsAdminTabAvailable() {
+		homePage = loginPage.openAs(username, password);
+		Assert.assertFalse(homePage.isAdminTabPresent(), "Admin tab is present");
+        homePage.clickOnButton(homePage.getLogOutButton());
+	}
+
+	/**
 	 * Test validates that Share with friends button works properly
 	 * @author Danko Lojanica
 	 */
@@ -95,7 +108,7 @@ public class TestHomePage extends TestBase {
 		homePage.clickOnSamsaraButton();
 		homePage.clickOnShareWithFriendsButton();
 		String message = homePage.alertMethod();
-		Assert.assertEquals(message, "http://172.17.167.71:9010", "Provided link is not correct");
+		Assert.assertEquals(message, LoginPage.ENDAVATRAINING_URL, "Provided link is not correct");
 
 	}
 

@@ -5,6 +5,9 @@ import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 
@@ -13,6 +16,8 @@ public class BasePage {
 	public static final String LOG_OUT_MESSAGE = "You have been logged out.";
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "password";
+
+	private Select dropClass;
 
     protected BasePage(WebDriver driver) {
 		this.driver = driver;
@@ -67,13 +72,6 @@ public class BasePage {
         return driver.findElement(element).getText();
     }
 
-	/**
-	 * This method send keys on passed element
-	 * @author Danko.Lojanica
-	 */
-	public void sendKeys(By by, String text){
-		driver.findElement(by).sendKeys(text);
-	}
 
 	/**
 	 * This method accepts alert end returns text from it
@@ -86,4 +84,27 @@ public class BasePage {
 		alert.accept();
 		return alertMessage;
 	}
+	/*
+	 *This method sends text into chosen text field
+	 * @author Srboljub.Todorovic
+	 * @param By, String
+	 */
+	public void typeTextOnElement(By field, String keys) {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		wait.until(ExpectedConditions.elementToBeClickable(field));
+		driver.findElement(field).sendKeys(keys);
+	}
+
+	/*
+	 *This method selects desirable option from drop down menu options
+	 * @author Srboljub.Todorovic
+	 * @param By, String
+	 */
+	public void dropDownMenuSelect(By dropMenu, String dropText) {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		wait.until(ExpectedConditions.elementToBeClickable(dropMenu));
+		dropClass = new Select(driver.findElement(dropMenu));
+		dropClass.selectByVisibleText(dropText);
+	}
+
 }

@@ -1,8 +1,9 @@
 package com.endavatraining.pages;
 
-
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 
 public class HomePage extends BasePage {
@@ -12,6 +13,7 @@ public class HomePage extends BasePage {
 	private By homeButton = By.linkText("Home");
 	private By usersButton = By.linkText("Users");
 	private By heroesButton = By.linkText("Heroes");
+	private By adminButton = By.linkText("Admin");
 	private By galleryButton = By.linkText("Gallery");
 	private By apiButton = By.linkText("API");
 	private By brokenLinkButton = By.linkText("Broken Link");
@@ -21,6 +23,7 @@ public class HomePage extends BasePage {
 	private By title= By.className("panel-title text-center");
 	private By samsara= By.cssSelector("a.navbar-brand");
 	private By body = By.cssSelector("body");
+    public static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
 		super(driver);
@@ -56,10 +59,6 @@ public class HomePage extends BasePage {
 		return apiButton;
 	}
 
-	public By getBrokenLinkButton() {
-		return brokenLinkButton;
-	}
-
 	public By getProfileButton() {
 		return profileButton;
 	}
@@ -68,9 +67,6 @@ public class HomePage extends BasePage {
 		return logOutTitle;
 	}
 
-	public By getTitle() {
-		return title;
-	}
 
 
 	/*
@@ -99,5 +95,11 @@ public class HomePage extends BasePage {
 		driver.findElement(shareWithFriends).click();
 	}
 
+	public WebElement findUsersPage() {
+		return driver.findElement(this.usersButton);
+	}
 
+	public boolean isAdminTabPresent(){
+		return isElementPresent(adminButton);
+	}
 }

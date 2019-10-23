@@ -10,7 +10,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.apache.log4j.Logger;
 
-public class TestUsersPage {
+public class TestUsersPage extends TestBase {
 
     private LoginPage loginPage;
     private HomePage homePage;
@@ -58,6 +58,20 @@ public class TestUsersPage {
 
 
     }
+
+    /**
+     * Test validates that hero count is correct, by logging in as user, going to users page and checking if the hero count of admins in Users table
+     * is the same as in the User Heroes pop up window.
+     *
+     *  @author Jovan.Penic
+     */
+    @Test
+    public void testHeroCount() {
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+        homePage.findUsersPage().click();
+        usersPage = new UsersPage(homePage.driver);
+    }
+
 
     @AfterTest
     public void tearDown() {

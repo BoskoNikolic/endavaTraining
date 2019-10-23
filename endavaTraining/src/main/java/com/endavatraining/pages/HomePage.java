@@ -3,6 +3,7 @@ package com.endavatraining.pages;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 
 public class HomePage extends BasePage {
@@ -21,6 +22,7 @@ public class HomePage extends BasePage {
 	private By title= By.className("panel-title text-center");
 	private By samsara= By.cssSelector("a.navbar-brand");
 	private By body = By.cssSelector("body");
+	private By adminButton = By.linkText("Admin");
     public static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
@@ -100,5 +102,7 @@ public class HomePage extends BasePage {
 		driver.findElement(shareWithFriends).click();
 	}
 
+	public WebElement findUsersPage() { return driver.findElement(this.usersButton);  }
 
+	public boolean isAdminTabPresent(){ return isElementPresent(adminButton); }
 }

@@ -13,8 +13,8 @@ import java.util.List;
 
 public class UsersPage extends BasePage {
 
-
-    private By userDetails = By.id("userModal");
+    private List<WebElement> rows;
+    public static By userDetails = By.id("userModal");
     private By getUserDetails = By.xpath("/html/body/div[1]/div/div/div[3]/div");
     private By userDetailsFirstname = By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[2]/div/div[2]/p/span[4]");
     private By userDetailsLastname = By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[2]/div/div[2]/p/span[6]");
@@ -22,13 +22,16 @@ public class UsersPage extends BasePage {
     private By getUserDetailsCreationTime = By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[2]/div/div[2]/p/span[8]");
     private By closeUserDetailsButton = By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[3]/button");
     private By logOutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
+    public static By userHeroesWindowBody = By.xpath("//*[@id=\"heroesModal\"]/div/div/div[2]/div/table/tbody/tr");
+    private By closeUserHeroesPopUpWindow = By.xpath("//*[@id=\"heroesModal\"]/div/div/div[3]/button");
     private By search = By.id("search");
-
     public static Logger log = Logger.getLogger(UsersPage.class);
     private By usersButton = By.linkText("Users");
     private By dropDownOnUsersPage = By.id("pageSizeSelect");
     private By searchIcon = By.cssSelector("button[class='btn btn-info btn-sm']");
     private By heroCountField = By.xpath("//*[@id=\"users-table\"]/tbody/tr[1]/td[3]");
+
+    private WebDriverWait wait = new WebDriverWait(driver, 15);
 
     public UsersPage(WebDriver driver) {
         super(driver);
@@ -78,7 +81,6 @@ public class UsersPage extends BasePage {
      *
      * */
     public boolean isUserDetailsVisible() {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOfElementLocated(userDetails));
         String style = driver.findElement(this.userDetails).getAttribute("style");
         if (style.contains("display: block")) {
@@ -233,12 +235,32 @@ public class UsersPage extends BasePage {
     public void clickUsersLogOutButton(WebDriver driver) {
 
         isElementPresent(logOutButton);
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(userDetails));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(invisibilityOfElement));
         driver.findElement(logOutButton).click();
 
     }
 
+    /**
+     * This method counts the number of Admin heroes in
+     *
+     * @author Jovan.Penic
+     * @return int
+     */
+    public int numberOfAdminHeroesInUserHeroesPopUp() {
+        rows = driver.findElements(userHeroesWindowBody);
+        int countAdminHeroes = rows.size() - 1;
+        return countAdminHeroes;
+    }
+
+    /**
+     * This method clicks and closes the User Heroes Window
+     *
+     * @author Jovan.Penic
+     */
+    public void closeUserHeroesWindow() {
+        wait.until(ExpectedConditions.elementToBeClickable(closeUserHeroesPopUpWindow));
+        clickOnButton(closeUserHeroesPopUpWindow);
+    }
 
 }
 

@@ -3,6 +3,7 @@ import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.pages.UsersPage;
 import com.endavatraining.util.Utils;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -18,10 +19,8 @@ public class TestUsersPage extends TestBase {
     private static final String DISPLAY_NAME = "Admin Admin";
     private static final String ABOUT_MESSAGE = "About Me Text";
     private static final String CREATION_TIME = "17.12.2018. 11:55";
-
+    private static By adminHeroCountUsersTable = By.xpath("//*[@id=\"users-table\"]/tbody/tr[3]/td[3]/a/b/span");
     public static Logger log = Logger.getLogger(TestUsersPage.class);
-
-
     private static final String USER_NAME = "user";
     private static final String PASSWORD = "password";
 
@@ -38,7 +37,7 @@ public class TestUsersPage extends TestBase {
      * Also check the About me message, and Creation time, then clicks the details close button, and logs out.
      *
      * */
-    @Test
+    @Test (priority = 0)
     public void testUserDetails(){
 
         homePage = loginPage.openAs(USER_NAME, PASSWORD);
@@ -65,15 +64,21 @@ public class TestUsersPage extends TestBase {
      *
      *  @author Jovan.Penic
      */
-    @Test
+    @Test (priority = 1)
     public void testHeroCount() {
         homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
         homePage.findUsersPage().click();
         usersPage = new UsersPage(homePage.driver);
+        int heroCount = Integer.parseInt(usersPage.getTextOfElement(adminHeroCountUsersTable));
+        usersPage.clickOnButton(adminHeroCountUsersTable);
+        Assert.assertEquals(heroCount, usersPage.numberOfAdminHeroesInUserHeroesPopUp(), "Hero count of admins in Users table is NOT the same as in the User Heroes pop up window");
+        usersPage.closeUserHeroesWindow();
+        usersPage.clickUsersLogOutButton(usersPage.driver, UsersPage.userHeroesWindowBody);
+        log.info("Tested if the hero count of admins in Users table is the same as in the User Heroes pop up window.");
     }
 
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         if (usersPage != null)
             usersPage.quit();

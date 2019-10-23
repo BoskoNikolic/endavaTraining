@@ -3,6 +3,7 @@ package com.endavatraining.pages;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
 
@@ -16,6 +17,7 @@ public class LoginPage extends BasePage {
     private By upperRightLogInButton = By.xpath("//a[@href='/login']");
 	private By createAccountButton = By.xpath("//a[@href='/register']");
 	private By galleryButton = By.xpath("//a[@href='/gallery']");
+	private By profileButton = By.linkText("Profile");
 
 
 
@@ -116,6 +118,5 @@ public class LoginPage extends BasePage {
         driver.findElement(galleryButton).click();
         return new GalleryPage(driver);
     }
-
 
 }

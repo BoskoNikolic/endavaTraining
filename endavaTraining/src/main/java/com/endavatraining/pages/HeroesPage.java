@@ -13,7 +13,7 @@ public class HeroesPage extends BasePage {
 
     private List<WebElement> rows;
     private WebDriverWait wait = new WebDriverWait(driver, 3);
-    WebDriverWait wait3 = new WebDriverWait(driver, 10);
+    WebDriverWait wait2 = new WebDriverWait(driver, 10);
 
 
     private By heroTableBody = By.xpath("//table[@id=\"heroes-table\"]/tbody/tr");
@@ -122,7 +122,6 @@ public class HeroesPage extends BasePage {
      * @author Srboljub.Todorovic
      */
     public void logout() {
-        wait3.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=\"addHeroModal\"]")));
         wait.until(ExpectedConditions.elementToBeClickable(logoutButton));
         clickOnButton(logoutButton);
     }
@@ -163,8 +162,7 @@ public class HeroesPage extends BasePage {
      * @author Jovan.Penic
      */
     public void logoutFromAddNewHeroModal() {
-        wait3.until(ExpectedConditions.invisibilityOfElementLocated(addHeroModal));
-        wait.until(ExpectedConditions.elementToBeClickable(logoutButton));
+        wait2.until(ExpectedConditions.invisibilityOfElementLocated(addHeroModal));
         clickOnButton(logoutButton);
     }
 

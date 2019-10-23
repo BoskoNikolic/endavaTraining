@@ -40,7 +40,8 @@
 	<test thread-count="5" name="TestHeroesPage">
 		<parameter name="browser" value="chrome" />
 		<classes>
-			<class name="com.endavatraining.TestLoginPage" />
+			<class name="com.endavatraining.TestHeroesPage" />
 		</classes>
 	</test>
+
 </suite> <!-- Suite -->

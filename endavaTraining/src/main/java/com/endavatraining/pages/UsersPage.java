@@ -1,5 +1,6 @@
 package com.endavatraining.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -11,11 +12,14 @@ public class UsersPage extends BasePage {
         super(driver);
     }
 
+    public static Logger log = Logger.getLogger(LoginPage.class);
     private By usersButton = By.linkText("Users");
     private By dropDownOnUsersPage = By.id("pageSizeSelect");
     private By searchIcon = By.cssSelector("button[class='btn btn-info btn-sm']");
     private By heroCountField = By.xpath("//*[@id=\"users-table\"]/tbody/tr[1]/td[3]");
-    private By firstResult = By.xpath("//*[@id=\"users-table\"]/tbody/tr[1]");
+
+
+
 
 
 

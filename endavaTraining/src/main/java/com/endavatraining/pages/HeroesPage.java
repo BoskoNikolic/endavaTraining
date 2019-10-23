@@ -1,5 +1,6 @@
 package com.endavatraining.pages;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -10,9 +11,10 @@ public class HeroesPage extends BasePage {
         super(driver);
     }
 
+    public static Logger log = Logger.getLogger(LoginPage.class);
     private By heroesButton = By.linkText("Heroes");
     private By dropDownOnHeroesPage = By.id("pageSizeSelect");
-    private By heroCountField = By.xpath("//*[@id=\"heroes-table\"]/tbody/tr");
+
 
     /**
      * This method clicks on heroesButton button

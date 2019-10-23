@@ -70,6 +70,13 @@ public class BasePage {
         return driver.findElement(element).getText();
     }
 
+	/**
+	 * This method send keys on passed element
+	 * @author Danko.Lojanica
+	 */
+	public void sendKeys(By by, String text){
+		driver.findElement(by).sendKeys(text);
+	}
 
 	/**
 	 * This method accepts alert end returns text from it
@@ -103,6 +110,19 @@ public class BasePage {
 		wait.until(ExpectedConditions.elementToBeClickable(dropMenu));
 		dropClass = new Select(driver.findElement(dropMenu));
 		dropClass.selectByVisibleText(dropText);
+	}
+
+
+    /**
+     * This method clears text of selected element
+     *
+     * @author Jovan.Penic
+     * @param field
+     */
+	public void clearTextOnElement(By field) {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		wait.until(ExpectedConditions.elementToBeClickable(field));
+		driver.findElement(field).clear();
 	}
 
 }

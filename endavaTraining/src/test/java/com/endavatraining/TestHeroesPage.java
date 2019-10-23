@@ -43,7 +43,7 @@ public class TestHeroesPage extends TestBase {
 
         Assert.assertFalse(heroesPage.isHeroInTable(heroName), "Hero with this username already exists in table!");
 
-        heroesPage.openAddNewHero();
+        heroesPage.openAddNewHeroWindow();
         heroesPage.insertHeroName(heroName);
         heroesPage.insertHeroLevel(heroLevel);
         heroesPage.insertHeroClass(heroClass);
@@ -98,16 +98,30 @@ public class TestHeroesPage extends TestBase {
      *
      *  @author Jovan.Penic
      */
-    @Test (priority = 0)
-    public void testUserCanNotCreateNewHeroBeyondHeroLevel() {
+    @Test(dataProvider = "NewHeroLevelBeyondLimits")
+    public void testUserCanNotCreateNewHeroBeyondHeroLevel(String heroLevel) {
         loginPage.userLogin(USER_USERNAME, USER_PASSWORD);
         heroesPage = new HeroesPage(loginPage.driver);
         heroesPage.openHeroPage();
-        heroesPage.openAddNewHero();
-        heroesPage.insertHeroLevel(heroLevelBeyondLimit);
+        heroesPage.openAddNewHeroWindow();
+        heroesPage.insertHeroLevel(heroLevel);
         Assert.assertTrue(heroesPage.isHeroLevelErrorMessagePresent(), "User can add new hero with level beyond limit. ");
+        log.info("Verified that new hero beyond level limit can not be added.");
+        heroesPage.clearHeroLevel();
+        heroesPage.clickOnCancel();
+        heroesPage.logoutFromAddNewHeroModal();
     }
 
+    @DataProvider(name = "NewHeroLevelBeyondLimits")
+    public Object[][] getDataFromNewHeroLevelBeyondLimitsDataProvider() {
+        return new Object[][]
+                {
+                        { "85" },
+                        { "0" },
+                        { "-10"},
+                };
+
+    }
 
     @AfterTest
     public void tearDown() {

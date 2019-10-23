@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
@@ -14,6 +13,7 @@ public class HeroesPage extends BasePage {
 
     private List<WebElement> rows;
     private WebDriverWait wait = new WebDriverWait(driver, 3);
+    WebDriverWait wait3 = new WebDriverWait(driver, 10);
 
 
     private By heroTableBody = By.xpath("//table[@id=\"heroes-table\"]/tbody/tr");
@@ -26,6 +26,8 @@ public class HeroesPage extends BasePage {
     public static By addHeroSave = By.id("submitButton");
     public static By logoutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
     public static By heroLevelErrorMessage = By.xpath("//div[@id='levelMessage'][contains(.,\"Level is a number between 0 and 80\")]");
+    public static By cancelAddHero = By.xpath("//*[@id=\"add-hero-form\"]/div[2]/button[1]");
+    public static By addHeroModal = By.xpath("//*[@id=\"addHeroModal\"]");
 
     public HeroesPage(WebDriver driver) {
         super(driver);
@@ -76,7 +78,7 @@ public class HeroesPage extends BasePage {
      * This method opens add new hero window
      * @author Srboljub.Todorovic
      */
-    public void openAddNewHero() {
+    public void openAddNewHeroWindow() {
         clickOnButton(addNewHeroButton);
     }
 
@@ -95,7 +97,7 @@ public class HeroesPage extends BasePage {
      * @param String
      */
     public void insertHeroLevel(String heroLevel) {
-        typeTextOnElement(addHeroLevel,heroLevel);
+        typeTextOnElement(addHeroLevel, heroLevel);
     }
 
     /*
@@ -120,6 +122,8 @@ public class HeroesPage extends BasePage {
      * @author Srboljub.Todorovic
      */
     public void logout() {
+        wait3.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[@id=\"addHeroModal\"]")));
+        wait.until(ExpectedConditions.elementToBeClickable(logoutButton));
         clickOnButton(logoutButton);
     }
 
@@ -134,6 +138,34 @@ public class HeroesPage extends BasePage {
         return isElementPresent(heroLevelErrorMessage);
     }
 
+    /**
+     * This method clicks on Cancel Add Hero button
+     *
+     * @author Jovan.Penic
+     */
+    public void clickOnCancel() {
+        wait.until(ExpectedConditions.elementToBeClickable(cancelAddHero));
+        clickOnButton(cancelAddHero);
+    }
 
+    /**
+     * This method clears Hero level in Add Hero window
+     *
+     * @author Jovan.Penic
+     */
+    public void clearHeroLevel() {
+        clearTextOnElement(addHeroLevel);
+    }
+
+    /**
+     * This method logs out user from Add New Hero window
+     *
+     * @author Jovan.Penic
+     */
+    public void logoutFromAddNewHeroModal() {
+        wait3.until(ExpectedConditions.invisibilityOfElementLocated(addHeroModal));
+        wait.until(ExpectedConditions.elementToBeClickable(logoutButton));
+        clickOnButton(logoutButton);
+    }
 
 }

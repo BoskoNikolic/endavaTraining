@@ -13,7 +13,6 @@ public class HeroesPage extends BasePage {
 
     private List<WebElement> rows;
     private WebDriverWait wait = new WebDriverWait(driver, 3);
-    WebDriverWait wait2 = new WebDriverWait(driver, 10);
 
 
     private By heroTableBody = By.xpath("//table[@id=\"heroes-table\"]/tbody/tr");
@@ -162,7 +161,7 @@ public class HeroesPage extends BasePage {
      * @author Jovan.Penic
      */
     public void logoutFromAddNewHeroModal() {
-        wait2.until(ExpectedConditions.invisibilityOfElementLocated(addHeroModal));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(addHeroModal));
         clickOnButton(logoutButton);
     }
 

@@ -105,4 +105,8 @@ public class HomePage extends BasePage {
 	public WebElement findUsersPage() { return driver.findElement(this.usersButton);  }
 
 	public boolean isAdminTabPresent(){ return isElementPresent(adminButton); }
+
+	public boolean isProfileButtonDisplayed() {
+		return isElementPresent(profileButton);
+	}
 }

@@ -106,14 +106,17 @@ public class TestHeroesPage extends TestBase {
         usersPage = new UsersPage(homePage.driver);
         usersPage.selectValueFromDropDownOnUsersPage(3);
         usersPage.searchUser("admin");
+        log.info("Search for admin user");
         usersPage.clickOnSearchIcon();
         int heroCountForAdminOnUserPage = usersPage.heroCountForAdminUserOnUserPage();
+        log.info("Count the number of heroes for admin user on User page");
         heroesPage = new HeroesPage(homePage.driver);
         heroesPage.clickOnHeroesButton();
         heroesPage.selectValueFromDropDownOnHeroesPage(3);
         int heroCountForAdminOnHeroesPage = heroesPage.heroCountForAdminUserOnHeroesPage();
+        log.info("Count the number of heroes for admin user on Heroes page");
         Assert.assertEquals(heroCountForAdminOnUserPage,heroCountForAdminOnHeroesPage, " Hero count for admin user is not the same on Users page (list of users) and Hero Page(heroes list)");
-
+        heroesPage.logout();
 
     }
 

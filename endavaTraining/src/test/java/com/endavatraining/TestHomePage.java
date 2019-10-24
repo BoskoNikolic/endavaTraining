@@ -68,17 +68,6 @@ public class TestHomePage extends TestBase {
 		homePage.clickOnButton(homePage.getLogOutButton());
 		Assert.assertEquals(homePage.getTextOfElement(homePage.getLogOutTitle()),
 				HomePage.LOG_OUT_MESSAGE, "Log out failed");
-	/**
-	 * Test validates that the Admin Tab is not present when logged in as a regular User
-	 *
-	 * */
-	@Test
-	public void testIsAdminTabAvailable(){
-		homePage = loginPage.openAs(username, password);
-		Assert.assertFalse(homePage.isAdminTabPresent(), "Admin tab is present");
-
-	}
-
 
 		loginPage.userLogin(username, password);
 		homePage.clickOnButton(homePage.getApiButton());
@@ -108,6 +97,19 @@ public class TestHomePage extends TestBase {
 		homePage.clickOnShareWithFriendsButton();
 		String message = homePage.alertMethod();
 		Assert.assertEquals(message, "http://172.17.167.71:9010", "Provided link is not correct");
+		homePage.clickOnButton(homePage.getLogOutButton());
+
+	}
+
+	/**
+	 * Test validates that the Admin Tab is not present when logged in as a regular User
+	 *
+	 * */
+	@Test
+	public void testIsAdminTabAvailable(){
+		homePage = loginPage.openAs(username, password);
+		Assert.assertFalse(homePage.isAdminTabPresent(), "Admin tab is present");
+		homePage.clickOnButton(homePage.getLogOutButton());
 
 	}
 

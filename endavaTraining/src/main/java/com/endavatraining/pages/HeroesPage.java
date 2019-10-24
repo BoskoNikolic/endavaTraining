@@ -13,12 +13,11 @@ import java.util.List;
 public class HeroesPage extends BasePage {
 
 
+    public static Logger log = Logger.getLogger(HeroesPage.class);
     private List<WebElement> rows;
     private WebDriverWait wait = new WebDriverWait(driver, 3);
-    public static Logger log = Logger.getLogger(LoginPage.class);
     private By heroesButton = By.linkText("Heroes");
     private By dropDownOnHeroesPage = By.id("pageSizeSelect");
-
     private By heroTableBody = By.xpath("//table[@id=\"heroes-table\"]/tbody/tr");
     private By deleteHeroButton = By.xpath("//*[@id=\"deleteHeroModal\"]/div/div/div[3]/form/button[2]");
     public static By heroesPageTab = By.linkText("Heroes");
@@ -29,12 +28,10 @@ public class HeroesPage extends BasePage {
     public static By addHeroSave = By.id("submitButton");
     public static By logoutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
 
+
     public HeroesPage(WebDriver driver) {
         super(driver);
     }
-
-
-
 
     /**
      * This method clicks on heroesButton button

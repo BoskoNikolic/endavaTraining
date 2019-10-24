@@ -22,9 +22,9 @@ public class UsersPage extends BasePage {
     private By getUserDetailsCreationTime = By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[2]/div/div[2]/p/span[8]");
     private By closeUserDetailsButton = By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[3]/button");
     private By logOutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
+    private By search = By.id("search");
 
-
-    public static Logger log = Logger.getLogger(LoginPage.class);
+    public static Logger log = Logger.getLogger(UsersPage.class);
     private By usersButton = By.linkText("Users");
     private By dropDownOnUsersPage = By.id("pageSizeSelect");
     private By searchIcon = By.cssSelector("button[class='btn btn-info btn-sm']");
@@ -69,7 +69,7 @@ public class UsersPage extends BasePage {
                int heroCount;
               return heroCount = Integer.parseInt(driver.findElement(heroCountField).getText());
     }
-}
+
     /**
      *Method check if User Details displayed
      *

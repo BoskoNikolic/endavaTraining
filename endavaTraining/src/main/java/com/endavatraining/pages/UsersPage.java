@@ -24,6 +24,7 @@ public class UsersPage extends BasePage {
     private By logOutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
     public static By userHeroesWindowBody = By.xpath("//*[@id=\"heroesModal\"]/div/div/div[2]/div/table/tbody/tr");
     private By closeUserHeroesPopUpWindow = By.xpath("//*[@id=\"heroesModal\"]/div/div/div[3]/button");
+    public static By adminHeroCountUsersTable = By.xpath("//*[@id=\"users-table\"]/tbody/tr[3]/td[3]/a/b/span");
     private By search = By.id("search");
     public static Logger log = Logger.getLogger(UsersPage.class);
     private By usersButton = By.linkText("Users");
@@ -227,29 +228,16 @@ public class UsersPage extends BasePage {
     }
 
     /**
-     * Method locates the Log Out button and clicks on it
-     * @author: luka.ivancic
-     *
-     *
-     * */
-    public void clickUsersLogOutButton(WebDriver driver) {
-
-        isElementPresent(logOutButton);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(invisibilityOfElement));
-        driver.findElement(logOutButton).click();
-
-    }
-
-    /**
-     * This method counts the number of Admin heroes in
+     * This method counts the number of Admin heroes in User heroes Pop Up Window, by clicking on it and
+     * counting the number of rows
      *
      * @author Jovan.Penic
      * @return int
      */
     public int numberOfAdminHeroesInUserHeroesPopUp() {
+        clickOnButton(UsersPage.adminHeroCountUsersTable);
         rows = driver.findElements(userHeroesWindowBody);
-        int countAdminHeroes = rows.size() - 1;
-        return countAdminHeroes;
+        return rows.size() - 1;
     }
 
     /**
@@ -260,6 +248,17 @@ public class UsersPage extends BasePage {
     public void closeUserHeroesWindow() {
         wait.until(ExpectedConditions.elementToBeClickable(closeUserHeroesPopUpWindow));
         clickOnButton(closeUserHeroesPopUpWindow);
+    }
+
+    /**
+     * This method counts the number of Admin heroes in Users table, by getting the text from Hero Count element
+     * and parsing it to integer
+     *
+     * @author Jovan.Penic
+     * @return int
+     */
+    public int getNumberOfAdminHeroesInUsersList() {
+        return Integer.parseInt(getTextOfElement(adminHeroCountUsersTable));
     }
 
 }

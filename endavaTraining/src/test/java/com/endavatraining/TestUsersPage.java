@@ -5,10 +5,7 @@ import com.endavatraining.pages.UsersPage;
 import com.endavatraining.util.Utils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.apache.log4j.Logger;
 
 public class TestUsersPage extends TestBase {
@@ -19,10 +16,7 @@ public class TestUsersPage extends TestBase {
     private static final String DISPLAY_NAME = "Admin Admin";
     private static final String ABOUT_MESSAGE = "About Me Text";
     private static final String CREATION_TIME = "17.12.2018. 11:55";
-    private static By adminHeroCountUsersTable = By.xpath("//*[@id=\"users-table\"]/tbody/tr[3]/td[3]/a/b/span");
-    public static Logger log = Logger.getLogger(TestUsersPage.class);
-    private static final String USER_NAME = "user";
-    private static final String PASSWORD = "password";
+    public static Logger log = Logger.getLogger(TestLoginPage.class);
 
 
     @BeforeTest
@@ -40,7 +34,7 @@ public class TestUsersPage extends TestBase {
     @Test (priority = 0)
     public void testUserDetails(){
 
-        homePage = loginPage.openAs(USER_NAME, PASSWORD);
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
         homePage.findUsersPage().click();
         usersPage = new UsersPage(homePage.driver);
         usersPage.clickUserDetails(usersPage.findUserIndexByDisplayName(DISPLAY_NAME));
@@ -52,15 +46,13 @@ public class TestUsersPage extends TestBase {
         Assert.assertEquals(ABOUT_MESSAGE, usersPage.getAboutMessageFromDetailsPage());
         Assert.assertEquals(CREATION_TIME, usersPage.getCreationTimeFromDetailsPage());
         usersPage.clickUserDetailsCloseButton();
-        usersPage.clickUsersLogOutButton(usersPage.driver);
+        usersPage.clickUsersLogOutButton(UsersPage.userDetails);
         log.info("Tested if Users info is the same in the Users list and the Details page");
-
-
     }
 
     /**
-     * Test validates that hero count is correct, by logging in as user, going to users page and checking if the hero count of admins in Users table
-     * is the same as in the User Heroes pop up window.
+     * Test validates that hero count is correct, by logging in as user, going to users page and checking if
+     * the hero count of admins in Users table is the same as in the User Heroes pop up window.
      *
      *  @author Jovan.Penic
      */
@@ -69,11 +61,10 @@ public class TestUsersPage extends TestBase {
         homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
         homePage.findUsersPage().click();
         usersPage = new UsersPage(homePage.driver);
-        int heroCount = Integer.parseInt(usersPage.getTextOfElement(adminHeroCountUsersTable));
-        usersPage.clickOnButton(adminHeroCountUsersTable);
-        Assert.assertEquals(heroCount, usersPage.numberOfAdminHeroesInUserHeroesPopUp(), "Hero count of admins in Users table is NOT the same as in the User Heroes pop up window");
+        Assert.assertEquals(usersPage.getNumberOfAdminHeroesInUsersList(), usersPage.numberOfAdminHeroesInUserHeroesPopUp(),
+                       "Hero count of admins in Users table is NOT the same as in the User Heroes pop up window");
         usersPage.closeUserHeroesWindow();
-        usersPage.clickUsersLogOutButton(usersPage.driver, UsersPage.userHeroesWindowBody);
+        usersPage.clickUsersLogOutButton(UsersPage.userHeroesWindowBody);
         log.info("Tested if the hero count of admins in Users table is the same as in the User Heroes pop up window.");
     }
 

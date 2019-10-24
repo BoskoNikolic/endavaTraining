@@ -10,6 +10,7 @@ Every test class enables testing of different page of Samsara website:
    *	TestLoginPage;
    *	TestHomePage;
    *	TestRegisterNewAccountPage;
+   *  TestProfilePage
    *	TestUsersPage;
    *	TestAdminPage;
    *	TestHeroesPage;

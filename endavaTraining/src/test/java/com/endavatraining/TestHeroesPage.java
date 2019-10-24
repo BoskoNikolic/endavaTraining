@@ -30,46 +30,46 @@ public class TestHeroesPage extends TestBase {
      * @author Srboljub.Todorovic
      * @param  String heroName, String heroLevel, String heroClass
      */
-//    @Test(dataProvider = "DataProvider")
-//    public void testAddingNewHero(String heroName, String heroLevel, String heroClass) {
-//
-//        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
-//
-//        heroesPage = new HeroesPage(homePage.driver);
-//        heroesPage.openHeroPage();
-//
-//        Assert.assertFalse(heroesPage.isHeroInTable(heroName), "Hero with this username already exists in table!");
-//
-//        heroesPage.openAddNewHero();
-//        heroesPage.insertHeroName(heroName);
-//        heroesPage.insertHeroLevel(heroLevel);
-//        heroesPage.insertHeroClass(heroClass);
-//        heroesPage.saveNewHero();
-//
-//        Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not added!");
-//        log.info("Verifies that new hero is added (shown on table).");
-//
-//        heroesPage.logout();
-//    }
+    @Test(dataProvider = "DataProvider")
+    public void testAddingNewHero(String heroName, String heroLevel, String heroClass) {
+
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+
+        heroesPage = new HeroesPage(homePage.driver);
+        heroesPage.openHeroPage();
+
+        Assert.assertFalse(heroesPage.isHeroInTable(heroName), "Hero with this username already exists in table!");
+
+        heroesPage.openAddNewHero();
+        heroesPage.insertHeroName(heroName);
+        heroesPage.insertHeroLevel(heroLevel);
+        heroesPage.insertHeroClass(heroClass);
+        heroesPage.saveNewHero();
+
+        Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not added!");
+        log.info("Verifies that new hero is added (shown on table).");
+
+        heroesPage.logout();
+    }
 
     /*
      * Test erases inputs from previous test
      * @author Srboljub.Todorovic
      * @param  String heroName, String heroLevel, String heroClass
      */
-//    @Test(dataProvider = "DataProvider", dependsOnMethods = {"testAddingNewHero"})
-//    public void deleteAddedHeroes(String heroName, String heroLevel, String heroClass) {
-//
-//        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
-//
-//        heroesPage = new HeroesPage(homePage.driver);
-//        heroesPage.openHeroPage();
-//
-//        heroesPage.deleteHeroInTable(heroName);
-//        log.info("Erasing inserted values so the previous test could be performed multiple times with same set of data");
-//
-//        heroesPage.logout();
-//    }
+    @Test(dataProvider = "DataProvider", dependsOnMethods = {"testAddingNewHero"})
+    public void deleteAddedHeroes(String heroName, String heroLevel, String heroClass) {
+
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+
+        heroesPage = new HeroesPage(homePage.driver);
+        heroesPage.openHeroPage();
+
+        heroesPage.deleteHeroInTable(heroName);
+        log.info("Erasing inserted values so the previous test could be performed multiple times with same set of data");
+
+        heroesPage.logout();
+    }
 
     @Test
     public void isUserNotAbleToAddTwoHeroesWithTheSameName() {
@@ -78,9 +78,11 @@ public class TestHeroesPage extends TestBase {
         heroesPage.openHeroPage();
         heroesPage.openAddNewHero();
         heroesPage.addNewHero("already exists", "5", "Warrior");
+        log.info("Adding new hero");
         heroesPage.saveNewHero();
         heroesPage.openAddNewHero();
         heroesPage.addNewHero("already exists", "5", "Warrior");
+        log.info("Adding hero with same name");
         Assert.assertEquals(heroesPage.getTextOfWarningMessageHeroAlreadyExists(), TestBase.HERO_ALREADY_EXISTS, "Adding hero that already exists is allowed");
         heroesPage.clickOnCancel();
         heroesPage.searchHero("already exists");

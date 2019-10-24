@@ -7,6 +7,11 @@ import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import org.testng.annotations.DataProvider;
+
 
 
 public class TestHeroesPage extends TestBase {
@@ -16,6 +21,7 @@ public class TestHeroesPage extends TestBase {
     private HomePage homePage;
     public static Logger log = Logger.getLogger(TestHeroesPage.class);
 
+    private String userName = "user";
 
     @BeforeTest
     @Parameters({"browser"})
@@ -29,7 +35,7 @@ public class TestHeroesPage extends TestBase {
      * @author Srboljub.Todorovic
      * @param  String heroName, String heroLevel, String heroClass
      */
-    @Test(dataProvider = "DataProvider")
+    @Test(priority = 0, dataProvider = "DataProvider")
     public void testAddingNewHero(String heroName, String heroLevel, String heroClass) {
 
         homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
@@ -56,7 +62,7 @@ public class TestHeroesPage extends TestBase {
      * @author Srboljub.Todorovic
      * @param  String heroName, String heroLevel, String heroClass
      */
-    @Test(dataProvider = "DataProvider", dependsOnMethods = {"testAddingNewHero"})
+    @Test(priority = 1, dataProvider = "DataProvider", dependsOnMethods = {"testAddingNewHero"})
     public void deleteAddedHeroes(String heroName, String heroLevel, String heroClass) {
 
         homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
@@ -94,7 +100,7 @@ public class TestHeroesPage extends TestBase {
      *
      *  @author Jovan.Penic
      */
-    @Test(dataProvider = "NewHeroLevelBeyondLimits")
+    @Test(priority = 2, dataProvider = "NewHeroLevelBeyondLimits")
     public void testUserCanNotCreateNewHeroBeyondHeroLevel(String heroLevel) {
         loginPage.userLogin(USER_USERNAME, USER_PASSWORD);
         heroesPage = new HeroesPage(loginPage.driver);
@@ -119,10 +125,31 @@ public class TestHeroesPage extends TestBase {
 
     }
 
+    /**
+     * Test check all the heroes from the Heroes page, and compares that list with the one took from My Heroes page
+     * @author luka.ivancic
+     *
+     *
+     * */
+    @Test(priority = 2)
+    public void testUsersHeroesNumber(){
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+        heroesPage = new HeroesPage(homePage.driver);
+        heroesPage.openHeroPage();
+        int allUsersHeroes = heroesPage.numberOfUsersHeroes(userName);
+        heroesPage.clickOnMyHeroesButton();
+        int myHeroesHeroes = heroesPage.numberOfMyHeroes(userName);
+        System.out.println("Number of all Users heroes: " + allUsersHeroes + "\nNumber of Users Heroes on My Heroes page: " + myHeroesHeroes);
+        Assert.assertEquals(allUsersHeroes, myHeroesHeroes, "Number of all Users heroes is not the same as on the My Heroes page");
+        log.info("Checking the number of users heroes on the Heroes list, and the number of users heroes on the My Heroes page.");
+    }
+
     @AfterClass
     public void tearDown() {
         if(heroesPage != null)
         heroesPage.quit();
     }
+
+
 
 }

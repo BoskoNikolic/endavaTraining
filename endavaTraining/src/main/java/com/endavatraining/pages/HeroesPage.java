@@ -27,6 +27,11 @@ public class HeroesPage extends BasePage {
     public static By heroLevelErrorMessage = By.xpath("//div[@id='levelMessage'][contains(.,\"Level is a number between 0 and 80\")]");
     public static By cancelAddHero = By.xpath("//*[@id=\"add-hero-form\"]/div[2]/button[1]");
     public static By addHeroModal = By.xpath("//*[@id=\"addHeroModal\"]");
+    private By heroesNextButton = By.linkText("→");
+    private By heroesTableRows = By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/table/tbody/tr");
+    private By myHeroesButton = By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/table/thead/tr/th[5]/div/a/span");
+    private By heroPagePaginate = By.xpath("/html/body/div[1]/div/div/div[2]/div[3]/div[2]/ul/li");
+
 
     public HeroesPage(WebDriver driver) {
         super(driver);
@@ -87,7 +92,7 @@ public class HeroesPage extends BasePage {
      * @param String
      */
     public void insertHeroName(String heroName) {
-        typeTextOnElement(addHeroName,heroName);
+        typeTextOnElement(addHeroName, heroName);
     }
 
     /*
@@ -126,11 +131,10 @@ public class HeroesPage extends BasePage {
     }
 
     /**
-     *
      * This method checks if hero level code error is visible
      *
-     * @author Jovan.Penic
      * @return boolean
+     * @author Jovan.Penic
      */
     public boolean isHeroLevelErrorMessagePresent() {
         return isElementPresent(heroLevelErrorMessage);
@@ -164,5 +168,89 @@ public class HeroesPage extends BasePage {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(addHeroModal));
         clickOnButton(logoutButton);
     }
+
+    /**
+     * Method finds the My Heroes button on the Heros page, and clicks on it
+     *
+     * @author luka.ivancic
+     */
+    public void clickOnMyHeroesButton() {
+        driver.findElement(myHeroesButton).click();
+
+    }
+
+
+    /**
+     * Method returns the number of Heroes pages
+     *
+     * @return heroPageNumber - 4
+     * @author luka.ivancic
+     */
+    public int numberOfHeroPages() {
+
+        int heroPageNumber;
+        List<WebElement> pages = driver.findElements(heroPagePaginate);
+        heroPageNumber = pages.size();
+        log.debug("Checked the number of Heroes pages");
+        if (heroPageNumber <= 4) {
+            return 1;
+        }
+        return heroPageNumber - 4;
+    }
+
+
+    /**
+     * Mathod counts all the heroes of the certain user
+     *
+     * @param userName
+     * @return numberOfUsersHeroes
+     * @author luka.ivancic
+     */
+    public int numberOfUsersHeroes(String userName) {
+        int heroCount;
+        int numberOfUsersHeroes = 0;
+
+
+        for (int j = 0; j < numberOfHeroPages(); j++) {
+
+
+            List<WebElement> allHeroes = driver.findElements(heroesTableRows);
+            heroCount = allHeroes.size();
+            for (int i = 0; i < heroCount; i++) {
+
+                if (((driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/table/tbody/tr[" + (i + 1) +
+                        "]/td[4]/a/b/span"))).getText()).equals(userName)) {
+                    numberOfUsersHeroes++;
+                }
+            }
+            driver.findElement(heroesNextButton).click();
+
+        }
+        log.debug("Checked the number of users heroes on the Heroes page");
+        return numberOfUsersHeroes;
+    }
+
+    /**
+     * Method counts the certain Users heroes on the My Heroes page
+     *
+     * @param userName
+     * @return numberOfMyHeroes
+     * @author luka.ivacnic
+     */
+    public int numberOfMyHeroes(String userName) {
+        int heroCount;
+        int numberOfMyHeroes = 0;
+        List<WebElement> myHeroes = driver.findElements(heroesTableRows);
+        heroCount = myHeroes.size();
+        for (int i = 0; i < heroCount; i++) {
+            if (((driver.findElement(By.xpath("/html/body/div[1]/div/div/div[2]/div[2]/table/tbody/tr[" + (i + 1) +
+                    "]/td[4]/a/b/span"))).getText()).equals(userName)) {
+                numberOfMyHeroes++;
+            }
+        }
+        log.debug("Checked the number of users heroes on the My Heroes page");
+        return numberOfMyHeroes;
+    }
+
 
 }

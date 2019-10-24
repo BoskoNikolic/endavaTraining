@@ -49,5 +49,10 @@
 			<class name="com.endavatraining.TestUsersPage" />
 		</classes>
 	</test>
-
+	<test thread-count="5" name="TestProfilePage">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.endavatraining.TestProfilePage" />
+		</classes>
+	</test>
 </suite> <!-- Suite -->

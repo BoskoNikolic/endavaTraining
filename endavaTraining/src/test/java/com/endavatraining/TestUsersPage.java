@@ -3,7 +3,6 @@ import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.pages.UsersPage;
 import com.endavatraining.util.Utils;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import org.apache.log4j.Logger;
@@ -46,7 +45,8 @@ public class TestUsersPage extends TestBase {
         Assert.assertEquals(ABOUT_MESSAGE, usersPage.getAboutMessageFromDetailsPage());
         Assert.assertEquals(CREATION_TIME, usersPage.getCreationTimeFromDetailsPage());
         usersPage.clickUserDetailsCloseButton();
-        usersPage.clickUsersLogOutButton(UsersPage.userDetails);
+        usersPage.waitInvisibilityOfElement(UsersPage.userDetails);
+        usersPage.clickLogOutButton();
         log.info("Tested if Users info is the same in the Users list and the Details page");
     }
 
@@ -63,11 +63,12 @@ public class TestUsersPage extends TestBase {
         usersPage = new UsersPage(homePage.driver);
         Assert.assertEquals(usersPage.getNumberOfAdminHeroesInUsersList(), usersPage.numberOfAdminHeroesInUserHeroesPopUp(),
                        "Hero count of admins in Users table is NOT the same as in the User Heroes pop up window");
+        usersPage.waitForElementToBeClickable(UsersPage.closeUserHeroesPopUpWindow);
         usersPage.closeUserHeroesWindow();
-        usersPage.clickUsersLogOutButton(UsersPage.userHeroesWindowBody);
+        usersPage.waitInvisibilityOfElement(UsersPage.userHeroesWindowBody);
+        usersPage.clickLogOutButton();
         log.info("Tested if the hero count of admins in Users table is the same as in the User Heroes pop up window.");
     }
-
 
     @AfterClass
     public void tearDown() {

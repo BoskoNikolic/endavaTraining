@@ -15,7 +15,6 @@ public class UsersPage extends BasePage {
 
     private List<WebElement> rows;
     public static By userDetails = By.id("userModal");
-    private By getUserDetails = By.xpath("/html/body/div[1]/div/div/div[3]/div");
     private By userDetailsFirstname = By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[2]/div/div[2]/p/span[4]");
     private By userDetailsLastname = By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[2]/div/div[2]/p/span[6]");
     private By userDetailsAbout = By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[2]/div/div[2]/span[2]");
@@ -23,11 +22,10 @@ public class UsersPage extends BasePage {
     private By closeUserDetailsButton = By.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[3]/button");
     private By logOutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
     public static By userHeroesWindowBody = By.xpath("//*[@id=\"heroesModal\"]/div/div/div[2]/div/table/tbody/tr");
-    private By closeUserHeroesPopUpWindow = By.xpath("//*[@id=\"heroesModal\"]/div/div/div[3]/button");
-    public static By adminHeroCountUsersTable = By.xpath("//*[@id=\"users-table\"]/tbody/tr[3]/td[3]/a/b/span");
+    public static By closeUserHeroesPopUpWindow = By.xpath("//*[@id=\"heroesModal\"]/div/div/div[3]/button");
+    public static By adminHeroCountUsersTable = By.xpath("//*[@id=\"users-table\"]/tbody/tr[1]/td[3]/a/b/span");
     private By search = By.id("search");
     public static Logger log = Logger.getLogger(UsersPage.class);
-    private By usersButton = By.linkText("Users");
     private By dropDownOnUsersPage = By.id("pageSizeSelect");
     private By searchIcon = By.cssSelector("button[class='btn btn-info btn-sm']");
     private By heroCountField = By.xpath("//*[@id=\"users-table\"]/tbody/tr[1]/td[3]");
@@ -246,7 +244,6 @@ public class UsersPage extends BasePage {
      * @author Jovan.Penic
      */
     public void closeUserHeroesWindow() {
-        wait.until(ExpectedConditions.elementToBeClickable(closeUserHeroesPopUpWindow));
         clickOnButton(closeUserHeroesPopUpWindow);
     }
 
@@ -260,6 +257,16 @@ public class UsersPage extends BasePage {
     public int getNumberOfAdminHeroesInUsersList() {
         return Integer.parseInt(getTextOfElement(adminHeroCountUsersTable));
     }
+
+    /**
+     * Method locates the Log Out button and clicks on it
+     *
+     * @author: Jovan.Penic
+     * */
+    public void clickLogOutButton() {
+        clickOnButton(logOutButton);
+    }
+
 
 }
 

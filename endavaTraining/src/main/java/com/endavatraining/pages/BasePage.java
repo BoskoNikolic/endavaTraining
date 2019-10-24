@@ -14,8 +14,6 @@ public class BasePage {
 	public static WebDriver driver;
 	public static Logger log = Logger.getLogger(BasePage.class);
 	public static final String LOG_OUT_MESSAGE = "You have been logged out.";
-	protected static By logOutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
-
 
 	private Select dropClass;
 
@@ -128,15 +126,25 @@ public class BasePage {
 	}
 
 	/**
-	 * Method locates the Log Out button and clicks on it after the invisibility of before used element
+	 * Method waits for invisibility of before used element
 	 *
 	 * @author: Jovan.Penic
-	 * */
-	public void clickUsersLogOutButton(By invisibilityOfElement) {
+	 **/
+	public void waitInvisibilityOfElement(By invisibilityOfElement) {
 		WebDriverWait wait = new WebDriverWait(driver, 3);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(invisibilityOfElement));
-		driver.findElement(logOutButton).click();
 	}
+
+	/**
+	 * Method waits for element to be clickable of before used element
+	 *
+	 * @author: Jovan.Penic
+	 **/
+	public void waitForElementToBeClickable(By clickableElement) {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		wait.until(ExpectedConditions.elementToBeClickable(clickableElement));
+	}
+
 
 
 }

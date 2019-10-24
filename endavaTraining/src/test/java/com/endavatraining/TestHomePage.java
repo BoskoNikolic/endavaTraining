@@ -115,16 +115,6 @@ public class TestHomePage extends TestBase {
 
 	}
 
-	/**
-	 * Test validates that the Admin Tab is not present when logged in as a regular User
-	 *
-	 * */
-	@Test
-	public void testIsAdminTabAvailable(){
-		homePage = loginPage.openAs(username, password);
-		Assert.assertFalse(homePage.isAdminTabPresent(), "Admin tab is present");
-		homePage.clickOnButton(homePage.getLogOutButton());
-	}
 
 	@AfterTest
 	public void tearDown() {

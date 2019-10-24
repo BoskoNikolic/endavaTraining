@@ -20,6 +20,7 @@ public class HomePage extends BasePage {
 	private By shareWithFriends= By.xpath("//*[text()='Share with friends!']");
 	private By title= By.className("panel-title text-center");
 	private By samsara= By.cssSelector("a.navbar-brand");
+	private By body = By.cssSelector("body");
     public static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {

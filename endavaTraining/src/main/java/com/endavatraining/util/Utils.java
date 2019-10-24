@@ -94,6 +94,10 @@ public class Utils {
 	}
 
     /**
+     *
+     * This method returns value of attributes of any text field
+     *
+     * @author Jovan.Penic
      * @param driver
      * @param locator
      */

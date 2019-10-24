@@ -15,6 +15,7 @@ public class BasePage {
 	public static Logger log = Logger.getLogger(BasePage.class);
 	public static final String LOG_OUT_MESSAGE = "You have been logged out.";
 
+
 	private Select dropClass;
 
     protected BasePage(WebDriver driver) {

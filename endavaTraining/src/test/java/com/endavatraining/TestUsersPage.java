@@ -19,7 +19,7 @@ public class TestUsersPage {
     private static final String ABOUT_MESSAGE = "About Me Text";
     private static final String CREATION_TIME = "17.12.2018. 11:55";
 
-    public static Logger log = Logger.getLogger(TestLoginPage.class);
+    public static Logger log = Logger.getLogger(TestUsersPage.class);
 
 
     private static final String USER_NAME = "user";

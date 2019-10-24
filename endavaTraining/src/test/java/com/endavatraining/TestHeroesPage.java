@@ -3,6 +3,7 @@ package com.endavatraining;
 import com.endavatraining.pages.HeroesPage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
+import com.endavatraining.pages.UsersPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
@@ -14,6 +15,7 @@ public class TestHeroesPage extends TestBase {
     private LoginPage loginPage;
     private HeroesPage heroesPage;
     private HomePage homePage;
+    private UsersPage usersPage;
     public static Logger log = Logger.getLogger(TestHeroesPage.class);
 
 
@@ -119,10 +121,37 @@ public class TestHeroesPage extends TestBase {
 
     }
 
+    /**
+     * Test validates that hero count for admin user is the same on Users page (list of users) and Hero Page(heroes list)
+     * @author Danko.Lojanica
+     */
+    @Test
+    public void isHeroCountCorrect2(){
+
+        homePage = loginPage.openAs(TestBase.USER_USERNAME, TestBase.USER_PASSWORD);
+        homePage.clickOnUsersButton();
+        usersPage = new UsersPage(homePage.driver);
+        usersPage.selectValueFromDropDownOnUsersPage(3);
+        usersPage.searchUser("admin");
+        log.info("Search for admin user");
+        usersPage.clickOnSearchIcon();
+        int heroCountForAdminOnUserPage = usersPage.heroCountForAdminUserOnUserPage();
+        log.info("Count the number of heroes for admin user on User page");
+        heroesPage = new HeroesPage(homePage.driver);
+        heroesPage.clickOnHeroesButton();
+        heroesPage.selectValueFromDropDownOnHeroesPage(3);
+        int heroCountForAdminOnHeroesPage = heroesPage.heroCountForAdminUserOnHeroesPage();
+        log.info("Count the number of heroes for admin user on Heroes page");
+        Assert.assertEquals(heroCountForAdminOnUserPage,heroCountForAdminOnHeroesPage, " Hero count for admin user is not the same on Users page (list of users) and Hero Page(heroes list)");
+        heroesPage.logout();
+
+    }
+
+
     @AfterClass
     public void tearDown() {
         if(heroesPage != null)
-        heroesPage.quit();
+            heroesPage.quit();
     }
 
 }

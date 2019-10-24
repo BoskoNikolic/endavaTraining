@@ -7,11 +7,7 @@ import com.endavatraining.pages.UsersPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.*;
 
 
 public class TestHeroesPage extends TestBase {
@@ -29,7 +25,6 @@ public class TestHeroesPage extends TestBase {
         loginPage = Utils.setUpWebBrowser(browser);
     }
 
-
     /*
      * Test validates that it is possible to add multiple inputs into hero table with different
      * values from drop down menu option
@@ -46,7 +41,7 @@ public class TestHeroesPage extends TestBase {
 
         Assert.assertFalse(heroesPage.isHeroInTable(heroName), "Hero with this username already exists in table!");
 
-        heroesPage.openAddNewHero();
+        heroesPage.openAddNewHeroWindow();
         heroesPage.insertHeroName(heroName);
         heroesPage.insertHeroLevel(heroLevel);
         heroesPage.insertHeroClass(heroClass);
@@ -95,6 +90,38 @@ public class TestHeroesPage extends TestBase {
     }
 
     /**
+     *
+     * Test validates that user can't create new hero, when hero level is beyond limit, by logging in as user,
+     * clicking on Heroes tab and on Add New Hero button, entering level beyond limit and checking if error message is visible.
+     *
+     *  @author Jovan.Penic
+     */
+    @Test(dataProvider = "NewHeroLevelBeyondLimits")
+    public void testUserCanNotCreateNewHeroBeyondHeroLevel(String heroLevel) {
+        loginPage.userLogin(USER_USERNAME, USER_PASSWORD);
+        heroesPage = new HeroesPage(loginPage.driver);
+        heroesPage.openHeroPage();
+        heroesPage.openAddNewHeroWindow();
+        heroesPage.insertHeroLevel(heroLevel);
+        Assert.assertTrue(heroesPage.isHeroLevelErrorMessagePresent(), "User can add new hero with level beyond limit. ");
+        log.info("Verified that new hero beyond level limit can not be added.");
+        heroesPage.clearHeroLevel();
+        heroesPage.clickOnCancel();
+        heroesPage.logoutFromAddNewHeroModal();
+    }
+
+    @DataProvider(name = "NewHeroLevelBeyondLimits")
+    public Object[][] getDataFromNewHeroLevelBeyondLimitsDataProvider() {
+        return new Object[][]
+                {
+                        { "85" },
+                        { "0" },
+                        { "-10"},
+                };
+
+    }
+
+    /**
      * Test validates that hero count for admin user is the same on Users page (list of users) and Hero Page(heroes list)
      * @author Danko.Lojanica
      */
@@ -121,9 +148,10 @@ public class TestHeroesPage extends TestBase {
     }
 
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
-        if (usersPage != null)
-            usersPage.quit();
+        if(heroesPage != null)
+            heroesPage.quit();
     }
+
 }

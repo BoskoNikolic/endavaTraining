@@ -21,7 +21,8 @@ public class HomePage extends BasePage {
 	private By shareWithFriends= By.xpath("//*[text()='Share with friends!']");
 	private By title= By.className("panel-title text-center");
 	private By samsara= By.cssSelector("a.navbar-brand");
-    private By adminButton = By.linkText("Admin");
+	private By body = By.cssSelector("body");
+	private By adminButton = By.linkText("Admin");
     public static Logger log = Logger.getLogger(HomePage.class);
 
 	public HomePage(WebDriver driver) {
@@ -108,11 +109,11 @@ public class HomePage extends BasePage {
 	public void clickOnUsersButton(){
 		driver.findElement(usersButton).click();
 	}
+	public WebElement findUsersPage() { return driver.findElement(this.usersButton);  }
 
-    public WebElement findUsersPage() {
-        return driver.findElement(this.usersButton);
-    }
-    public boolean isAdminTabPresent(){
-        return isElementPresent(adminButton);
-    }
+	public boolean isAdminTabPresent(){ return isElementPresent(adminButton); }
+
+	public boolean isProfileButtonDisplayed() {
+		return isElementPresent(profileButton);
+	}
 }

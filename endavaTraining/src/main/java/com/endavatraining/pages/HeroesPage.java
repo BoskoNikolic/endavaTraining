@@ -36,6 +36,7 @@ public class HeroesPage extends BasePage {
     private By heroPagePaginate = By.xpath("/html/body/div[1]/div/div/div[2]/div[3]/div[2]/ul/li");
 
 
+
     public HeroesPage(WebDriver driver) {
         super(driver);
     }
@@ -287,6 +288,5 @@ public class HeroesPage extends BasePage {
         log.debug("Checked the number of users heroes on the My Heroes page");
         return numberOfMyHeroes;
     }
-
 
 }

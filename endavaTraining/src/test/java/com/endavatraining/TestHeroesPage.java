@@ -7,10 +7,7 @@ import com.endavatraining.pages.UsersPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 
 public class TestHeroesPage extends TestBase {

@@ -25,7 +25,7 @@ public class HeroesPage extends BasePage {
     public static By addHeroName = By.xpath("//*[@id=\"name\"]");
     public static By addHeroLevel = By.id("level");
     public static By addHeroClass = By.id("type");
-    public static By addHeroSave = By.id("submitButton");
+    public static By addHeroSave = By.xpath("//*[@id=\"edit-hero-form\"]/div[2]/button[2]");
     public static By logoutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
     public static By heroLevelErrorMessage = By.xpath("//div[@id='levelMessage'][contains(.,\"Level is a number between 0 and 80\")]");
     public static By cancelAddHero = By.xpath("//*[@id=\"add-hero-form\"]/div[2]/button[1]");
@@ -200,5 +200,22 @@ public class HeroesPage extends BasePage {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(addHeroModal));
         clickOnButton(logoutButton);
     }
+
+    public void editHeroLevel(String level) {
+        int rowNumber;
+        rowNumber = driver.findElements(By.xpath("//*[@id=\"heroes-table\"]/tbody/tr")).size();
+        for (int i = 1; i < rowNumber; i++) {
+            if (driver.findElement(By.xpath("//*[@id=\"heroes-table\"]/tbody/tr[" + i + "]/td[4]")).getText().equals("user")) {
+                clickOnButton(By.xpath("//*[@id=\"heroes-table\"]/tbody/tr[" + i + "]/td[5]/a[2]/span"));
+                break;
+            }
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addHeroLevel));
+        driver.findElement(addHeroLevel).clear();
+        driver.findElement(addHeroLevel).sendKeys(level);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addHeroSave));
+        saveNewHero();
+    }
+
 
 }

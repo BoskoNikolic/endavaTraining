@@ -3,11 +3,10 @@ package com.endavatraining.pages;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
 
-	private static final String ENDAVATRAINING_URL = "http://172.17.167.71:9010";
+	private static final String ENDAVATRAINING_URL = "http://172.17.167.71:9011";
 	public static Logger log = Logger.getLogger(LoginPage.class);
 
 	private By loginButton = By.xpath("//input[@value='Log In']");

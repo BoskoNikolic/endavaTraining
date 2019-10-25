@@ -147,6 +147,23 @@ public class TestHeroesPage extends TestBase {
 
     }
 
+    /**
+     * Test validates that user is not able to edit hero level entering special characters
+     * @author Danko.Lojanica
+     */
+     @Test
+    public void editHeroLevelWithSpecialCharacters (){
+        homePage = loginPage.openAs(TestBase.USER_USERNAME, TestBase.USER_PASSWORD);
+        homePage.clickOnHeroesButton();
+        heroesPage = new HeroesPage(homePage.driver);
+        heroesPage.editHeroLevel("-=27");
+        Assert.assertEquals(heroesPage.isHeroLevelErrorMessagePresent(), true );
+
+        heroesPage.logout();
+
+    }
+
+
 
     @AfterClass
     public void tearDown() {

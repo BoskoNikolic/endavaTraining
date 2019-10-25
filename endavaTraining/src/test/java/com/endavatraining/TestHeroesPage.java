@@ -147,16 +147,33 @@ public class TestHeroesPage extends TestBase {
 
     }
 
-    @Test
-
-    public void editHeroLevelAboveTheLimit(){
+    /**
+     * * Test validates that user is able to edit hero level with values that a above the limits
+     * @author Danko.Lojanica
+     * @param level
+     */
+    @Test(dataProvider = "EditHeroLevelAboveTheLimit")
+    public void editHeroLevelAboveTheLimit(String level){
         homePage = loginPage.openAs(TestBase.USER_USERNAME, TestBase.USER_PASSWORD);
         homePage.clickOnHeroesButton();
         heroesPage = new HeroesPage(homePage.driver);
-        heroesPage.editHero();
-        Assert.assertEquals(heroesPage.isHeroLevelErrorMessagePresent(), true );
+        heroesPage.editHero(level);
+        Assert.assertFalse(heroesPage.isHeroLevelErrorMessagePresent());
+        heroesPage.logout();
 
     }
+
+    @DataProvider(name = "EditHeroLevelAboveTheLimit")
+    public Object[][] getDataFromEditHeroLevelAboveTheLimitDataProvider() {
+        return new Object[][]
+                {
+                        { "81" },
+                        { "-25"},
+                };
+
+    }
+
+
 
 
     @AfterClass

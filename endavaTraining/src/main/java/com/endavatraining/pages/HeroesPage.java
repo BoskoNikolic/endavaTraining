@@ -212,10 +212,11 @@ public class HeroesPage extends BasePage {
     }
 
     /**
-     * This method edit hero entering level that is above the limits
+     * This method edit hero level
      * @author Danko.Lojanica
+     * @param level
      */
-    public void editHero() {
+    public void editHero(String level) {
         int rowNumber;
         rowNumber = driver.findElements(By.xpath("//*[@id=\"heroes-table\"]/tbody/tr")).size();
         for (int i = 1; i < rowNumber; i++) {
@@ -226,7 +227,7 @@ public class HeroesPage extends BasePage {
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(addHeroLevel));
         driver.findElement(addHeroLevel).clear();
-        driver.findElement(addHeroLevel).sendKeys("-25");
+        driver.findElement(addHeroLevel).sendKeys(level);
         saveNewHero();
     }
 }

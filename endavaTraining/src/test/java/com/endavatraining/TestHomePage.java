@@ -99,6 +99,7 @@ public class TestHomePage extends TestBase {
 		homePage.clickOnShareWithFriendsButton();
 		String message = homePage.alertMethod();
 		Assert.assertEquals(message, "http://172.17.167.71:9010", "Provided link is not correct");
+		homePage.clickOnButton(homePage.getLogOutButton());
 
 	}
 
@@ -111,7 +112,9 @@ public class TestHomePage extends TestBase {
 		homePage = loginPage.openAs(username, password);
 		Assert.assertFalse(homePage.isAdminTabPresent(), "Admin tab is present");
 		homePage.clickOnButton(homePage.getLogOutButton());
+
 	}
+
 
 	@AfterTest
 	public void tearDown() {

@@ -7,41 +7,52 @@
 		<class name="com.endavatraining.TestLoginPage" />
 	</classes>
 </test>
-<test thread-count="5" name="TestHomePage">
-	<parameter name="browser" value="chrome" />
-	<classes>
-		<class name="com.endavatraining.TestHomePage" />
-	</classes>
-</test>
-<test thread-count="5" name="TestRegisterNewAccountPage">
-	<parameter name="browser" value="chrome" />
-	<classes>
-		<class name="com.endavatraining.TestRegisterNewAccountPage" />
-	</classes>
-</test>
+	<test thread-count="5" name="TestHomePage">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.endavatraining.TestHomePage" />
+		</classes>
+	</test>
+	<test thread-count="5" name="TestRegisterNewAccountPage">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.endavatraining.TestRegisterNewAccountPage" />
+		</classes>
+	</test>
 	<test thread-count="5" name="TestBrokenLinkPage">
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class name="com.endavatraining.TestBrokenLinkPage" />
 		</classes>
 	</test>
-    <test thread-count="5" name="TestAdminPage">
+	<test thread-count="5" name="TestAdminPage">
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class name="com.endavatraining.TestAdminPage" />
 		</classes>
 	</test>
-    <test thread-count="5" name="TestGalleryPage">
-        <parameter name="browser" value="chrome" />
-        <classes>
-            <class name="com.endavatraining.TestGalleryPage" />
-        </classes>
-    </test>
+	<test thread-count="5" name="TestGalleryPage">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.endavatraining.TestGalleryPage" />
+		</classes>
+	</test>
 	<test thread-count="5" name="TestHeroesPage">
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class name="com.endavatraining.TestHeroesPage" />
 		</classes>
 	</test>
-
+	<test thread-count="5" name="TestUsersPage">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.endavatraining.TestUsersPage" />
+		</classes>
+	</test>
+	<test thread-count="5" name="TestProfilePage">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.endavatraining.TestProfilePage" />
+		</classes>
+	</test>
 </suite> <!-- Suite -->

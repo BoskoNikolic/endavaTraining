@@ -4,13 +4,10 @@ import com.endavatraining.pages.LoginPage;
 import com.endavatraining.pages.UsersPage;
 import com.endavatraining.util.Utils;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.apache.log4j.Logger;
 
-public class TestUsersPage {
+public class TestUsersPage extends TestBase {
 
     private LoginPage loginPage;
     private HomePage homePage;
@@ -18,12 +15,7 @@ public class TestUsersPage {
     private static final String DISPLAY_NAME = "Admin Admin";
     private static final String ABOUT_MESSAGE = "About Me Text";
     private static final String CREATION_TIME = "17.12.2018. 11:55";
-
     public static Logger log = Logger.getLogger(TestLoginPage.class);
-
-
-    private static final String USER_NAME = "user";
-    private static final String PASSWORD = "password";
 
 
     @BeforeTest
@@ -38,10 +30,10 @@ public class TestUsersPage {
      * Also check the About me message, and Creation time, then clicks the details close button, and logs out.
      *
      * */
-    @Test
+    @Test (priority = 0)
     public void testUserDetails(){
 
-        homePage = loginPage.openAs(USER_NAME, PASSWORD);
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
         homePage.findUsersPage().click();
         usersPage = new UsersPage(homePage.driver);
         usersPage.clickUserDetails(usersPage.findUserIndexByDisplayName(DISPLAY_NAME));
@@ -53,13 +45,32 @@ public class TestUsersPage {
         Assert.assertEquals(ABOUT_MESSAGE, usersPage.getAboutMessageFromDetailsPage());
         Assert.assertEquals(CREATION_TIME, usersPage.getCreationTimeFromDetailsPage());
         usersPage.clickUserDetailsCloseButton();
-        usersPage.clickUsersLogOutButton(usersPage.driver);
+        usersPage.waitInvisibilityOfElement(UsersPage.userDetails);
+        usersPage.clickLogOutButton();
         log.info("Tested if Users info is the same in the Users list and the Details page");
-
-
     }
 
-    @AfterTest
+    /**
+     * Test validates that hero count is correct, by logging in as user, going to users page and checking if
+     * the hero count of admins in Users table is the same as in the User Heroes pop up window.
+     *
+     *  @author Jovan.Penic
+     */
+    @Test (priority = 1)
+    public void testHeroCount() {
+        homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+        homePage.findUsersPage().click();
+        usersPage = new UsersPage(homePage.driver);
+        Assert.assertEquals(usersPage.getNumberOfAdminHeroesInUsersList(), usersPage.numberOfAdminHeroesInUserHeroesPopUp(),
+                       "Hero count of admins in Users table is NOT the same as in the User Heroes pop up window");
+        usersPage.waitForElementToBeClickable(UsersPage.closeUserHeroesPopUpWindow);
+        usersPage.closeUserHeroesWindow();
+        usersPage.waitInvisibilityOfElement(UsersPage.userHeroesWindowBody);
+        usersPage.clickLogOutButton();
+        log.info("Tested if the hero count of admins in Users table is the same as in the User Heroes pop up window.");
+    }
+
+    @AfterClass
     public void tearDown() {
         if (usersPage != null)
             usersPage.quit();

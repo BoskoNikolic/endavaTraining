@@ -125,4 +125,26 @@ public class BasePage {
 		driver.findElement(field).clear();
 	}
 
+	/**
+	 * Method waits for invisibility of before used element
+	 *
+	 * @author: Jovan.Penic
+	 **/
+	public void waitInvisibilityOfElement(By invisibilityOfElement) {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(invisibilityOfElement));
+	}
+
+	/**
+	 * Method waits for element to be clickable of before used element
+	 *
+	 * @author: Jovan.Penic
+	 **/
+	public void waitForElementToBeClickable(By clickableElement) {
+		WebDriverWait wait = new WebDriverWait(driver, 3);
+		wait.until(ExpectedConditions.elementToBeClickable(clickableElement));
+	}
+
+
+
 }

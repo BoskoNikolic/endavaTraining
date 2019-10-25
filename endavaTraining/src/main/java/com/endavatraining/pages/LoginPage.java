@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage {
 
-	private static final String ENDAVATRAINING_URL = "http://172.17.167.71:9011";
+	private static final String ENDAVATRAINING_URL = "http://172.17.167.71:9010";
 	public static Logger log = Logger.getLogger(LoginPage.class);
 
 	private By loginButton = By.xpath("//input[@value='Log In']");

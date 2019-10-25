@@ -5,18 +5,10 @@ import org.openqa.selenium.WebDriver;
 
 public class GalleryPage extends BasePage {
 
+    private By logOutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
+
     public GalleryPage(WebDriver driver) {
         super(driver);
-    }
-
-    /**
-     * This method clicks on image in Gallery Tab
-     *
-     * @author Jovan.Penic
-     * @param slideXPath
-     */
-    public void clickOnImage(By slideXPath) {
-        driver.findElement(slideXPath).click();
     }
 
     /**
@@ -29,4 +21,15 @@ public class GalleryPage extends BasePage {
     public String getCaptionOfTheSlide (By slideCaptionXPath) {
         return driver.findElement(slideCaptionXPath).getText();
     }
+
+    /**
+     * This method locates the Log Out button and clicks on it
+     *
+     * @author: Jovan.Penic
+     * */
+    public void clickLogOutButton() {
+        clickOnButton(logOutButton);
+    }
+
+
 }

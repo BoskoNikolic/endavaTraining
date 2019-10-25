@@ -201,6 +201,11 @@ public class HeroesPage extends BasePage {
         clickOnButton(logoutButton);
     }
 
+    /**
+     * This method edit hero level
+     * @author Danko.Lojanica
+     * @param level
+     */
     public void editHeroLevel(String level) {
         int rowNumber;
         rowNumber = driver.findElements(By.xpath("//*[@id=\"heroes-table\"]/tbody/tr")).size();

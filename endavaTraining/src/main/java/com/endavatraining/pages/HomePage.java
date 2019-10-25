@@ -116,4 +116,7 @@ public class HomePage extends BasePage {
 	public boolean isProfileButtonDisplayed() {
 		return isElementPresent(profileButton);
 	}
+	public void clickOnHeroesButton(){
+		driver.findElement(heroesButton).click();
+	}
 }

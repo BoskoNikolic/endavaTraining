@@ -6,6 +6,7 @@ import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -17,13 +18,24 @@ import org.testng.annotations.*;
 
 public class TestAdminPage extends TestBase {
 
+	
     private LoginPage loginPage;
     private HomePage homePage;
     private AdminPage adminPage;
     private By adminPageButton = By.linkText("Admin");
     public static Logger log = Logger.getLogger(TestAdminPage.class);
 
-
+    /*
+     * Before Test suite message
+     * @author ana.acanski
+     *
+     */
+    
+    @BeforeSuite
+    public void setup() {
+        System.out.println("Running testAdminPage Test.");
+    }
+    
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
@@ -76,9 +88,22 @@ public class TestAdminPage extends TestBase {
 
     }
 
+    
+    /*
+     * After Test suite message
+     * @author ana.acanski
+     *
+     */
 
-    @AfterClass
+
+    @AfterTest
     public void tearDown() {
-        adminPage.quit();
+        if (adminPage != null)
+            adminPage.quit();
+    }
+    @AfterSuite
+    public void teardownS() {
+        System.out.println("TestAdminPage Test Suite is finished");
+        driver.quit(); 
     }
 }

@@ -7,9 +7,6 @@ import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 import org.testng.annotations.*;
 
 /*
@@ -25,6 +22,17 @@ public class TestBrokenLinkPage extends TestBase {
     private By brokenLinkPageTab = By.linkText("Broken Link");
     private static final String EXPECTED_TITLE = "Alice in Wonderland";
     public static Logger log = Logger.getLogger(TestBrokenLinkPage.class);
+
+    /*
+     * Before Test suite message
+     * @author ana.acanski
+     *
+     */
+    
+    @BeforeSuite
+    public void setup() {
+        System.out.println("Running TestBrokenPage Test.");
+    }
 
 
     @BeforeTest
@@ -55,10 +63,20 @@ public class TestBrokenLinkPage extends TestBase {
         Assert.assertEquals(mainTitle, EXPECTED_TITLE, "Main title differs from expected");
     }
 
-
-    @AfterClass
+    @AfterTest
     public void tearDown() {
         if (brokenLinkPage != null)
             brokenLinkPage.quit();
+    }
+    
+    /*
+     * After Test suite message
+     * @author ana.acanski
+     *
+     */
+    @AfterSuite
+    public void teardownS() {
+        System.out.println("TestBrokenLinkPage Test Suite is finished");
+        driver.quit(); 
     }
 }

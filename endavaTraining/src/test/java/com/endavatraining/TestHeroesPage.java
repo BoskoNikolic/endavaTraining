@@ -23,6 +23,17 @@ public class TestHeroesPage extends TestBase {
 
     private String userName = "user";
 
+    /*
+     * Before Test suite message
+     * @author ana.acanski
+     *
+     */
+    
+    @BeforeSuite
+    public void setup() {
+        System.out.println("Running TestHeroesPage Test.");
+    }
+
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
@@ -171,10 +182,21 @@ public class TestHeroesPage extends TestBase {
         log.info("Checking the number of users heroes on the Heroes list, and the number of users heroes on the My Heroes page.");
     }
 
-    @AfterClass
+    @AfterTest
     public void tearDown() {
-        if(heroesPage != null)
-            heroesPage.quit();
+        if (heroesPage != null)
+        	heroesPage.quit();
+    }
+    
+    /*
+     * After Test suite message
+     * @author ana.acanski
+     *
+     */
+    @AfterSuite
+    public void teardownS() {
+        System.out.println("LogTestHeroesPageinPage Test Suite is finished");
+        driver.quit(); 
     }
 
 }

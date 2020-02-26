@@ -17,6 +17,17 @@ public class TestUsersPage extends TestBase {
     private static final String CREATION_TIME = "17.12.2018. 11:55";
     public static Logger log = Logger.getLogger(TestLoginPage.class);
 
+    /*
+     * Before Test suite message
+     * @author ana.acanski
+     *
+     */
+    
+    @BeforeSuite
+    public void setup() {
+        System.out.println("Running TestUsersPage Test.");
+    }
+
 
     @BeforeTest
     @Parameters({"browser"})
@@ -70,10 +81,21 @@ public class TestUsersPage extends TestBase {
         log.info("Tested if the hero count of admins in Users table is the same as in the User Heroes pop up window.");
     }
 
-    @AfterClass
+    @AfterTest
     public void tearDown() {
         if (usersPage != null)
             usersPage.quit();
+    }
+    
+    /*
+     * After Test suite message
+     * @author ana.acanski
+     *
+     */
+    @AfterSuite
+    public void teardownS() {
+        System.out.println("TestUsersPage Test Suite is finished");
+        driver.quit(); 
     }
 
 

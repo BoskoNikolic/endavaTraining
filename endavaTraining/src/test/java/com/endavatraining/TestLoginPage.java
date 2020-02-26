@@ -7,7 +7,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -23,6 +25,17 @@ public class TestLoginPage extends TestBase {
 	private static String password = "password";
 	private By userNameBy = By.id("username");
 	private By passWordBy = By.id("password");
+
+    /*
+     * Before Test suite message
+     * @author ana.acanski
+     *
+     */
+    
+    @BeforeSuite
+    public void setup() {
+        System.out.println("Running TestLoginPage Test.");
+    }
 
 
 	@BeforeTest
@@ -81,6 +94,17 @@ public class TestLoginPage extends TestBase {
     public void tearDown() {
         if (loginPage != null)
             loginPage.quit();
+    }
+    
+    /*
+     * After Test suite message
+     * @author ana.acanski
+     *
+     */
+    @AfterSuite
+    public void teardownS() {
+        System.out.println("TestLoginPage Test Suite is finished");
+        driver.quit(); 
     }
 
 }

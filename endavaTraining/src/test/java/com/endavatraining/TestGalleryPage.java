@@ -25,6 +25,18 @@ public class TestGalleryPage extends TestBase {
     private By logOutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
     private By closeSlides = By.xpath("//*[@id=\"myModal\"]/span");
 
+
+    /*
+     * Before Test suite message
+     * @author ana.acanski
+     *
+     */
+    
+    @BeforeSuite
+    public void setup() {
+        System.out.println("Running TestGalleryPage Test.");
+    }
+
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
@@ -81,10 +93,23 @@ public class TestGalleryPage extends TestBase {
         galleryPage.clickLogOutButton();
     }
 
-    @AfterClass
+
+    @AfterTest
     public void tearDown() {
         if (galleryPage != null)
-            galleryPage.quit();
+        	galleryPage.quit();
+    }
+    
+    
+    /*
+     * After Test suite message
+     * @author ana.acanski
+     *
+     */
+    @AfterSuite
+    public void teardownS() {
+        System.out.println("TestGalleryPage Test Suite is finished");
+        driver.quit(); 
     }
 
 

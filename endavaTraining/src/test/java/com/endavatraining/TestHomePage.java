@@ -5,7 +5,10 @@ import com.endavatraining.pages.LoginPage;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import com.endavatraining.util.Utils;
+
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -18,6 +21,17 @@ public class TestHomePage extends TestBase {
 	private String username = "user";
 	private String password = "password";
 	public static Logger log = Logger.getLogger(TestHomePage.class);
+
+    /*
+     * Before Test suite message
+     * @author ana.acanski
+     *
+     */
+    
+    @BeforeSuite
+    public void setup() {
+        System.out.println("Running TestHomePage Test.");
+    }
 
 
 
@@ -121,5 +135,16 @@ public class TestHomePage extends TestBase {
 		if (homePage != null)
 			homePage.quit();
 	}
+    
+    /*
+     * After Test suite message
+     * @author ana.acanski
+     *
+     */
+    @AfterSuite
+    public void teardownS() {
+        System.out.println("TestHomePage Test Suite is finished");
+        driver.quit(); 
+    }
 
 }

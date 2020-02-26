@@ -5,7 +5,9 @@ import com.endavatraining.pages.LoginPage;
 import com.endavatraining.pages.ProfilePage;
 import com.endavatraining.util.Utils;
 import org.testng.Assert;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -15,6 +17,18 @@ public class TestProfilePage extends TestBase {
     private LoginPage loginPage;
     private HomePage homePage;
     private ProfilePage profilePage;
+
+
+    /*
+     * Before Test suite message
+     * @author ana.acanski
+     *
+     */
+    
+    @BeforeSuite
+    public void setup() {
+        System.out.println("Running TestProfilePage Test.");
+    }
 
     @BeforeTest
     @Parameters({"browser"})
@@ -44,6 +58,18 @@ public class TestProfilePage extends TestBase {
 
     @AfterTest
     public void tearDown() {
-        profilePage.quit();
+        if (profilePage != null)
+        	profilePage.quit();
+    }
+    
+    /*
+     * After Test suite message
+     * @author ana.acanski
+     *
+     */
+    @AfterSuite
+    public void teardownS() {
+        System.out.println("TestProfilePage Test Suite is finished");
+        driver.quit(); 
     }
 }

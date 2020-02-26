@@ -23,6 +23,18 @@ public class TestRegisterNewAccountPage extends TestBase {
     private String SECRET_ANSWER = "42";
     private String PASSWORD = "Johndoerules123";
 
+
+    /*
+     * Before Test suite message
+     * @author ana.acanski
+     *
+     */
+    
+    @BeforeSuite
+    public void setup() {
+        System.out.println("Running TestRegisterNewAccountPage Test.");
+    }
+
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
@@ -73,10 +85,21 @@ public class TestRegisterNewAccountPage extends TestBase {
         }
     }
 
-    @AfterClass
+    @AfterTest
     public void tearDown() {
         if (registerNewAccountPage != null)
             registerNewAccountPage.quit();
+    }
+    
+    /*
+     * After Test suite message
+     * @author ana.acanski
+     *
+     */
+    @AfterSuite
+    public void teardownS() {
+        System.out.println("TestRegisterNewAccountPage Test Suite is finished");
+        driver.quit(); 
     }
 
 }

@@ -2,6 +2,7 @@ package com.endavatraining;
 
 import com.endavatraining.pages.AdminPage;
 import com.endavatraining.pages.AlgorithmsPage;
+import com.endavatraining.pages.HeroesPage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
@@ -46,10 +47,10 @@ public class TestAlgorithmsPage extends TestBase {
     }
     
     @BeforeTest
-    @Parameters({"browser"})
-    public void setUp(String browser) {
-        algorithmsPage = Utils.setUpWebBrowserAlgorithms(browser);
-    }
+	@Parameters({"browser"})
+	public void setUp(String browser) {
+		loginPage = Utils.setUpWebBrowser(browser);
+	}
 
     @AfterTest
     public void tearDown() {
@@ -64,7 +65,9 @@ public class TestAlgorithmsPage extends TestBase {
 	@Test
 	public void testAlgorithmsPageIsOpened() {
 		log.info("Test is Algorithms Page is opened");
-		algorithmsPage.open();
+		homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+		algorithmsPage = new AlgorithmsPage(homePage.driver);
+		algorithmsPage.openArithmeticsPage();
 		new WebDriverWait(algorithmsPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getSubmitButton()));
 	}

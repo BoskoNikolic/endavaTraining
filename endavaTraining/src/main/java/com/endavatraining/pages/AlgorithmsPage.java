@@ -4,12 +4,17 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class AlgorithmsPage extends BasePage {
-	private static final String ENDALGORITHMS_URL = "http://localhost:8080/algorithms";
+	//private static final String ENDALGORITHMS_URL = "http://localhost:8080/algorithms";
+	private WebDriverWait wait = new WebDriverWait(driver, 3);
 	public static Logger log = Logger.getLogger(AlgorithmsPage.class);
-	private By arithmeticsHomeTab = By.xpath("//a[@href='/Algorithms']");
+	//private By arithmeticsHomeTab = By.xpath("//a[@href='/Algorithms']");
+	public static By arithmeticsHomeTab = By.linkText("Algorithms");
+    private By arithmeticsButton = By.linkText("Algorithms");
 	private By upperRightLogInButton = By.xpath("//a[@href='/login']");
 	private By formControl = By.id("length");
 	private By searchKey = By.id("plainText");
@@ -33,10 +38,16 @@ public class AlgorithmsPage extends BasePage {
 	public AlgorithmsPage(WebDriver driver) {
 		super(driver);
 	}
-	public void open() {
-		log.debug("Open endava algorithms site");
-		driver.get(ENDALGORITHMS_URL);
+	public void goToPage(By pageTab) {
+		driver.findElement(pageTab).click();
 	}
+	public void openArithmeticsPage() {
+        wait.until(ExpectedConditions.elementToBeClickable(arithmeticsHomeTab));
+        clickOnButton(arithmeticsHomeTab);
+    }
+    public void clickOnAlgorithmsButton() {
+        driver.findElement(arithmeticsButton).click();
+    }
 	public By getSubmitButton() {
 		return submitButton;
 	}

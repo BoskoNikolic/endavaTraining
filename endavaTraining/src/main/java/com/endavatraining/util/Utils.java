@@ -94,39 +94,7 @@ public class Utils {
 		}
 		return loginPage;
 	}
-
-	/**
-	 * @author Ana Acanski
-	 * @param browser
-	 * @return algorithmsPage
-	 */
-	public static AlgorithmsPage setUpWebBrowserAlgorithms(String browser) {
-		AlgorithmsPage algorithmsPage;
-		log.debug("Choose web browser");
-		if (browser.equalsIgnoreCase("chrome")) {
-			WebDriverManager.chromedriver().setup();
-			algorithmsPage = new AlgorithmsPage(new ChromeDriver(setUpBrowserOptions()));
-		}else if(browser.equalsIgnoreCase("firefox")){
-			WebDriverManager.firefoxdriver().setup();
-			algorithmsPage = new AlgorithmsPage(new FirefoxDriver());
-		}else if (browser.equalsIgnoreCase("edge")){
-			WebDriverManager.edgedriver().setup();
-			algorithmsPage = new AlgorithmsPage(new EdgeDriver());
-		}else if (browser.equalsIgnoreCase("opera")){
-			WebDriverManager.operadriver().setup();
-			algorithmsPage = new AlgorithmsPage(new OperaDriver());
-		}else if (browser.equalsIgnoreCase("ie")){
-			WebDriverManager.iedriver().setup();
-			algorithmsPage = new AlgorithmsPage(new InternetExplorerDriver());
-		}
-
-		else {
-			throw new RuntimeException();
-		}
-		return algorithmsPage;
-	}
 	
-
     /**
      *
      * This method returns value of attributes of any text field

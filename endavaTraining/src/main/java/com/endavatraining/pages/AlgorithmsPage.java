@@ -21,7 +21,9 @@ public class AlgorithmsPage extends BasePage {
 	private By vgnKey = By.id("vgnKey");
 	private By letter = By.id("letter");
 	private By algorithmsPageWelcomeMessage = By.xpath("//div[@class='panel-title text-center'][contains(.,'Hello, and welcome to our gamers page!')]");
-    private By submitButton = By.xpath("/html/body/div[1]/div/div/div[2]/div[1]/form/div/div[5]/button");
+    //private By submitButton = By.xpath("/html/body/div[1]/div/div/div[2]/div[1]/form/div/div[5]/button");
+	//private By submitButton = By.xpath("//input[@value='Submit']");
+	public static By submitButton = By.linkText("Submit");
 	private By wonderlandPageWelcomeMessage = By.xpath("//div[@class='panel-title text-center'][contains(.,'Alice in Wonderland')]");
 	private By loginPageSamsaraWelcomeMessage = By.xpath("//div[@class='panel-title text-center'][contains(.,'Samsara')]");
 	private By loginButton = By.xpath("//input[@value='Log In']");

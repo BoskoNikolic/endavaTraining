@@ -14,15 +14,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-/*
- *
- * @author Ana Acanski
- *
- */
-
 public class TestAlgorithmsPage extends TestBase {
 
-	
     private LoginPage loginPage;
     private HomePage homePage;
     private AlgorithmsPage algorithmsPage;
@@ -33,13 +26,6 @@ public class TestAlgorithmsPage extends TestBase {
 	private static String password = "password";
 	private By userNameBy = By.id("username");
 	private By passWordBy = By.id("password");
-	
-
-    /*
-     * Before Test suite message
-     * @author ana.acanski
-     *
-     */
     
     @BeforeSuite
     public void setup() {
@@ -71,7 +57,6 @@ public class TestAlgorithmsPage extends TestBase {
 		new WebDriverWait(algorithmsPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getSubmitButton()));
 	}
-
 	/*
 	 * Test validates is Log In page available by clicking upperRightLogInButton 
 	 */
@@ -83,7 +68,6 @@ public class TestAlgorithmsPage extends TestBase {
 		new WebDriverWait(algorithmsPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getLoginButton()));
 	}
-
 	/*
 	 * Test validates is Login possible after logIn by clicking upperRightLogInButton 
 	 */
@@ -100,7 +84,6 @@ public class TestAlgorithmsPage extends TestBase {
         Assert.assertTrue(LoginPage.getAttributeOfAnyTextField(algorithmsPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
 		log.info("Tested that username and password fields are NOT populated after clicking Log In");
 	}
-	
 	/*
 	 * 
 	 * Test validates is Home page available after logIn by clicking upperRightLogInButton

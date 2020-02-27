@@ -6,14 +6,8 @@
 	<classes>
 		<class name="com.endavatraining.TestLoginPage" />
 	</classes>
+	
 </test>
-	<test thread-count="5" name="TestAlgorithmsPage">
-		<parameter name="browser" value="chrome" />
-		<classes>
-			<class name="com.endavatraining.TestAlgorithmsPage" />
-		</classes>
-	</test>
-<!-- </test>
 	<test thread-count="5" name="TestHomePage">
 		<parameter name="browser" value="chrome" />
 		<classes>
@@ -30,6 +24,12 @@
 		<parameter name="browser" value="chrome" />
 		<classes>
 			<class name="com.endavatraining.TestBrokenLinkPage" />
+		</classes>
+		</test>
+	<test thread-count="5" name="TestAlgorithmsPage">
+		<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.endavatraining.TestAlgorithmsPage" />
 		</classes>
 	</test>
 	<test thread-count="5" name="TestAdminPage">
@@ -61,5 +61,5 @@
 		<classes>
 			<class name="com.endavatraining.TestProfilePage" />
 		</classes>
-	</test> -->
+	</test> 
 </suite> <!-- Suite -->

@@ -15,7 +15,7 @@ import org.testng.annotations.*;
 
 /*
  *
- * @author Srboljub.Todorovic
+ * @author Ana Acanski
  *
  */
 
@@ -25,9 +25,14 @@ public class TestAlgorithmsPage extends TestBase {
     private LoginPage loginPage;
     private HomePage homePage;
     private AlgorithmsPage algorithmsPage;
-    public AlgorithmsPage adminPage;
     private By algorithmsPageButton = By.linkText("Algorithms");
     public static Logger log = Logger.getLogger(TestAlgorithmsPage.class);
+    
+	private static String username = "user";
+	private static String password = "password";
+	private By userNameBy = By.id("username");
+	private By passWordBy = By.id("password");
+	
 
     /*
      * Before Test suite message
@@ -46,8 +51,14 @@ public class TestAlgorithmsPage extends TestBase {
         algorithmsPage = Utils.setUpWebBrowserAlgorithms(browser);
     }
 
+    @AfterTest
+    public void tearDown() {
+        if (algorithmsPage != null)
+        	algorithmsPage.quit();
+    }
+
 	/*
-	 * Test validates that login page is opened by checking if log in button is
+	 * Test validates that algorithms page is opened by checking if Submit button is
 	 * visible on the page
 	 */
 	@Test
@@ -58,16 +69,47 @@ public class TestAlgorithmsPage extends TestBase {
 				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getSubmitButton()));
 	}
 
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
+	/*
+	 * Test validates is Log In page available by clicking upperRightLogInButton 
+	 */
+	@Test
+	public void testIsLoginPageAvailable() {
+		testAlgorithmsPageIsOpened();
+        log.info("Test is is Log In page available by clicking upperRightLogInButton " );
+        algorithmsPage.clickRightUpperLoginButton();
+		new WebDriverWait(algorithmsPage.driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getLoginButton()));
+	}
 
-
-    @AfterTest
-    public void tearDown() {
-        if (algorithmsPage != null)
-        	algorithmsPage.quit();
-    }
+	/*
+	 * Test validates is Login possible after logIn by clicking upperRightLogInButton 
+	 */
+	@Test
+	public void testIsLogInPossible() {
+		testAlgorithmsPageIsOpened();
+		testIsLoginPageAvailable();
+		algorithmsPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
+        Assert.assertEquals( username, LoginPage.getAttributeOfAnyTextField(algorithmsPage.driver, userNameBy), "Entered text in username Log In field is NOT populated.");
+        Assert.assertEquals( password, LoginPage.getAttributeOfAnyTextField(algorithmsPage.driver, passWordBy), "Entered text in password Log In field is NOT populated. ");
+		log.info("Tested that username and password fields are populated with correct credentials");
+		algorithmsPage.clickRightUpperLoginButton();
+        Assert.assertTrue(LoginPage.getAttributeOfAnyTextField(algorithmsPage.driver, userNameBy).isEmpty(), "Username Log In field IS populated. Expected empty text field, but got: " + LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
+        Assert.assertTrue(LoginPage.getAttributeOfAnyTextField(algorithmsPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
+		log.info("Tested that username and password fields are NOT populated after clicking Log In");
+	}
+	
+	/*
+	 * 
+	 * Test validates is Home page available after logIn by clicking upperRightLogInButton
+	 */
+	@Test
+	public void testIsAlgorithmsPageAvailableAfterLogin() {
+		log.info("Test is algorithms page availabe" );
+		testIsLoginPageAvailable();
+		algorithmsPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
+		algorithmsPage.clickLoginButton();
+		algorithmsPage.clickArithmeticsHomeTab();
+		new WebDriverWait(algorithmsPage.driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getSubmitButton()));
+	}
 }

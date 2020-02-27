@@ -35,8 +35,6 @@ public class AlgorithmsPage extends BasePage {
 	private By profileButton = By.linkText("Profile");
 	private By resetPassword = By.xpath("//a[@href='/forgotpassword ']");
 
-	
-	
 	public AlgorithmsPage(WebDriver driver) {
 		super(driver);
 	}
@@ -56,8 +54,8 @@ public class AlgorithmsPage extends BasePage {
 	public By getLoginButton() {
 		return loginButton;
 	}
-    public void insertValueInFormControlFields(int formControl) {
-        driver.findElement(this.formControl).sendKeys("6");
+    public void insertValueInFormControlFields(CharSequence[] formControl) {
+        driver.findElement(this.formControl).sendKeys(formControl);
 		log.debug("Inserted number in form control number field");
     }
     public void clickArithmeticsHomeTab() {
@@ -65,15 +63,15 @@ public class AlgorithmsPage extends BasePage {
 		log.debug("Clicked on Arithmetic Home Tab");
     }
     public void insertValueInSearchKeyFields(String searchKey) {
-        driver.findElement(this.searchKey).sendKeys("ana");
+        driver.findElement(this.searchKey).sendKeys(searchKey);
 		log.debug("Inserted searchKey in search key field");
     }
     public void insertValueInVigenereFields(String vgnKey) {
-        driver.findElement(this.vgnKey).sendKeys("FJv6Jb");
+        driver.findElement(this.vgnKey).sendKeys(vgnKey);
 		log.debug("Inserted FJv6Jb in Vigenere key field");
     }
-    public void insertValueInLetterFields(char letter) {
-        driver.findElement(this.letter).sendKeys("e");
+    public void insertValueInLetterFields(CharSequence[] letter) {
+        driver.findElement(this.letter).sendKeys(letter);
 		log.debug("Inserted letter in Vigenere key field");
     }
     public void clickRightUpperLoginButton() {
@@ -88,11 +86,11 @@ public class AlgorithmsPage extends BasePage {
         driver.findElement(submitButton).click();
 		log.debug("Clicked on Submit button");
     }
-    public void submitNewValue(int formControl, String searchKey, String vgnKey, char letter) {
-        driver.findElement(this.formControl).sendKeys("6");
-        driver.findElement(this.searchKey).sendKeys("ana");
-        driver.findElement(this.vgnKey).sendKeys("FJv6Jb");
-        driver.findElement(this.letter).sendKeys("e");
+    public void submitNewValue(CharSequence[] formControl, String searchKey, String vgnKey, CharSequence[] letter) {
+        driver.findElement(this.formControl).sendKeys(formControl);
+        driver.findElement(this.searchKey).sendKeys(searchKey);
+        driver.findElement(this.vgnKey).sendKeys(vgnKey);
+        driver.findElement(this.letter).sendKeys(letter);
         clickSubmitButton();
     }
     public void insertTextInUsernameAndPasswordLogInTextFields(String username, String password) {

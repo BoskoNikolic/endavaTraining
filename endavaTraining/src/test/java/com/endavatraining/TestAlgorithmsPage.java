@@ -24,6 +24,10 @@ public class TestAlgorithmsPage extends TestBase {
     
 	private static String username = "user";
 	private static String password = "password";
+	private static String formControl = "6";
+	private static String searchKey = "ana";
+	private static String vgnKey = "FJv6Jb";
+	private static String letter = "e";
 	private By userNameBy = By.id("username");
 	private By passWordBy = By.id("password");
     

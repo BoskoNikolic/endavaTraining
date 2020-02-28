@@ -72,7 +72,7 @@ public class LogedInTest extends TestBase  {
         log.info("Test is Samsara Page present after login");
         homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
         //2. Click to Samsara Tab to open Samsara Page
-        logedInPage.goToPage(pageTab);
+        logedInPage.goToPage(Samsara);
     }
 
 

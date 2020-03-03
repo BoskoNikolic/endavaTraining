@@ -33,6 +33,7 @@ public class LogedInTest extends TestBase  {
     public static final String USER_PASSWORD = "password";
     
 	public By Samsara = By.linkText("Samsara");
+	public By Algorithms = By.linkText("Algorithms");
 
     @BeforeMethod
 	@BeforeClass

@@ -51,6 +51,7 @@ public class TestAlgorithmsPage extends TestBase {
 	 * Test validates that algorithms page is opened by checking if Submit button is
 	 * visible on the page
 	 */
+	@Parameters("browser")
 	@Test
 	public void testAlgorithmsPageIsOpened() {
 		algorithmsPage = new AlgorithmsPage(homePage.driver);
@@ -65,22 +66,9 @@ public class TestAlgorithmsPage extends TestBase {
 				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getSubmitButton()));
 	}
 	/*
-	 * Test validates is Log In page available by clicking upperRightLogInButton 
+	 * Test validates is Log In page available by clicking upperRightLogInButton under Algorithms Page
 	 */
-	@Test
-	public void testSubmitButtonFunctionality(String formControl) {
-		//1. Verify that Algorithms Page is presented
-		testAlgorithmsPageIsOpened();
-		//2. Click to the RightUpperLoginButton
-        log.info("Clear and enter text into the formControl field" );
-        algorithmsPage.submitNewValue(formControlValue, searchKeyValue, vgnKeyValue, letterValue);
-        //3. Verify that RightUpperLoginButton open login Page
-		new WebDriverWait(algorithmsPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getLoginButton()));
-	}
-	/*
-	 * Test validates is Log In page available by clicking upperRightLogInButton 
-	 */
+	@Parameters("browser")
 	@Test
 	public void testIsLoginPageAvailable() {
 		//1. Verify that Algorithms Page is presented
@@ -92,4 +80,31 @@ public class TestAlgorithmsPage extends TestBase {
 		new WebDriverWait(algorithmsPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getLoginButton()));
 	}
+	/*
+	 * Test validates is Log In page available by clicking upperRightLogInButton 
+	 */
+	@Parameters("browser")
+	@Test
+	public void testSubmitButtonFunctionality() {
+		//1. Verify that Algorithms Page is presented
+		testAlgorithmsPageIsOpened();
+		//2. Click to the RightUpperLoginButton
+        log.info("Clear and enter text into the formControl field" );
+        algorithmsPage.submitNewValue(formControlValue, searchKeyValue, vgnKeyValue, letterValue);
+        //3. Verify that RightUpperLoginButton open login Page
+		new WebDriverWait(algorithmsPage.driver, 5)
+				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getLoginButton()));
+	}
+	/*
+	 * *Test validates are prime numbers generated appropriate relatid to entered formControl number
+	 */
+	@Parameters("browser")
+	@Test
+	public void testGeneratedPrimeNumbers() {
+		//1. precondition for generated prime numbers verification: enter and submit appropriate field value
+		testSubmitButtonFunctionality();
+		//2. Get generated prime numbers and verify them
+		algorithmsPage.generatedPrimeNumbersVerification(formControlValue);
+	}
+	
 }

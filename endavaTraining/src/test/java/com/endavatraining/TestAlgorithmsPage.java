@@ -96,7 +96,7 @@ public class TestAlgorithmsPage extends TestBase {
 				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getLoginButton()));
 	}
 	/*
-	 * *Test validates are prime numbers generated appropriate relatid to entered formControl number
+	 * *Test validates are prime numbers generated appropriate related to entered formControl number
 	 */
 	@Parameters("browser")
 	@Test
@@ -105,6 +105,17 @@ public class TestAlgorithmsPage extends TestBase {
 		testSubmitButtonFunctionality();
 		//2. Get generated prime numbers and verify them
 		algorithmsPage.generatedPrimeNumbersVerification(formControlValue);
+	}
+	/*
+	 * *Test validates are Fibonacci numbers generated appropriate related to entered formControl number
+	 */
+	@Parameters("browser")
+	@Test
+	public void testGeneratedFibonacciNumbers() {
+		//1. precondition for generated prime numbers verification: enter and submit appropriate field value
+		testSubmitButtonFunctionality();
+		//2. Get generated Fibonacci numbers and verify them
+		algorithmsPage.generatedFibonacciNumbersVerification(formControlValue);
 	}
 	
 }

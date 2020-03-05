@@ -117,5 +117,18 @@ public class TestAlgorithmsPage extends TestBase {
 		//2. Get generated Fibonacci numbers and verify them
 		algorithmsPage.generatedFibonacciNumbersVerification(formControlValue);
 	}
+	/*
+	 * *Test validates are factoriel calculated valid
+	 */
+	@Parameters("browser")
+	@Test
+	public void testCalculateFactorial() {
+		//1. precondition for generated prime numbers verification: enter and submit appropriate field value
+		testSubmitButtonFunctionality();
+		//2. Get calculate factorial 
+		algorithmsPage.calculatedFactorial(formControlValue);
+		//3. Verify that Factorial has expected value.
+		algorithmsPage.compareFatorial(algorithmsPage.getApplicationFactorialValue(), algorithmsPage.calculatedFactorial(formControlValue));
+	}
 	
 }

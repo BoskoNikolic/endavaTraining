@@ -1,8 +1,9 @@
 package com.endavatraining;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import com.endavatraining.pages.AdminPage;
 import com.endavatraining.pages.AlgorithmsPage;
-import com.endavatraining.pages.HeroesPage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
@@ -22,12 +23,12 @@ public class TestAlgorithmsPage extends TestBase {
     private By algorithmsPageButton = By.linkText("Algorithms");
     public static Logger log = Logger.getLogger(TestAlgorithmsPage.class);
     
-	private static String username = "user";
-	private static String password = "password";
-	private static String formControlValue = "8";
-	private static String searchKeyValue = "ana";
-	private static String vgnKeyValue = "FJv6Jb";
-	private static String letterValue = "e";
+	private  String username = "user";
+	private  String password = "password";
+	private  String formControlValue = "8";
+	private  String searchKeyValue = "ana";
+	private  String vgnKeyValue = "FJv6Jb";
+	private  String letterValue = "e";
 	private By userNameBy = By.id("username");
 	private By passWordBy = By.id("password");
     
@@ -36,13 +37,15 @@ public class TestAlgorithmsPage extends TestBase {
         System.out.println("Running testAlgorithmsPage Test.");
     }
     
-    @BeforeTest
+    @BeforeMethod
+	@BeforeTest
 	@Parameters({"browser"})
 	public void setUp(String browser) {
 		loginPage = Utils.setUpWebBrowser(browser);
 	}
 
-    @AfterTest
+    @AfterMethod
+	@AfterTest
     public void tearDown() {
         if (algorithmsPage != null)
         	algorithmsPage.quit();
@@ -118,7 +121,7 @@ public class TestAlgorithmsPage extends TestBase {
 		algorithmsPage.generatedFibonacciNumbersVerification(formControlValue);
 	}
 	/*
-	 * *Test validates are factoriel calculated valid
+	 * *Test validates is factorial valid
 	 */
 	@Parameters("browser")
 	@Test
@@ -129,6 +132,17 @@ public class TestAlgorithmsPage extends TestBase {
 		algorithmsPage.calculatedFactorial(formControlValue);
 		//3. Verify that Factorial has expected value.
 		algorithmsPage.compareFatorial(algorithmsPage.getApplicationFactorialValue(), algorithmsPage.calculatedFactorial(formControlValue));
+	}
+	/*
+	 * *Test validates is random string valid 
+	 */
+	@Parameters("browser")
+	@Test
+	public void testRandomString() throws Exception {
+		//1. precondition for generated prime numbers verification: enter and submit appropriate field value
+		testSubmitButtonFunctionality();
+		//2. Random string verification
+		algorithmsPage.randomStringVerification();
 	}
 	
 }

@@ -41,13 +41,6 @@ public class LogedInTest extends TestBase  {
     public void setUp(String browser) {
         basePage = Utils.setUpWebBrowser(browser);
     }
-
-    /**
-     * This method runs after every test and takes screen shot if test fails
-     *
-     * @author Jovan.Penic
-     * @param result
-     */
     @AfterMethod
     public void testFailScreenshot(ITestResult result){
         if (ITestResult.FAILURE == result.getStatus()){

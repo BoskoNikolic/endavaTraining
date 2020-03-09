@@ -18,29 +18,24 @@ import org.testng.annotations.*;
 
 public class TestAdminPage extends TestBase {
 
-	
     private LoginPage loginPage;
     private HomePage homePage;
     private AdminPage adminPage;
     private By adminPageButton = By.linkText("Admin");
     public static Logger log = Logger.getLogger(TestAdminPage.class);
-
-    /*
-     * Before Test suite message
-     * @author ana.acanski
-     *
-     */
-    
-    @BeforeSuite
-    public void setup() {
-        System.out.println("Running testAdminPage Test.");
-    }
     
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
         loginPage = Utils.setUpWebBrowser(browser);
     }
+    
+	@BeforeMethod
+	@Parameters({ "browser" })
+	public void openBrowser(String browser) {
+		homePage = new HomePage(WebDriverWrapper.createDriver(browser));
+		homePage.open();
+	}
 
     /*
      * Test validates default state of checkbox on admin page
@@ -87,23 +82,15 @@ public class TestAdminPage extends TestBase {
         log.info("Tested functionality of 'Generate new code' button on admin page");
 
     }
-
-    
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
-
-
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         if (adminPage != null)
             adminPage.quit();
     }
-    @AfterSuite
-    public void teardownS() {
+    @AfterTest
+    public void tearDown() {
         System.out.println("TestAdminPage Test Suite is finished");
-        driver.quit(); 
+        if (this.driver != null)
+            driver.quit();
     }
 }

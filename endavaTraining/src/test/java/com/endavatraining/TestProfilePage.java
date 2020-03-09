@@ -18,23 +18,24 @@ public class TestProfilePage extends TestBase {
     private HomePage homePage;
     private ProfilePage profilePage;
 
-
-    /*
-     * Before Test suite message
-     * @author ana.acanski
-     *
-     */
     
     @BeforeSuite
     public void setup() {
         System.out.println("Running TestProfilePage Test.");
     }
-
+    
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
         loginPage = Utils.setUpWebBrowser(browser);
     }
+    
+	@BeforeMethod
+	@Parameters({ "browser" })
+	public void openBrowser(String browser) {
+		homePage = new HomePage(WebDriverWrapper.createDriver(browser));
+		homePage.open();
+	}
 
     /*
     * Test is checking functionality of profile button
@@ -55,21 +56,15 @@ public class TestProfilePage extends TestBase {
         log.info("Tested that profile page button is displayed when user is logged in and that it is possible to click on it and go to profile page");
 
     }
-
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         if (profilePage != null)
         	profilePage.quit();
     }
-    
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
-    @AfterSuite
-    public void teardownS() {
+    @AfterTest
+    public void tearDown() {
         System.out.println("TestProfilePage Test Suite is finished");
-        driver.quit(); 
+        if (this.driver != null)
+            driver.quit();
     }
 }

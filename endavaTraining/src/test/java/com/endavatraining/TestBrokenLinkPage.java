@@ -23,23 +23,19 @@ public class TestBrokenLinkPage extends TestBase {
     private static final String EXPECTED_TITLE = "Alice in Wonderland";
     public static Logger log = Logger.getLogger(TestBrokenLinkPage.class);
 
-    /*
-     * Before Test suite message
-     * @author ana.acanski
-     *
-     */
     
-    @BeforeSuite
-    public void setup() {
-        System.out.println("Running TestBrokenPage Test.");
-    }
-
-
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
         loginPage = Utils.setUpWebBrowser(browser);
     }
+    
+	@BeforeMethod
+	@Parameters({ "browser" })
+	public void openBrowser(String browser) {
+		homePage = new HomePage(WebDriverWrapper.createDriver(browser));
+		homePage.open();
+	}
 
     /*
      * Test validates that elements visible on other pages are invisible on
@@ -62,21 +58,15 @@ public class TestBrokenLinkPage extends TestBase {
         String mainTitle = brokenLinkPage.getMainTitleText();
         Assert.assertEquals(mainTitle, EXPECTED_TITLE, "Main title differs from expected");
     }
-
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         if (brokenLinkPage != null)
-            brokenLinkPage.quit();
+        	brokenLinkPage.quit();
     }
-    
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
-    @AfterSuite
-    public void teardownS() {
+    @AfterTest
+    public void tearDown() {
         System.out.println("TestBrokenLinkPage Test Suite is finished");
-        driver.quit(); 
+        if (this.driver != null)
+            driver.quit();
     }
 }

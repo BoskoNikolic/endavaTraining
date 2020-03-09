@@ -25,12 +25,6 @@ public class TestBase {
     protected void BasePage(WebDriver driver) {
 		this.driver = driver;
 	}
-
-    /*
-     * Before Test suite message
-     * @author ana.acanski
-     *
-     */
     
     @BeforeSuite
     public void setup() {
@@ -52,30 +46,14 @@ public class TestBase {
      */
     @AfterMethod
     public void testFailScreenshot(ITestResult result){
-        if (ITestResult.FAILURE == result.getStatus()){
-            Utils.captureScreenshot(basePage.driver, result.getName());
-            log.info("Screenshot of failure of test " + result.getName() +" is taken!");
+    	if (basePage != null)
+    		basePage.quit();
         }
     }
-
-    
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
-
-
-    @AfterTest
-    public void tearDown() {
-        if (basePage != null)
-            basePage.quit();
-    }
     @AfterSuite
-    public void teardownS() {
+    public void teardown() {
         System.out.println("TestBase Test Suite is finished");
-        driver.quit(); 
+        if (this.driver != null)
+            driver.quit();
     }
-
-
 }

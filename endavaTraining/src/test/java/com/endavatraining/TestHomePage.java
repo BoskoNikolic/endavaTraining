@@ -21,24 +21,23 @@ public class TestHomePage extends TestBase {
 	private String username = "user";
 	private String password = "password";
 	public static Logger log = Logger.getLogger(TestHomePage.class);
-
-    /*
-     * Before Test suite message
-     * @author ana.acanski
-     *
-     */
     
     @BeforeSuite
     public void setup() {
         System.out.println("Running TestHomePage Test.");
     }
-
-
-
-	@BeforeTest
+    
+    @BeforeTest
+    @Parameters({"browser"})
+    public void setUp(String browser) {
+        loginPage = Utils.setUpWebBrowser(browser);
+    }
+    
+	@BeforeMethod
 	@Parameters({ "browser" })
-	public void setUp(String browser) {
-		loginPage = Utils.setUpWebBrowser(browser);
+	public void openBrowser(String browser) {
+		homePage = new HomePage(WebDriverWrapper.createDriver(browser));
+		homePage.open();
 	}
 	
 	/*
@@ -128,23 +127,15 @@ public class TestHomePage extends TestBase {
 		homePage.clickOnButton(homePage.getLogOutButton());
 
 	}
-
-
-	@AfterTest
-	public void tearDown() {
-		if (homePage != null)
-			homePage.quit();
-	}
-    
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
-    @AfterSuite
-    public void teardownS() {
-        System.out.println("TestHomePage Test Suite is finished");
-        driver.quit(); 
+    @AfterMethod
+    public void tearDown() {
+        if (homePage != null)
+            homePage.quit();
     }
-
+    @AfterTest
+    public void tearDown() {
+        System.out.println("TestHomePage Test Suite is finished");
+        if (this.driver != null)
+            driver.quit();
+    }
 }

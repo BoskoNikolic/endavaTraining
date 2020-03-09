@@ -22,12 +22,6 @@ public class TestHeroesPage extends TestBase {
     public static Logger log = Logger.getLogger(TestHeroesPage.class);
 
     private String userName = "user";
-
-    /*
-     * Before Test suite message
-     * @author ana.acanski
-     *
-     */
     
     @BeforeSuite
     public void setup() {
@@ -39,7 +33,13 @@ public class TestHeroesPage extends TestBase {
     public void setUp(String browser) {
         loginPage = Utils.setUpWebBrowser(browser);
     }
-
+    
+	@BeforeMethod
+	@Parameters({ "browser" })
+	public void openBrowser(String browser) {
+		homePage = new HomePage(WebDriverWrapper.createDriver(browser));
+		homePage.open();
+	}
     /*
      * Test validates that it is possible to add multiple inputs into hero table with different
      * values from drop down menu option
@@ -181,22 +181,15 @@ public class TestHeroesPage extends TestBase {
         Assert.assertEquals(allUsersHeroes, myHeroesHeroes, "Number of all Users heroes is not the same as on the My Heroes page");
         log.info("Checking the number of users heroes on the Heroes list, and the number of users heroes on the My Heroes page.");
     }
-
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         if (heroesPage != null)
         	heroesPage.quit();
     }
-    
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
-    @AfterSuite
-    public void teardownS() {
+    @AfterTest
+    public void tearDown() {
         System.out.println("LogTestHeroesPageinPage Test Suite is finished");
-        driver.quit(); 
+        if (this.driver != null)
+            driver.quit();
     }
-
 }

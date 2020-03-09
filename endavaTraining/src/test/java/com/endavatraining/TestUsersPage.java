@@ -27,13 +27,19 @@ public class TestUsersPage extends TestBase {
     public void setup() {
         System.out.println("Running TestUsersPage Test.");
     }
-
-
+    
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
         loginPage = Utils.setUpWebBrowser(browser);
     }
+    
+	@BeforeMethod
+	@Parameters({ "browser" })
+	public void openBrowser(String browser) {
+		homePage = new HomePage(WebDriverWrapper.createDriver(browser));
+		homePage.open();
+	}
 
     /**
      * The test logs in as a user, finds Admin from the Users list, opens his details, verifies that the details are open,
@@ -80,25 +86,15 @@ public class TestUsersPage extends TestBase {
         usersPage.clickLogOutButton();
         log.info("Tested if the hero count of admins in Users table is the same as in the User Heroes pop up window.");
     }
-
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         if (usersPage != null)
-            usersPage.quit();
+        	usersPage.quit();
     }
-    
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
-    @AfterSuite
-    public void teardownS() {
+    @AfterTest
+    public void tearDown() {
         System.out.println("TestUsersPage Test Suite is finished");
-        driver.quit(); 
+        if (this.driver != null)
+            driver.quit();
     }
-
-
-
-
 }

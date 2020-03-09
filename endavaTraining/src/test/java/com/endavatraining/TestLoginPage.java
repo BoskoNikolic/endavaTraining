@@ -25,23 +25,23 @@ public class TestLoginPage extends TestBase {
 	private static String password = "password";
 	private By userNameBy = By.id("username");
 	private By passWordBy = By.id("password");
-
-    /*
-     * Before Test suite message
-     * @author ana.acanski
-     *
-     */
     
     @BeforeSuite
     public void setup() {
         System.out.println("Running TestLoginPage Test.");
     }
-
-
-	@BeforeTest
-	@Parameters({"browser"})
-	public void setUp(String browser) {
-		loginPage = Utils.setUpWebBrowser(browser);
+    
+    @BeforeTest
+    @Parameters({"browser"})
+    public void setUp(String browser) {
+        loginPage = Utils.setUpWebBrowser(browser);
+    }
+    
+	@BeforeMethod
+	@Parameters({ "browser" })
+	public void openBrowser(String browser) {
+		homePage = new HomePage(WebDriverWrapper.createDriver(browser));
+		homePage.open();
 	}
 
 	/*
@@ -88,23 +88,15 @@ public class TestLoginPage extends TestBase {
         Assert.assertTrue(LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(), "Password Log In field IS populated. Expected empty text field, but got: " + LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
 		log.info("Tested that username and password fields are NOT populated after clicking Log In");
     }
-
-
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         if (loginPage != null)
-            loginPage.quit();
+        	loginPage.quit();
     }
-    
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
-    @AfterSuite
-    public void teardownS() {
+    @AfterTest
+    public void tearDown() {
         System.out.println("TestLoginPage Test Suite is finished");
-        driver.quit(); 
+        if (this.driver != null)
+            driver.quit();
     }
-
 }

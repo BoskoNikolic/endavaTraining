@@ -23,23 +23,24 @@ public class TestRegisterNewAccountPage extends TestBase {
     private String SECRET_ANSWER = "42";
     private String PASSWORD = "Johndoerules123";
 
-
-    /*
-     * Before Test suite message
-     * @author ana.acanski
-     *
-     */
     
     @BeforeSuite
     public void setup() {
         System.out.println("Running TestRegisterNewAccountPage Test.");
     }
-
+    
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
         loginPage = Utils.setUpWebBrowser(browser);
     }
+    
+	@BeforeMethod
+	@Parameters({ "browser" })
+	public void openBrowser(String browser) {
+		homePage = new HomePage(WebDriverWrapper.createDriver(browser));
+		homePage.open();
+	}
 
     /**
      *
@@ -84,22 +85,15 @@ public class TestRegisterNewAccountPage extends TestBase {
             Assert.assertTrue(registerNewAccountPage.submitButton().isEnabled(), "Sign Up button is disabled");
         }
     }
-
+    @AfterMethod
+    public void tearDown() {
+        if (registerNewAccountPage  != null)
+        	registerNewAccountPage .quit();
+    }
     @AfterTest
     public void tearDown() {
-        if (registerNewAccountPage != null)
-            registerNewAccountPage.quit();
-    }
-    
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
-    @AfterSuite
-    public void teardownS() {
         System.out.println("TestRegisterNewAccountPage Test Suite is finished");
-        driver.quit(); 
+        if (this.driver != null)
+            driver.quit();
     }
-
 }

@@ -25,23 +25,19 @@ public class TestGalleryPage extends TestBase {
     private By logOutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
     private By closeSlides = By.xpath("//*[@id=\"myModal\"]/span");
 
-
-    /*
-     * Before Test suite message
-     * @author ana.acanski
-     *
-     */
     
-    @BeforeSuite
-    public void setup() {
-        System.out.println("Running TestGalleryPage Test.");
-    }
-
     @BeforeTest
     @Parameters({"browser"})
     public void setUp(String browser) {
         loginPage = Utils.setUpWebBrowser(browser);
     }
+    
+	@BeforeMethod
+	@Parameters({ "browser" })
+	public void openBrowser(String browser) {
+		homePage = new HomePage(WebDriverWrapper.createDriver(browser));
+		homePage.open();
+	}
 
     /**
      * Test validates that captions of images in Gallery tab exist
@@ -92,26 +88,15 @@ public class TestGalleryPage extends TestBase {
         galleryPage.waitForElementToBeClickable(logOutButton);
         galleryPage.clickLogOutButton();
     }
-
-
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         if (galleryPage != null)
         	galleryPage.quit();
     }
-    
-    
-    /*
-     * After Test suite message
-     * @author ana.acanski
-     *
-     */
-    @AfterSuite
-    public void teardownS() {
+    @AfterTest
+    public void tearDown() {
         System.out.println("TestGalleryPage Test Suite is finished");
-        driver.quit(); 
+        if (this.driver != null)
+            driver.quit();
     }
-
-
-
 }

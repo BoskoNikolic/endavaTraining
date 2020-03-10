@@ -15,7 +15,7 @@ import org.testng.annotations.*;
  *
  */
 
-public class TestAdminPage extends TestBase {
+public class TestAdminPage extends BaseTest {
 
     private LoginPage loginPage;
     private HomePage homePage;

@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class TestRegisterNewAccountPage extends TestBase {
+public class TestRegisterNewAccountPage extends BaseTest {
 
     private RegisterNewAccountPage registerNewAccountPage;
     private LoginPage loginPage;

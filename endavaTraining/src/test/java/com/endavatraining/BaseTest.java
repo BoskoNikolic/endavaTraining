@@ -9,10 +9,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
-public class TestBase {
+public class BaseTest {
 
     protected static BasePage basePage;
-    public static Logger log = Logger.getLogger(TestBase.class);
+    public static Logger log = Logger.getLogger(BaseTest.class);
     public static final String ADMIN_USERNAME = "admin";
     public static final String ADMIN_PASSWORD = "password";
     public static final String USER_USERNAME = "user";

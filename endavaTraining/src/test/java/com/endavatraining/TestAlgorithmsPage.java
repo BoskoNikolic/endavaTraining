@@ -2,20 +2,17 @@ package com.endavatraining;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import com.endavatraining.pages.AdminPage;
 import com.endavatraining.pages.AlgorithmsPage;
 import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class TestAlgorithmsPage extends TestBase {
+public class TestAlgorithmsPage extends BaseTest {
 
     private LoginPage loginPage;
     private HomePage homePage;
@@ -36,7 +33,7 @@ public class TestAlgorithmsPage extends TestBase {
     public void setup() {
         System.out.println("Running testAlgorithmsPage Test.");
     }
-    
+ 
     @BeforeMethod
 	@BeforeTest
 	@Parameters({"browser"})
@@ -134,7 +131,7 @@ public class TestAlgorithmsPage extends TestBase {
 		algorithmsPage.compareFatorial(algorithmsPage.getApplicationFactorialValue(), algorithmsPage.calculatedFactorial(formControlValue));
 	}
 	/*
-	 * *Test validates is random string valid 
+	 * *Test validates is random string expected 
 	 */
 	@Parameters("browser")
 	@Test

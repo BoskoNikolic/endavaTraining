@@ -11,7 +11,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 
-public class TestHomePage extends TestBase {
+public class TestHomePage extends BaseTest {
 
 	private HomePage homePage;
 	private LoginPage loginPage;

@@ -18,7 +18,7 @@ import org.testng.annotations.*;
  *
  */
 
-public class TestBrokenLinkPage extends TestBase {
+public class TestBrokenLinkPage extends BaseTest {
 
     private LoginPage loginPage;
     private BrokenLinkPage brokenLinkPage;

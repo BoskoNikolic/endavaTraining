@@ -28,27 +28,21 @@ public class LogedInPage extends BasePage {
 	protected LogedInPage(WebDriver driver) {
 		super(driver);
 	}
-
 	public static WebDriver driver;
 	public static final String LOG_OUT_MESSAGE = "You have been logged in.";
-
 	public void quit() {
 		log.debug("Quitting browser");
 		if (this.driver != null) {
 			driver.quit();
 		}
 	}
-
 	public By getAlgorithms() {
 		return Algorithms;
 	}
-
 	//This method is used to navigate from home page to another page
 	public void goToPage(By pageTab) {
 		driver.findElement(pageTab).click();
 	}
-
-
     public static void verificationByURL(String content) {
     	String url = driver.getCurrentUrl();
         Assert.assertTrue(url.contains("content"));

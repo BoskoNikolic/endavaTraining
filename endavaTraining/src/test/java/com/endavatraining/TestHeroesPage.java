@@ -13,7 +13,7 @@ import org.testng.annotations.*;
 
 
 
-public class TestHeroesPage extends TestBase {
+public class TestHeroesPage extends BaseTest {
 
     private LoginPage loginPage;
     private HeroesPage heroesPage;
@@ -132,7 +132,7 @@ public class TestHeroesPage extends TestBase {
     @Test
     public void isHeroCountCorrect2(){
 
-        homePage = loginPage.openAs(TestBase.USER_USERNAME, TestBase.USER_PASSWORD);
+        homePage = loginPage.openAs(BaseTest.USER_USERNAME, BaseTest.USER_PASSWORD);
         homePage.clickOnUsersButton();
         usersPage = new UsersPage(homePage.driver);
         usersPage.selectValueFromDropDownOnUsersPage(3);

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
 
-	private static final String ENDAVATRAINING_URL = "http://172.17.167.71:9010";
+	private static final String ENDAVATRAINING_URL = "http://localhost:8080/login";
 	public static Logger log = Logger.getLogger(LoginPage.class);
 
 	private By loginButton = By.xpath("//input[@value='Log In']");
@@ -18,12 +18,7 @@ public class LoginPage extends BasePage {
 	private By createAccountButton = By.xpath("//a[@href='/register']");
 	private By galleryButton = By.xpath("//a[@href='/gallery']");
 	private By profileButton = By.linkText("Profile");
-
-
-
-
-
-
+	private By resetPassword = By.xpath("//a[@href='/forgotpassword ']");
 
 	public LoginPage(WebDriver driver) {
 		super(driver);

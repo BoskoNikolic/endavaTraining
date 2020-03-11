@@ -17,19 +17,18 @@ public class BasePage {
 
 	private Select dropClass;
 
-    protected BasePage(WebDriver driver) {
+	protected BasePage(WebDriver driver) {
 		this.driver = driver;
 	}
 
-	protected boolean isElementPresent(By by){
-	        try{
-	            driver.findElement(by);
-	            return true;
-	        }
-	        catch(NoSuchElementException e){
-	            return false;
-	        }
-	    }
+	protected boolean isElementPresent(By by) {
+		try {
+			driver.findElement(by);
+			return true;
+		} catch (NoSuchElementException e) {
+			return false;
+		}
+	}
 
 	public void quit() {
 		log.debug("Quitting browser");
@@ -47,51 +46,58 @@ public class BasePage {
 	 * @param anyTextField
 	 * @return
 	 */
-	public static String getAttributeOfAnyTextField(WebDriver driver, By anyTextField){
+	public static String getAttributeOfAnyTextField(WebDriver driver, By anyTextField) {
 		return driver.findElement(anyTextField).getAttribute("value");
 	}
 
-    /**
-     * This method clicks on button that is passed
-     * @author Danko.Lojanica
-     * @param button
-     */
-     public void clickOnButton(By button){
-        driver.findElement(button).click();
-    }
+	/**
+	 * This method clicks on button that is passed
+	 * 
+	 * @author Danko.Lojanica
+	 * @param button
+	 */
+	public void clickOnButton(By button) {
+		driver.findElement(button).click();
+	}
 
-    /**
-     * This method returns text of any passed element
-     * @author Danko.Lojanica
-     * @param element
-     * @return
-     */
-    public String getTextOfElement(By element) {
-        return driver.findElement(element).getText();
-    }
+	/**
+	 * This method returns text of any passed element
+	 * 
+	 * @author Danko.Lojanica
+	 * @param element
+	 * @return
+	 */
+	public String getTextOfElement(By element) {
+		return driver.findElement(element).getText();
+	}
 
 	/**
 	 * This method send keys on passed element
+	 * 
 	 * @author Danko.Lojanica
 	 */
-	public void sendKeys(By by, String text){
+	public void sendKeys(By by, String text) {
 		driver.findElement(by).sendKeys(text);
 	}
 
 	/**
 	 * This method accepts alert end returns text from it
+	 * 
 	 * @author Danko.Lojanica
 	 * @return alertMessage
 	 */
-	public String alertMethod(){
+	public String alertMethod() {
 		Alert alert = driver.switchTo().alert();
 		String alertMessage = alert.getText();
 		alert.accept();
 		return alertMessage;
 	}
+
 	/*
-	 *This method sends text into chosen text field
+	 * This method sends text into chosen text field
+	 * 
 	 * @author Srboljub.Todorovic
+	 * 
 	 * @param By, String
 	 */
 	public void typeTextOnElement(By field, String keys) {
@@ -101,8 +107,10 @@ public class BasePage {
 	}
 
 	/*
-	 *This method selects desirable option from drop down menu options
+	 * This method selects desirable option from drop down menu options
+	 * 
 	 * @author Srboljub.Todorovic
+	 * 
 	 * @param By, String
 	 */
 	public void dropDownMenuSelect(By dropMenu, String dropText) {
@@ -112,13 +120,12 @@ public class BasePage {
 		dropClass.selectByVisibleText(dropText);
 	}
 
-
-    /**
-     * This method clears text of selected element
-     *
-     * @author Jovan.Penic
-     * @param field
-     */
+	/**
+	 * This method clears text of selected element
+	 *
+	 * @author Jovan.Penic
+	 * @param field
+	 */
 	public void clearTextOnElement(By field) {
 		WebDriverWait wait = new WebDriverWait(driver, 3);
 		wait.until(ExpectedConditions.elementToBeClickable(field));
@@ -144,7 +151,5 @@ public class BasePage {
 		WebDriverWait wait = new WebDriverWait(driver, 3);
 		wait.until(ExpectedConditions.elementToBeClickable(clickableElement));
 	}
-
-
 
 }

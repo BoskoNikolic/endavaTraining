@@ -23,7 +23,7 @@ public class BasePage {
 	}
 
 	protected boolean isElementPresent(By by) {
-		new WebDriverWait(driver,60).until(ExpectedConditions.visibilityOfElementLocated(by));
+		new WebDriverWait(driver,5).until(ExpectedConditions.visibilityOfElementLocated(by));
 		return false;
 	}
 

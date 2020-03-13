@@ -42,9 +42,7 @@ public class AlgorithmsPage extends BasePage {
 	private static By generateFibonacciNumbers = By.id("fibonacci");
 	private static By calculateFactorial = By.id("factorial");
 	private static By generateRandomString = By.id("rand");
-	private static By possiblePermutations = By.xpath("/html/body/div[1]/div/div/div[2]/div[4]/textarea");// xpath will
-																											// be
-																											// updated
+	private static By possiblePermutations = By.xpath("//textarea");
 
 	public AlgorithmsPage(WebDriver driver) {
 		super(driver);
@@ -69,11 +67,6 @@ public class AlgorithmsPage extends BasePage {
 
 	public By getLoginButton() {
 		return loginButton;
-	}
-
-	public void clearTextOnElement(By field) {
-		WebDriverWait wait = new WebDriverWait(driver, 3);
-		driver.findElement(field).clear();
 	}
 
 	public void insertValueInFormControlFields(String formControlValue) {

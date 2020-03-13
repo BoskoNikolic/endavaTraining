@@ -96,12 +96,7 @@ public class AlgorithmsPage extends BasePage {
 		driver.findElement(arithmeticsHomeTab).click();
 		log.debug("Clicked on Arithmetic Home Tab");
 	}
-
-	/*
-	 * public void insertValueInSearchKeyFields(String searchKey) {
-	 * driver.findElement(this.searchKey).sendKeys(searchKey);
-	 * log.debug("Inserted searchKey in search key field"); }
-	 */
+	
 	public void insertValueInVigenereFields(String vgnKey) {
 		driver.findElement(this.vgnKey).sendKeys(vgnKey);
 		log.debug("Inserted FJv6Jb in Vigenere key field");
@@ -255,7 +250,7 @@ public class AlgorithmsPage extends BasePage {
 		return fact;
 	}
 
-	public static boolean compareFatorial(Integer int1, Integer int2) {
+	public static boolean compareFactorial(Integer int1, Integer int2) {
 		if (int1 != null) {
 			return int1.equals(int2);
 		} else {

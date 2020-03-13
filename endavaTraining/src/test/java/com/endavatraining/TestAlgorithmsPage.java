@@ -127,7 +127,7 @@ public class TestAlgorithmsPage extends BaseTest {
 		// 2. Get calculate factorial
 		algorithmsPage.calculatedFactorial(formControlValue);
 		// 3. Verify that Factorial has expected value.
-		algorithmsPage.compareFatorial(algorithmsPage.getApplicationFactorialValue(),
+		algorithmsPage.compareFactorial(algorithmsPage.getApplicationFactorialValue(),
 				algorithmsPage.calculatedFactorial(formControlValue));
 	}
 

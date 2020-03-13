@@ -3,7 +3,7 @@ package com.endavatraining;
 import org.testng.annotations.AfterTest;
 import com.endavatraining.pages.BasePage;
 import com.endavatraining.pages.HomePage;
-import com.endavatraining.pages.LogedInPage;
+import com.endavatraining.pages.LoggedInPage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
 import org.apache.log4j.Logger;
@@ -13,14 +13,14 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
-public class LogedInTest extends BaseTest {
+public class LoggedInTest extends BaseTest {
 
-	protected LogedInPage logedInPage;
+	protected LoggedInPage logedInPage;
 	protected BasePage basePage;
 	protected HomePage homePage;
 	protected LoginPage loginPage;
 
-	public static Logger log = Logger.getLogger(LogedInTest.class);
+	public static Logger log = Logger.getLogger(LoggedInTest.class);
 	public static final String ADMIN_USERNAME = "admin";
 	public static final String ADMIN_PASSWORD = "password";
 	public static final String USER_USERNAME = "user";

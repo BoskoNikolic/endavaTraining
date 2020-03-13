@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-public class LogedInPage extends BasePage {
+public class LoggedInPage extends BasePage {
 	public By samsara = By.linkText("Samsara");
 	public By homeButton = By.linkText("Home");
 	public By usersButton = By.linkText("Users");
@@ -17,7 +17,7 @@ public class LogedInPage extends BasePage {
 	private AlgorithmsPage algorithmsPage;
 	private HomePage homePage;
 
-	protected LogedInPage(WebDriver driver) {
+	protected LoggedInPage(WebDriver driver) {
 		super(driver);
 	}
 

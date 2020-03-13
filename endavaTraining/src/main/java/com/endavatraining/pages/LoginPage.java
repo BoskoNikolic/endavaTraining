@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
 
-	private static final String ENDAVATRAINING_URL = "http://localhost:8080/login";
+	private static final String ENDAVATRAINING_URL = "http://172.17.167.71:9091/login";
 	public static Logger log = Logger.getLogger(LoginPage.class);
 
 	private By loginButton = By.xpath("//input[@value='Log In']");

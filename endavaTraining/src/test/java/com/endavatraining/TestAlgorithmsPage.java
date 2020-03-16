@@ -19,7 +19,7 @@ public class TestAlgorithmsPage extends BaseTest {
 	private LoginPage loginPage;
 	private HomePage homePage;
 	private AlgorithmsPage algorithmsPage;
-	private By algorithmsPageButton = By.linkText("Algorithms");
+	private By algorithmsPageButton = By.linkText("algorithms");
 	public static Logger log = Logger.getLogger(TestAlgorithmsPage.class);
 
 	private String username = "user";
@@ -41,28 +41,26 @@ public class TestAlgorithmsPage extends BaseTest {
 	 * Test validates that algorithms page is opened by checking if Submit button is
 	 * visible on the page
 	 */
-	@Parameters("browser")
 	@Test
 	public void testAlgorithmsPageIsOpened() {
 		algorithmsPage = new AlgorithmsPage(homePage.driver);
 
 		// 1. User is logged and home page is present
-		log.info("Test is Algorithms Page is opened");
+		log.info("Test is algorithms Page is opened");
 		homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
-		// 2. Click to Algorithms Tab to open Algorithms Page
+		// 2. Click to algorithms Tab to open algorithms Page
 		algorithmsPage.openArithmeticsPage();
-		// 3. Verify that Algorithms Page is presented
+		// 3. Verify that algorithms Page is presented
 		new WebDriverWait(algorithmsPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getSubmitButton()));
 	}
 
 	/*
-	 * Test validates is Log In page available by clicking upperRightLogInButton
+	 * Test validates submitted values which will be used in the next test
 	 */
-	@Parameters("browser")
 	@Test
 	public void testSubmitButtonFunctionality() {
-		// 1. Verify that Algorithms Page is presented
+		// 1. Verify that algorithms Page is presented
 		testAlgorithmsPageIsOpened();
 		// 2. Click to the RightUpperLoginButton
 		log.info("Clear and enter text into the formControl field");
@@ -75,7 +73,6 @@ public class TestAlgorithmsPage extends BaseTest {
 	/*
 	 * *Test validates is random string expected
 	 */
-	@Parameters("browser")
 	@Test
 	public void testRandomString() throws Exception {
 		// 1. precondition for generated prime numbers verification: enter and submit
@@ -88,7 +85,6 @@ public class TestAlgorithmsPage extends BaseTest {
 	/*
 	 * *Test validates is Letters field expected
 	 */
-	@Parameters("browser")
 	@Test
 	public void testLettersFieldverification() throws Exception {
 		// 1. precondition for generated prime numbers verification: enter and submit
@@ -101,7 +97,6 @@ public class TestAlgorithmsPage extends BaseTest {
 	/*
 	 * *Test validates is Digits field expected
 	 */
-	@Parameters("browser")
 	@Test
 	public void testDigitsFieldverification() throws Exception {
 		// 1. precondition for generated prime numbers verification: enter and submit

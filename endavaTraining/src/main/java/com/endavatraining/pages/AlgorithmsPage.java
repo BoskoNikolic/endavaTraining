@@ -20,8 +20,8 @@ public class AlgorithmsPage extends BasePage {
 	public static Logger log = Logger.getLogger(AlgorithmsPage.class);
 	private List<WebElement> rows;
 	private WebDriverWait wait = new WebDriverWait(driver, 3);
-	public static By arithmeticsHomeTab = By.linkText("Algorithms");
-    private  static By arithmeticsButton = By.linkText("Algorithms");
+	public static By arithmeticsHomeTab = By.linkText("algorithms");
+    private  static By arithmeticsButton = By.linkText("algorithms");
 	private static By upperRightLogInButton = By.xpath("//a[@href='/login']");
 	private static By formControl = By.id("length");
 	private static By searchKey = By.id("plainText");
@@ -43,7 +43,7 @@ public class AlgorithmsPage extends BasePage {
 	private static By generateFibonacciNumbers = By.id("fibonacci");
 	private static By calculateFactorial = By.id("factorial");
 	private static By generateRandomString = By.id("rand");
-	private static By possiblePermutations = By.xpath("/html/body/div[1]/div/div/div[2]/div[4]/textarea");//xpath will be updated 
+	private static By possiblePermutations = By.xpath("//textarea"); 
 
 
 	public AlgorithmsPage(WebDriver driver) {

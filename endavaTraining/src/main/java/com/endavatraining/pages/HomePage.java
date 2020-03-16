@@ -16,7 +16,7 @@ public class HomePage extends BasePage {
 	private By galleryButton = By.linkText("Gallery");
 	private By apiButton = By.linkText("API");
 	private By brokenLinkButton = By.linkText("Broken Link");
-	private By Algorithms = By.linkText("Algorithms");
+	private By algorithms = By.linkText("algorithms");
 	private By profileButton = By.linkText("Profile");
 	private By logOutTitle = By.xpath("//div[@class='alert alert-success']");
 	private By shareWithFriends= By.xpath("//*[text()='Share with friends!']");
@@ -65,7 +65,7 @@ public class HomePage extends BasePage {
 	}
 
 	public By getAlgorithms() {
-		return Algorithms;
+		return algorithms;
 	}
 
 	public By getProfileButton() {

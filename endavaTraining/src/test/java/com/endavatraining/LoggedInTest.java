@@ -13,21 +13,21 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 
-public class LogedInTest extends BaseTest {
+public class LoggedInTest extends BaseTest {
 
-	protected LogedInPage logedInPage;
+	protected LoggedInPage loggedInPage;
 	protected BasePage basePage;
 	protected HomePage homePage;
 	protected LoginPage loginPage;
 
-	public static Logger log = Logger.getLogger(LogedInTest.class);
+	public static Logger log = Logger.getLogger(LoggedInTest.class);
 	public static final String ADMIN_USERNAME = "admin";
 	public static final String ADMIN_PASSWORD = "password";
 	public static final String USER_USERNAME = "user";
 	public static final String USER_PASSWORD = "password";
 
 	public By Samsara = By.linkText("Samsara");
-	public By Algorithms = By.linkText("Algorithms");
+	public By algorithms = By.linkText("algorithms");
 
 	@BeforeClass
 	@Parameters({ "browser" })

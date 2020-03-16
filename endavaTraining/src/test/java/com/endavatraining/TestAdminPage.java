@@ -15,70 +15,70 @@ import org.testng.annotations.*;
  *
  */
 
-public class TestAdminPage extends TestBase {
+public class TestAdminPage extends BaseTest {
 
-    private LoginPage loginPage;
-    private HomePage homePage;
-    private AdminPage adminPage;
-    private By adminPageButton = By.linkText("Admin");
-    public static Logger log = Logger.getLogger(TestAdminPage.class);
+	private LoginPage loginPage;
+	private HomePage homePage;
+	private AdminPage adminPage;
+	private By adminPageButton = By.linkText("Admin");
+	public static Logger log = Logger.getLogger(TestAdminPage.class);
 
+	@BeforeTest
+	@Parameters({ "browser" })
+	public void setUp(String browser) {
+		loginPage = Utils.setUpWebBrowser(browser);
+	}
 
-    @BeforeTest
-    @Parameters({"browser"})
-    public void setUp(String browser) {
-        loginPage = Utils.setUpWebBrowser(browser);
-    }
+	/*
+	 * Test validates default state of checkbox on admin page
+	 * 
+	 * @author Srboljub.Todorovic
+	 *
+	 */
+	@Test
+	public void testAdminPageCheckbox() {
+		HomePage homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
+		homePage.goToPage(adminPageButton);
 
-    /*
-     * Test validates default state of checkbox on admin page
-     * @author Srboljub.Todorovic
-     *
-     */
-    @Test
-    public void testAdminPageCheckbox() {
-        HomePage homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
-        homePage.goToPage(adminPageButton);
+		adminPage = new AdminPage(homePage.driver);
 
-        adminPage = new AdminPage(homePage.driver);
+		Assert.assertTrue(adminPage.isCheckBoxSelected(), "Checkbox is not ticked by default");
+		adminPage.clickOnAllowUsersToShareRegCode();
+		Assert.assertFalse(adminPage.isCheckBoxSelected());
+		adminPage.clickOnAllowUsersToShareRegCode();
+		Assert.assertTrue(adminPage.isCheckBoxSelected());
 
-        Assert.assertTrue(adminPage.isCheckBoxSelected(), "Checkbox is not ticked by default");
-        adminPage.clickOnAllowUsersToShareRegCode();
-        Assert.assertFalse(adminPage.isCheckBoxSelected());
-        adminPage.clickOnAllowUsersToShareRegCode();
-        Assert.assertTrue(adminPage.isCheckBoxSelected());
+		adminPage.logout();
+		log.info("Tested functionality of a 'Allow users to share Registration Code' checkbox on admin page");
 
-        adminPage.logout();
-        log.info("Tested functionality of a 'Allow users to share Registration Code' checkbox on admin page");
+	}
 
-    }
+	/*
+	 * Test validates functionality of generate new code button on admin page
+	 * 
+	 * @author Srboljub.Todorovic
+	 *
+	 */
+	@Test
+	public void testGenerateNewRegCodeButton() {
+		homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
+		homePage.goToPage(AdminPage.adminPageButton);
 
-    /*
-     * Test validates functionality of generate new code button on admin page
-     * @author Srboljub.Todorovic
-     *
-     */
-    @Test
-    public void testGenerateNewRegCodeButton() {
-        homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
-        homePage.goToPage(AdminPage.adminPageButton);
+		adminPage = new AdminPage(homePage.driver);
 
-        adminPage = new AdminPage(homePage.driver);
+		String regCode = adminPage.getRegCodeBoxText();
 
-        String regCode = adminPage.getRegCodeBoxText();
+		adminPage.generateNewRegCode();
 
-        adminPage.generateNewRegCode();
+		String newRegCode = adminPage.getRegCodeBoxText();
 
-        String newRegCode = adminPage.getRegCodeBoxText();
+		Assert.assertNotEquals(regCode, newRegCode, "Registration button does not refreshes registration code");
+		log.info("Tested functionality of 'Generate new code' button on admin page");
 
-        Assert.assertNotEquals(regCode, newRegCode, "Registration button does not refreshes registration code");
-        log.info("Tested functionality of 'Generate new code' button on admin page");
+	}
 
-    }
-
-
-    @AfterClass
-    public void tearDown() {
-        adminPage.quit();
-    }
+	@AfterClass
+	public void tearDown() {
+		adminPage.quit();
+	}
 }

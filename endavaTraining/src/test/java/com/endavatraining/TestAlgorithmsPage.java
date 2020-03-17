@@ -39,7 +39,6 @@ public class TestAlgorithmsPage extends BaseTest {
 	 * Test validates that algorithms page is opened by checking if Submit button is
 	 * visible on the page
 	 */
-	@Parameters("browser")
 	@Test
 	public void testAlgorithmsPageIsOpened() {
 		algorithmsPage = new AlgorithmsPage(homePage.driver);
@@ -49,32 +48,24 @@ public class TestAlgorithmsPage extends BaseTest {
 		homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
 		// 2. Click to Algorithms Tab to open Algorithms Page
 		algorithmsPage.openArithmeticsPage();
-		// 3. Verify that Algorithms Page is presented
-		new WebDriverWait(algorithmsPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getSubmitButton()));
 	}
 
 	/*
 	 * Test validates is Log In page available by clicking upperRightLogInButton
 	 * under Algorithms Page
 	 */
-	@Parameters("browser")
 	@Test
 	public void testIsLoginPageAvailable() {
 		// 1. Verify that Algorithms Page is presented
 		testAlgorithmsPageIsOpened();
 		// 2. Click to the RightUpperLoginButton
 		log.info("Test is LogIn page available by clicking upperRightLogInButton ");
-		algorithmsPage.clickRightUpperLoginButton();
-		// 3. Verify that RightUpperLoginButton open login Page
-		new WebDriverWait(algorithmsPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getLoginButton()));
+		algorithmsPage.clickRightUpperLoginButton();	
 	}
 
 	/*
 	 * Test validates is Log In page available by clicking upperRightLogInButton
 	 */
-	@Parameters("browser")
 	@Test
 	public void testSubmitButtonFunctionality() {
 		// 1. Verify that Algorithms Page is presented
@@ -82,16 +73,12 @@ public class TestAlgorithmsPage extends BaseTest {
 		// 2. Click to the RightUpperLoginButton
 		log.info("Clear and enter text into the formControl field");
 		algorithmsPage.submitNewValue(formControlValue, searchKeyValue, vgnKeyValue, letterValue);
-		// 3. Verify that RightUpperLoginButton open login Page
-		new WebDriverWait(algorithmsPage.driver, 5)
-				.until(ExpectedConditions.visibilityOfElementLocated(algorithmsPage.getLoginButton()));
 	}
 
 	/*
 	 * *Test validates are prime numbers generated appropriate related to entered
 	 * formControl number
 	 */
-	@Parameters("browser")
 	@Test
 	public void testGeneratedPrimeNumbers() {
 		// 1. precondition for generated prime numbers verification: enter and submit
@@ -105,7 +92,6 @@ public class TestAlgorithmsPage extends BaseTest {
 	 * *Test validates are Fibonacci numbers generated appropriate related to
 	 * entered formControl number
 	 */
-	@Parameters("browser")
 	@Test
 	public void testGeneratedFibonacciNumbers() {
 		// 1. precondition for generated prime numbers verification: enter and submit
@@ -118,7 +104,6 @@ public class TestAlgorithmsPage extends BaseTest {
 	/*
 	 * *Test validates is factorial valid
 	 */
-	@Parameters("browser")
 	@Test
 	public void testCalculateFactorial() {
 		// 1. precondition for generated prime numbers verification: enter and submit
@@ -134,7 +119,6 @@ public class TestAlgorithmsPage extends BaseTest {
 	/*
 	 * *Test validates is random string expected
 	 */
-	@Parameters("browser")
 	@Test
 	public void testRandomString() throws Exception {
 		// 1. precondition for generated prime numbers verification: enter and submit

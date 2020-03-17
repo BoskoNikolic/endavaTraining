@@ -8,7 +8,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class TestGalleryPage extends TestBase {
+public class TestGalleryPage extends BaseTest {
 
     private GalleryPage galleryPage;
     private LoginPage loginPage;

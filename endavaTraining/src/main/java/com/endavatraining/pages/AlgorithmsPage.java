@@ -19,13 +19,13 @@ public class AlgorithmsPage extends BasePage {
 	public static By arithmeticsHomeTab = By.linkText("Algorithms");
 	private static By arithmeticsButton = By.linkText("Algorithms");
 	private static By upperRightLogInButton = By.xpath("//a[@href='/login']");
-	private static By formControl = By.xpath("/html/body/div[1]/div/div/div[2]/div[1]/form/div/div[1]/input");
-	private static By searchKey = By.xpath("//input[@class='form-control']['plainText'][@name='searchKey']");
-	private static By vgnKey = By.xpath("//input[@class='form-control']['vgnKey'][@name='vgnKey']");
-	private static By letter = By.xpath("//input[@class='form-control']['letter'][@name='letter']");
+	private static By formControl = By.xpath("//form//input[@class='form-control']['length'][@name='n']");
+	private static By searchKey = By.xpath("//form//input[@class='form-control']['plainText'][@name='searchKey']");
+	private static By vgnKey = By.xpath("//form//input[@class='form-control']['vgnKey'][@name='vgnKey']");
+	private static By letter = By.xpath("//form//input[@class='form-control']['letter'][@name='letter']");
 	private static By algorithmsPageWelcomeMessage = By
 			.xpath("//div[@class='panel-title text-center'][contains(.,'Hello, and welcome to our gamers page!')]");
-	public static By submitButton = By.linkText("Submit");
+	public static By submitButton = By.xpath("//form//button[@type='submit']");
 	private static By wonderlandPageWelcomeMessage = By
 			.xpath("//div[@class='panel-title text-center'][contains(.,'Alice in Wonderland')]");
 	private static By loginPageSamsaraWelcomeMessage = By

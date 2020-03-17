@@ -19,10 +19,10 @@ public class AlgorithmsPage extends BasePage {
 	public static By arithmeticsHomeTab = By.linkText("Algorithms");
 	private static By arithmeticsButton = By.linkText("Algorithms");
 	private static By upperRightLogInButton = By.xpath("//a[@href='/login']");
-	private static By formControl = By.id("length");
-	private static By searchKey = By.id("plainText");
-	private static By vgnKey = By.id("vgnKey");
-	private static By letter = By.id("letter");
+	private static By formControl = By.xpath("/html/body/div[1]/div/div/div[2]/div[1]/form/div/div[1]/input");
+	private static By searchKey = By.xpath("//input[@class='form-control']['plainText'][@name='searchKey']");
+	private static By vgnKey = By.xpath("//input[@class='form-control']['vgnKey'][@name='vgnKey']");
+	private static By letter = By.xpath("//input[@class='form-control']['letter'][@name='letter']");
 	private static By algorithmsPageWelcomeMessage = By
 			.xpath("//div[@class='panel-title text-center'][contains(.,'Hello, and welcome to our gamers page!')]");
 	public static By submitButton = By.linkText("Submit");
@@ -38,8 +38,8 @@ public class AlgorithmsPage extends BasePage {
 	private static By galleryButton = By.xpath("//a[@href='/gallery']");
 	private static By profileButton = By.linkText("Profile");
 	private static By resetPassword = By.xpath("//a[@href='/forgotpassword ']");
-	private static By generatePrimeNumbers = By.xpath("//input[@class='form-control'][@id='primes");
-	private static By generateFibonacciNumbers = By.xpath("//input[@class='form-control'][@id='fibonacci");
+	private static By generatePrimeNumbers = By.xpath("//input[@class='form-control'][@id='primes]");
+	private static By generateFibonacciNumbers = By.xpath("//input[@class='form-control'][@id='fibonacci]");
 	private static By calculateFactorial = By.xpath("//input[@class='form-control'][@id='factorial']");
 	private static By generateRandomString = By.xpath("//input[@class='form-control'][@id='rand']");
 	private static By possiblePermutations = By.xpath("//textarea");

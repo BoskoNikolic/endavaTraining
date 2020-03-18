@@ -79,7 +79,7 @@ public class AlgorithmsPage extends BasePage {
 		log.debug("Inserted number in form control number field");
 	}
 
-	public void insertRandomValueInFormControlFields(String formControlValue) {
+	public void insertRandomValueInFormControlFields() {
 		log.debug("Clear form control number field if there is any value");
 		clearTextOnElement(formControl);
 		Random rand = new Random();
@@ -269,38 +269,34 @@ public class AlgorithmsPage extends BasePage {
 		// random generated string
 		assertTrue(getStringFromString(generateRandomString).equals(getStringFromString(plainText)));
 	}
+	
+	public void repeatRandomFormControlValue(String searchKeyValue, String vgnKeyValue, String letterValue) {
 
-	public void submitFormControlValueLoop(String formControlValueChecking, String searchKeyValue, String vgnKeyValue, String letterValue) {
+		clearTextOnElement(formControl);
+		insertRandomValueInFormControlFields();	
+		clearTextOnElement(this.searchKey);
+		typeTextOnElement(this.searchKey, searchKeyValue);
+		clearTextOnElement(vgnKey);
+		typeTextOnElement(vgnKey, vgnKeyValue);
+		clearTextOnElement(letter);
+		typeTextOnElement(letter, letterValue);
+		clickSubmitButton();
+	}
+
+	public void submitFormControlValueLoop(String searchKeyValue, String vgnKeyValue, String letterValue) {
+		repeatRandomFormControlValue(searchKeyValue, vgnKeyValue, letterValue);
 		
-		insertRandomValueInFormControlFields(formControlValueChecking);
-		int formControlInt = Integer.parseInt(formControlValueChecking);
-		
-		boolean numeric = true;
-		numeric = formControlValueChecking.matches("-?\\d+(\\.\\d+)?");
-        
-		if (formControlInt<6) {
-			
+		if ((getIntFromString(formControl)<6)&&(getIntFromString(formControl)>25)){
+			repeatRandomFormControlValue(searchKeyValue, vgnKeyValue, letterValue);
 		}
 		else {
-			if(formControlInt >25) {
-				System.out.println("Value must be lees or equal to 25");
-			}
-			else {
-				insertRandomValueInFormControlFields(formControlValueChecking);
-				if (numeric) {
-					insertRandomValueInFormControlFields(formControlValueChecking);
-					clearTextOnElement(this.searchKey);
-					typeTextOnElement(this.searchKey, searchKeyValue);
-					clearTextOnElement(vgnKey);
-					typeTextOnElement(vgnKey, vgnKeyValue);
-					clearTextOnElement(letter);
-					typeTextOnElement(letter, letterValue);
-					clickSubmitButton();
-				}
-				else {
-					System.out.println("Please enter a number.");
-				}
-			}
+			clearTextOnElement(this.searchKey);
+			typeTextOnElement(this.searchKey, searchKeyValue);
+			clearTextOnElement(vgnKey);
+			typeTextOnElement(vgnKey, vgnKeyValue);
+			clearTextOnElement(letter);
+			typeTextOnElement(letter, letterValue);
+			clickSubmitButton();
 		}
 	}	
 }

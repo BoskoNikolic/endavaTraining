@@ -85,7 +85,7 @@ public class TestAlgorithmsPage extends BaseTest {
 		testAlgorithmsPageIsOpened();
 		// 2. Click to the RightUpperLoginButton
 		log.info("Clear and enter text into the formControl field");
-		algorithmsPage.submitFormControlValueLoop(formControlValueChecking, searchKeyValue, vgnKeyValue, letterValue);
+		algorithmsPage.submitFormControlValueLoop(searchKeyValue, vgnKeyValue, letterValue);
 	}
 
 	/*

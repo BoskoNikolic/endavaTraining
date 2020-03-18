@@ -23,6 +23,7 @@ public class TestAlgorithmsPage extends BaseTest {
 	private String username = "user";
 	private String password = "password";
 	private String formControlValue = "8";
+	public String formControlValueChecking;
 	private String searchKeyValue = "ana";
 	private String vgnKeyValue = "FJv6Jb";
 	private String letterValue = "e";
@@ -73,6 +74,18 @@ public class TestAlgorithmsPage extends BaseTest {
 		// 2. Click to the RightUpperLoginButton
 		log.info("Clear and enter text into the formControl field");
 		algorithmsPage.submitNewValue(formControlValue, searchKeyValue, vgnKeyValue, letterValue);
+	}
+
+	/*
+	 * Test validates are formControlValue appropriated 
+	 */
+	@Test
+	public void testDifferentFormControlValue() {
+		// 1. Verify that Algorithms Page is presented
+		testAlgorithmsPageIsOpened();
+		// 2. Click to the RightUpperLoginButton
+		log.info("Clear and enter text into the formControl field");
+		algorithmsPage.submitFormControlValueLoop(formControlValueChecking, searchKeyValue, vgnKeyValue, letterValue);
 	}
 
 	/*

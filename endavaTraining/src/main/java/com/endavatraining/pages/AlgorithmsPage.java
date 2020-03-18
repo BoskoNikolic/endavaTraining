@@ -3,6 +3,7 @@ package com.endavatraining.pages;
 import static org.testng.AssertJUnit.*;
 
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 import org.apache.log4j.Logger;
@@ -75,6 +76,17 @@ public class AlgorithmsPage extends BasePage {
 		clearTextOnElement(formControl);
 		log.debug("Enter value into the control number field");
 		typeTextOnElement(formControl, formControlValue);
+		log.debug("Inserted number in form control number field");
+	}
+
+	public void insertRandomValueInFormControlFields(String formControlValue) {
+		log.debug("Clear form control number field if there is any value");
+		clearTextOnElement(formControl);
+		Random rand = new Random();
+		//Generate random integer in range 0 to 50
+		int number = rand.nextInt(50);
+		String formControlStr = Integer.toString(number);
+		typeTextOnElement(formControl, formControlStr);
 		log.debug("Inserted number in form control number field");
 	}
 
@@ -257,4 +269,38 @@ public class AlgorithmsPage extends BasePage {
 		// random generated string
 		assertTrue(getStringFromString(generateRandomString).equals(getStringFromString(plainText)));
 	}
+
+	public void submitFormControlValueLoop(String formControlValueChecking, String searchKeyValue, String vgnKeyValue, String letterValue) {
+		
+		insertRandomValueInFormControlFields(formControlValueChecking);
+		int formControlInt = Integer.parseInt(formControlValueChecking);
+		
+		boolean numeric = true;
+		numeric = formControlValueChecking.matches("-?\\d+(\\.\\d+)?");
+        
+		if (formControlInt<6) {
+			
+		}
+		else {
+			if(formControlInt >25) {
+				System.out.println("Value must be lees or equal to 25");
+			}
+			else {
+				insertRandomValueInFormControlFields(formControlValueChecking);
+				if (numeric) {
+					insertRandomValueInFormControlFields(formControlValueChecking);
+					clearTextOnElement(this.searchKey);
+					typeTextOnElement(this.searchKey, searchKeyValue);
+					clearTextOnElement(vgnKey);
+					typeTextOnElement(vgnKey, vgnKeyValue);
+					clearTextOnElement(letter);
+					typeTextOnElement(letter, letterValue);
+					clickSubmitButton();
+				}
+				else {
+					System.out.println("Please enter a number.");
+				}
+			}
+		}
+	}	
 }

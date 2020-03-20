@@ -42,7 +42,7 @@ public class BasePage {
 		driver.findElement(button).click();
 	}
 
-	public String getTextOfElement(By element) {
+	public static String getTextOfElement(By element) {
 		return driver.findElement(element).getText();
 	}
 

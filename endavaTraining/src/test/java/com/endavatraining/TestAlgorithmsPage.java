@@ -141,6 +141,19 @@ public class TestAlgorithmsPage extends BaseTest {
 		algorithmsPage.randomStringVerification();
 	}
 
+	/*
+	 * *Test validates is random string expected
+	 */
+	@Test
+	public void vigenereTest() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.vigenereVerification();
+	}
+
+
 	@AfterClass
 	public void tearDown() {
 		if (algorithmsPage != null)

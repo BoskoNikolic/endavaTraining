@@ -43,8 +43,31 @@ public class AlgorithmsPage extends BasePage {
 	private static By generateFibonacciNumbers = By.xpath("//div[@class='col-md-6'][1]/input[@class='form-control'][@id='fibonacci']");
 	private static By calculateFactorial = By.xpath("//div[@class='col-md-6'][1]/input[@class='form-control'][@id='factorial']");
 	private static By generateRandomString = By.xpath("//div[@class='col-md-6'][1]/input[@class='form-control'][@id='rand']");
-	private static By possiblePermutations = By.xpath("//textarea");
+	private static By possiblePermutations = By.xpath("//div[4][@class='col-md-12']/textarea[@rows='4'][@cols='80']");
 	private static By plainText = By.xpath("//div[@class='col-md-4'][1]/p[1]");
+	//XOR: *******************
+	private static By xorValue = By.xpath("//div[@class='col-md-4'][1]/p[2]");
+	//ROT13:******************
+	private static By rot13Value = By.xpath("//div[@class='col-md-4'][1]/p[4]");
+	//Vigenere:***************
+	private static By vigenereValue = By.xpath("//div[@class='col-md-4'][1]/p[7]");
+	//Reverse:
+	private static By reverseValue = By.xpath("//div[@class='col-md-4'][1]/p[7]");
+	//Letters:
+	private static By lettersValue = By.xpath("//div[@class='col-md-4'][2]/p[1]");
+	//Digits:
+	private static By digitsValue = By.xpath("//div[@class='col-md-4'][2]/p[2]");
+	//Is palindrome:
+	private static By isPalindromeValue = By.xpath("//div[@class='col-md-4'][2]/p[3]");
+	//Contains key:	
+	private static By containsKey = By.xpath("//div[@class='col-md-4'][2]/p[4]");
+	//Contains letters:
+	private static By containsLettersValue = By.xpath("//div[@class='col-md-4'][2]/p[5]");
+	//Time to search:
+	private static By timeToSearch = By.xpath("//div[@class='col-md-4'][2]/p[6]");
+	//Sort asc:
+	private static By sortAsc = By.xpath("//div[@class='col-md-4'][3]/p[1]");
+
 
 	public AlgorithmsPage(WebDriver driver) {
 		super(driver);
@@ -323,11 +346,18 @@ public class AlgorithmsPage extends BasePage {
 	    } 
 	    return key; 
 	} 
+
+	public static String getValue(By field) {
+		String str = driver.findElement(field).getText();
+		return str;
+	}
 	  
 	// This function returns the encrypted text 
 	// generated with the help of the key 
-	static String cipherText(String str, String key) 
+	static String cipherText() 
 	{ 
+		String str = getValue(plainText);
+		String key = getValue(searchKey);
 	    String cipher_text=""; 
 	  
 	    for (int i = 0; i < str.length(); i++) 
@@ -345,8 +375,11 @@ public class AlgorithmsPage extends BasePage {
 	  
 	// This function decrypts the encrypted text 
 	// and returns the original text 
-	static String originalText(String cipher_text, String key) 
+	static String originalText() 
 	{ 
+		String cipher_text = cipherText();
+		String key = getValue(searchKey);
+		
 	    String orig_text=""; 
 	  
 	    for (int i = 0 ; i < cipher_text.length() &&  
@@ -361,7 +394,7 @@ public class AlgorithmsPage extends BasePage {
 	        orig_text+=(char)(x);
 	    } 
 	    return orig_text; 
-	} 
+	}
 	
 	public void vigenereVerification(){
 		// verification will be based on verification that there is a class name such as

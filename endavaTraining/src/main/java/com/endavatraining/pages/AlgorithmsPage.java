@@ -399,6 +399,6 @@ public class AlgorithmsPage extends BasePage {
 	public void vigenereVerification(){
 		// verification will be based on verification that there is a class name such as
 		// random generated string
-		assertTrue(getStringFromString(generateRandomString).equals(getStringFromString(plainText)));
+		assertTrue(originalText().equals(getStringFromString(vigenereValue)));
 	}
 }

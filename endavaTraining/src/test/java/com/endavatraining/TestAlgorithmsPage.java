@@ -153,6 +153,30 @@ public class TestAlgorithmsPage extends BaseTest {
 		algorithmsPage.vigenereVerification();
 	}
 
+	/*
+	 * *Test validates is XOR: string expected
+	 */
+	@Test
+	public void XOR() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.verificationXOR();
+	}
+
+	/*
+	 * *Test validates is ROT13: expected
+	 */
+	@Test
+	public void ROT13() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.verificationROT();
+	}
+
 
 	@AfterClass
 	public void tearDown() {

@@ -395,10 +395,50 @@ public class AlgorithmsPage extends BasePage {
 	    } 
 	    return orig_text; 
 	}
-	
+	////*********** For caesar cipher Technique I will modify  https://www.geeksforgeeks.org/caesar-cipher-in-cryptography/
+	//A Java Program to illustrate Caesar Cipher Technique 
+	// Encrypts text using a shift  for ROT13
+    public static StringBuffer encryptCaesar13() { 
+    	String text = getValue(plainText);
+    	StringBuffer result= new StringBuffer(); 
+  
+        for (int i=0; i<text.length(); i++) { 
+            if (Character.isUpperCase(text.charAt(i))) 
+            { 
+                char ch = (char)(((int)text.charAt(i) + 13 - 65) % 26 + 65); 
+                result.append(ch); 
+            } 
+            else
+            { 
+                char ch = (char)(((int)text.charAt(i) + 
+                                  13 - 97) % 26 + 97); 
+                result.append(ch); 
+            } 
+        }
+		return result;
+    }
+    
+    public String xorVerification(){
+    	String plainTextValue = getValue(plainText);
+    	String vigenereValueText = getValue(vigenereValue);
+    	
+        StringBuilder sb = new StringBuilder();
+        for(int k=0; k < plainTextValue.length(); k++)
+           sb.append((plainTextValue.charAt(k) ^ vigenereValueText.charAt(k + (Math.abs(plainTextValue.length() - vigenereValueText.length()))))) ;
+           return sb.toString();
+    }
+        
 	public void vigenereVerification(){
-		// verification will be based on verification that there is a class name such as
-		// random generated string
+		assertTrue(xorVerification().equals(getStringFromString(rot13Value)));
+	}
+	
+	public void verificationXOR(){
+		assertTrue(xorVerification().equals(getTextOfElement(xorValue)));
+	}
+	
+	public void verificationROT(){
+		String str = getValue(plainText);
 		assertTrue(originalText().equals(getStringFromString(vigenereValue)));
 	}
+	
 }

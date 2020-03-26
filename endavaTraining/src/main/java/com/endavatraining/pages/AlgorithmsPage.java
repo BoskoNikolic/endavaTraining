@@ -427,6 +427,28 @@ public class AlgorithmsPage extends BasePage {
            sb.append((plainTextValue.charAt(k) ^ vigenereValueText.charAt(k + (Math.abs(plainTextValue.length() - vigenereValueText.length()))))) ;
            return sb.toString();
     }
+    
+    //// Java program to Reverse a String using swapping 
+ // of variables
+
+    public String reverseVerification(){
+    	String plainTextValue = getValue(plainText);
+    	  
+        // getBytes() method to convert string  
+        // into bytes[]. 
+        byte [] strAsByteArray = plainTextValue.getBytes(); 
+  
+        byte [] result =  
+                   new byte [strAsByteArray.length]; 
+  
+        // Store result in reverse order into the 
+        // result byte[] 
+        for (int i = 0; i<strAsByteArray.length; i++) 
+            result[i] =  
+             strAsByteArray[strAsByteArray.length-i-1]; 
+  
+        return(new String(result));
+    }
         
 	public void vigenereVerification(){
 		assertTrue(xorVerification().equals(getStringFromString(rot13Value)));
@@ -439,6 +461,11 @@ public class AlgorithmsPage extends BasePage {
 	public void verificationROT(){
 		String str = getValue(plainText);
 		assertTrue(originalText().equals(getStringFromString(vigenereValue)));
+	}
+	
+	public void revVerification(){
+		String str = getValue(plainText);
+		assertTrue(reverseVerification().equals(getStringFromString(reverseValue)));
 	}
 	
 }

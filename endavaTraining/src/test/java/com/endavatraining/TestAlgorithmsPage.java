@@ -188,6 +188,18 @@ public class TestAlgorithmsPage extends BaseTest {
 		// 2. Random string verification
 		algorithmsPage.revVerification();
 	}
+	
+	/*
+	 * *Test validates is Reverse: expected
+	 */
+	@Test
+	public void palindromeVerification() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.paVerification();
+	}
 
 
 	@AfterClass

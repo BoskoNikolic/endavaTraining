@@ -350,6 +350,12 @@ public class AlgorithmsPage extends BasePage {
 	public static String getValue(By field) {
 		String str = driver.findElement(field).getText();
 		return str;
+	} 
+
+	public static char getLetterValue(By field) {
+		String str = driver.findElement(field).getText();
+		char ch = str.charAt(0);  
+		return ch;
 	}
 	  
 	// This function returns the encrypted text 
@@ -471,6 +477,28 @@ public class AlgorithmsPage extends BasePage {
 	public void paVerification(){
 		String str = getValue(plainText);
 		assertTrue(getStringFromString(plainText).equals(getStringFromString(reverseValue)));
+	}
+	
+	public void containsKeyVerification(){
+		String str = getValue(plainText);
+		assertTrue(getStringFromString(plainText).equals(getStringFromString(reverseValue)));
+	}
+	
+	public boolean containsLetters() {
+		String s = getValue(plainText);
+		char search = getLetterValue(letter);
+		
+	    if (s.length() == 0)
+	        return false;
+	    else
+	        return s.charAt(0) == search || containsLetters();
+	}
+	
+	public void containsLettersVerification(){
+		String data = getStringFromString(lettersValue); 
+		String str = String.valueOf(containsLetters());
+
+		assertTrue(str.equals(getStringFromString(containsLettersValue)));
 	}
 	
 }

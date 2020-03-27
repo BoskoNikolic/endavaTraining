@@ -190,7 +190,7 @@ public class TestAlgorithmsPage extends BaseTest {
 	}
 	
 	/*
-	 * *Test validates is Reverse: expected
+	 * *Test validates is Palindrom: expected
 	 */
 	@Test
 	public void palindromeVerification() {
@@ -200,9 +200,34 @@ public class TestAlgorithmsPage extends BaseTest {
 		// 2. Random string verification
 		algorithmsPage.paVerification();
 	}
+	
+	/*
+	 * *Test validates is containsKey: expected
+	 */
+	@Test
+	public void containsKeyVerification() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.containsKeyVerification();
+	}
 
+	
+	/*
+	 * *Test validates is containsKey: expected
+	 */
+	@Test
+	public void containsLetters() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.containsLettersVerification();
+	}
 
 	@AfterClass
+	
 	public void tearDown() {
 		if (algorithmsPage != null)
 			algorithmsPage.quit();

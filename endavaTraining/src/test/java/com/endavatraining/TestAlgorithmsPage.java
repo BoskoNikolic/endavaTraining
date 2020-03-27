@@ -215,7 +215,7 @@ public class TestAlgorithmsPage extends BaseTest {
 
 	
 	/*
-	 * *Test validates is containsKey: expected
+	 * *Test validates is containsLetters: expected
 	 */
 	@Test
 	public void containsLetters() {
@@ -224,6 +224,18 @@ public class TestAlgorithmsPage extends BaseTest {
 		testSubmitButtonFunctionality();
 		// 2. Random string verification
 		algorithmsPage.containsLettersVerification();
+	}
+
+	/*
+	 * *Test validates is possiblePermutation: expected
+	 */
+	@Test
+	public void possiblePermutationVerification() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.printPermutnVerification();
 	}
 
 	@AfterClass

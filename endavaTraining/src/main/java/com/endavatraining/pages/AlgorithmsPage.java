@@ -501,4 +501,41 @@ public class AlgorithmsPage extends BasePage {
 		assertTrue(str.equals(getStringFromString(containsLettersValue)));
 	}
 	
+	public String printPermutn(){
+		// I have used https://www.geeksforgeeks.org/print-all-permutations-of-a-string-in-java/
+		String str = getValue(plainText); 
+		String ans = getValue(calculateFactorial);
+    
+  
+		if (str.length() == 0) { 
+            System.out.print(ans + " "); 
+            ans = ans + "";
+            return ans; 
+        } 
+  
+        for (int i = 0; i < str.length(); i++) { 
+  
+            // ith character of str 
+            char ch = str.charAt(i); 
+  
+            // Rest of the string after excluding  
+            // the ith character 
+            String ros = str.substring(0, i) +  
+                         str.substring(i + 1); 
+            ans = ans + ch;
+  
+            // Recurvise call 
+            printPermutn(); 
+        }
+        ans = "";
+        printPermutn();
+        return ans;
+     
+    }
+
+	public void printPermutnVerification(){
+		String str = getValue(plainText);
+		assertTrue(printPermutn().equals(getStringFromString(possiblePermutations)));
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.endavatraining.pages;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -8,12 +10,14 @@ import org.openqa.selenium.WebElement;
 public class LoginPage extends BasePage {
 
 	private static final String ENDAVATRAINING_URL = "http://localhost:8080/login";
+	public static final String INVALID_CREDENTIAL_MESSAGE = "Invalid username and password.";
 	public static Logger log = Logger.getLogger(LoginPage.class);
 
 	private By loginButton = By.xpath("//input[@value='Log In']");
 	private By userName = By.id("username");
 	private By password = By.id("password");
-	private By errorLoginText = By.id("loginbox");
+	//private By errorLoginText = By.id("loginbox");
+	private By errorLoginText = By.xpath("//div[1]/div/div[2]/div[2]/div");
 	private By upperRightLogInButton = By.xpath("//a[@href='/login']");
 	private By createAccountButton = By.xpath("//a[@href='/register']");
 	private By galleryButton = By.xpath("//a[@href='/gallery']");
@@ -28,6 +32,11 @@ public class LoginPage extends BasePage {
 		log.debug("Open endava training site");
 
 		driver.get(ENDAVATRAINING_URL);
+	}
+
+	public static String getStringFromString(By field) {
+		String str = driver.findElement(field).getText();
+		return str;
 	}
 
 	public By getLoginButton() {
@@ -113,6 +122,11 @@ public class LoginPage extends BasePage {
 		log.debug("Open gallery");
 		driver.findElement(galleryButton).click();
 		return new GalleryPage(driver);
+	}
+	
+	public void invalidCredentialVerification(){
+		// Invalid credential verification
+		assertTrue(getStringFromString(errorLoginText).equals(INVALID_CREDENTIAL_MESSAGE));
 	}
 
 }

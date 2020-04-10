@@ -1,7 +1,11 @@
 package com.endavatraining;
 
+import com.endavatraining.pages.HomePage;
 import com.endavatraining.pages.LoginPage;
 import com.endavatraining.util.Utils;
+
+import static org.testng.AssertJUnit.assertTrue;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -40,17 +44,11 @@ public class TestLoginPage extends BaseTest {
 		new WebDriverWait(loginPage.driver, 5)
 				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
 	}
-
-	/*
-	 * Test validates that attempt to login with false credentials is not possible
-	 * by checking if log in error message is visible on the page
-	 * 
-	 * @author Srboljub.Todorovic
-	 */
+	
 	@Test
 	public void testLoginWithFalseCredentials() {
 		loginPage.userLogin(falseUsername, falsePassword);
-		assert loginPage.isErrorTextPresent() : "Error message is not present";
+		loginPage.invalidCredentialVerification();
 	}
 
 	/**

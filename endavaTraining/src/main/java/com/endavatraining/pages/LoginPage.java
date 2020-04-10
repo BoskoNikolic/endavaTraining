@@ -1,5 +1,7 @@
 package com.endavatraining.pages;
 
+import static org.testng.AssertJUnit.assertTrue;
+
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,33 +9,34 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage extends BasePage {
 
-	private static final String ENDAVATRAINING_URL = "http://172.17.167.71:9010";
+	private static final String ENDAVATRAINING_URL = "http://localhost:8080/login";
+	public static final String INVALID_CREDENTIAL_MESSAGE = "Invalid username and password.";
 	public static Logger log = Logger.getLogger(LoginPage.class);
 
 	private By loginButton = By.xpath("//input[@value='Log In']");
 	private By userName = By.id("username");
 	private By password = By.id("password");
-	private By errorLoginText = By.id("loginbox");
-    private By upperRightLogInButton = By.xpath("//a[@href='/login']");
+	//private By errorLoginText = By.id("loginbox");
+	private By errorLoginText = By.xpath("//div[1]/div/div[2]/div[2]/div");
+	private By upperRightLogInButton = By.xpath("//a[@href='/login']");
 	private By createAccountButton = By.xpath("//a[@href='/register']");
 	private By galleryButton = By.xpath("//a[@href='/gallery']");
 	private By profileButton = By.linkText("Profile");
-
-
-
-
-
-
+	private By resetPassword = By.xpath("//a[@href='/forgotpassword ']");
 
 	public LoginPage(WebDriver driver) {
 		super(driver);
 	}
 
-
 	public void open() {
 		log.debug("Open endava training site");
 
 		driver.get(ENDAVATRAINING_URL);
+	}
+
+	public static String getStringFromString(By field) {
+		String str = driver.findElement(field).getText();
+		return str;
 	}
 
 	public By getLoginButton() {
@@ -42,20 +45,22 @@ public class LoginPage extends BasePage {
 
 	}
 
-    /*
-    * This method is used for user login
-    *
-    * @author Srboljub.Todorovic
-    * @param username
-    * @param password
-    *
-     */
-    public void userLogin(String username, String password) {
-        open();
+	/*
+	 * This method is used for user login
+	 *
+	 * @author Srboljub.Todorovic
+	 * 
+	 * @param username
+	 * 
+	 * @param password
+	 *
+	 */
+	public void userLogin(String username, String password) {
+		open();
 		log.debug("Logging In user");
-        insertTextInUsernameAndPasswordLogInTextFields(username, password);
-        driver.findElement(this.loginButton).click();
-    }
+		insertTextInUsernameAndPasswordLogInTextFields(username, password);
+		driver.findElement(this.loginButton).click();
+	}
 
 	public HomePage openAs(String username, String password) {
 		log.debug("Logging In as user and opening Home Page");
@@ -68,55 +73,60 @@ public class LoginPage extends BasePage {
 		return isElementPresent(errorLoginText);
 	}
 
-    /**
-     *
-     * This method finds username and password text fields, and inserts credentials.
-     *
-     * @author Jovan.Penic
-     * @param username
-     * @param password
-     */
-    public void insertTextInUsernameAndPasswordLogInTextFields(String username, String password) {
-        driver.findElement(this.userName).sendKeys(username);
-        driver.findElement(this.password).sendKeys(password);
+	/**
+	 *
+	 * This method finds username and password text fields, and inserts credentials.
+	 *
+	 * @author Jovan.Penic
+	 * @param username
+	 * @param password
+	 */
+	public void insertTextInUsernameAndPasswordLogInTextFields(String username, String password) {
+		driver.findElement(this.userName).sendKeys(username);
+		driver.findElement(this.password).sendKeys(password);
 		log.debug("Inserted text in user name and in password field");
-    }
+	}
 
-    /**
-     *
-     * This method finds and clicks on upper right Log In button
-     *
-     * @author Jovan.Penic
-     */
-    public void clickRightUpperLoginButton() {
-        driver.findElement(upperRightLogInButton).click();
+	/**
+	 *
+	 * This method finds and clicks on upper right Log In button
+	 *
+	 * @author Jovan.Penic
+	 */
+	public void clickRightUpperLoginButton() {
+		driver.findElement(upperRightLogInButton).click();
 		log.debug("Clicked on upper right Log In button");
-    }
+	}
 
-    /**
-     *
-     *
-     * @author Jovan.Penic
-     * @return RegisterNewAccountPage
-     */
-    public RegisterNewAccountPage openCreateAccount() {
+	/**
+	 *
+	 *
+	 * @author Jovan.Penic
+	 * @return RegisterNewAccountPage
+	 */
+	public RegisterNewAccountPage openCreateAccount() {
 		log.debug("Clicking on create account on Log In page");
-        open();
-        driver.findElement(createAccountButton).click();
-        return new RegisterNewAccountPage(driver);
-    }
+		open();
+		driver.findElement(createAccountButton).click();
+		return new RegisterNewAccountPage(driver);
+	}
 
-    /**
-     *
-     * This method clicks on and opens Gallery Page
-     *
-     * @author Jovan.Penic
-     * @return GalleryPage
-     */
-    public GalleryPage openGalleryPage() {
-        log.debug("Open gallery");
-        driver.findElement(galleryButton).click();
-        return new GalleryPage(driver);
-    }
+	/**
+	 *
+	 * This method clicks on and opens Gallery Page
+	 *
+	 * @author Jovan.Penic
+	 * @return GalleryPage
+	 */
+	public GalleryPage openGalleryPage() {
+		log.debug("Open gallery");
+		driver.findElement(galleryButton).click();
+		return new GalleryPage(driver);
+	}
+	
+	public void invalidCredentialVerification(){
+		// Invalid credential verification
+		assertTrue(getStringFromString(errorLoginText).equals(INVALID_CREDENTIAL_MESSAGE));
+	}
 
 }

@@ -19,7 +19,7 @@ public class AlgorithmsPage extends BasePage {
 	private WebDriverWait wait = new WebDriverWait(driver, 3);
 	public static By arithmeticsHomeTab = By.linkText("Algorithms");
 	private static By arithmeticsButton = By.linkText("Algorithms");
-	private static By upperRightLogInButton = By.xpath("//a[@href='/login']");
+	private static By upperRightLogInButton = By.xpath("//a[@href=\"javascript: document.logoutForm.submit()\"]");
 	private static By formControl = By.xpath("//input[@class='form-control']['length'][@name='n']");
 	private static By searchKey = By.xpath("//input[@class='form-control']['plainText'][@name='searchKey']");
 	private static By vgnKey = By.xpath("//input[@class='form-control']['vgnKey'][@name='vgnKey']");
@@ -465,7 +465,6 @@ public class AlgorithmsPage extends BasePage {
 	}
 	
 	public void verificationROT(){
-		String str = getValue(plainText);
 		assertTrue(originalText().equals(getStringFromString(vigenereValue)));
 	}
 	

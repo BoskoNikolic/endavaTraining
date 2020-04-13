@@ -130,19 +130,7 @@ public class TestAlgorithmsPage extends BaseTest {
 	}
 
 	/*
-	 * *Test validates is random string expected
-	 */
-	@Test
-	public void testRandomString() throws Exception {
-		// 1. precondition for generated prime numbers verification: enter and submit
-		// appropriate field value
-		testSubmitButtonFunctionality();
-		// 2. Random string verification
-		algorithmsPage.randomStringVerification();
-	}
-
-	/*
-	 * *Test validates is random string expected
+	 * *Test validates is vigenere expected
 	 */
 	@Test
 	public void vigenereTest() {
@@ -236,6 +224,18 @@ public class TestAlgorithmsPage extends BaseTest {
 		testSubmitButtonFunctionality();
 		// 2. Random string verification
 		algorithmsPage.printPermutnVerification();
+	}
+
+	/*
+	 * *Test validates is random string expected
+	 */
+	@Test
+	public void testRandomString() throws Exception {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.randomStringVerification();
 	}
 
 	@AfterClass

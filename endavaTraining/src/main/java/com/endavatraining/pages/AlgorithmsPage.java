@@ -3,6 +3,7 @@ package com.endavatraining.pages;
 import static org.testng.AssertJUnit.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -12,6 +13,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import com.google.common.primitives.Ints;
 
 public class AlgorithmsPage extends BasePage {
 	public static Logger log = Logger.getLogger(AlgorithmsPage.class);
@@ -182,7 +184,9 @@ public class AlgorithmsPage extends BasePage {
 
 	public int getIntFromString(By field) {
 		String str = driver.findElement(field).getText();
-		int i = Integer.parseInt(str);
+		int i = Optional.ofNullable(str)
+				 .map(Ints::tryParse)
+				 .orElse(0);
 		return i;
 	}
 

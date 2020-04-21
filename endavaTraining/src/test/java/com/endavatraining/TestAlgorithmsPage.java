@@ -111,7 +111,7 @@ public class TestAlgorithmsPage extends BaseTest {
 		// appropriate field value
 		testSubmitButtonFunctionality();
 		// 2. Get generated Fibonacci numbers and verify them
-		algorithmsPage.generatedFibonacciNumbersVerification(formControlValue);
+		algorithmsPage.generatedFibonacciNumbersVerification();
 	}
 
 	@AfterClass

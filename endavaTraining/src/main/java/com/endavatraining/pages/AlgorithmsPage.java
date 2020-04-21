@@ -310,10 +310,10 @@ public class AlgorithmsPage extends BasePage {
 		}
 	}
 
-	public void randomStringVerification() throws Exception {
+	public void randomStringVerification(){
 		// verification will be based on verification that there is a class name such as
 		// random generated string
-		assertTrue(getStringFromString(generateRandomString).equals(getStringFromString(plainText)));
+		getStringFromString(generateRandomString).equals(getStringFromString(plainText));
 	}
 	
 	public void repeatRandomFormControlValue(String searchKeyValue, String vgnKeyValue, String letterValue) {

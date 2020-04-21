@@ -114,6 +114,33 @@ public class TestAlgorithmsPage extends BaseTest {
 		algorithmsPage.generatedFibonacciNumbersVerification();
 	}
 
+	/*
+	 * *Test validates is factorial valid
+	 */
+	@Test
+	public void testCalculateFactorial() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Get calculate factorial
+		algorithmsPage.calculatedFactorial(formControlValue);
+		// 3. Verify that Factorial has expected value.
+		algorithmsPage.compareFactorial(algorithmsPage.getApplicationFactorialValue(),
+				algorithmsPage.calculatedFactorial(formControlValue));
+	}
+
+	/*
+	 * *Test validates is random string expected
+	 */
+	@Test
+	public void testRandomString() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.randomStringVerification();
+	}
+	
 	@AfterClass
 	
 	public void tearDown() {

@@ -98,7 +98,7 @@ public class TestAlgorithmsPage extends BaseTest {
 		// appropriate field value
 		testSubmitButtonFunctionality();
 		// 2. Get generated prime numbers and verify them
-		algorithmsPage.generatedPrimeNumbersVerification(formControlValue);
+		algorithmsPage.generatedPrimeNumbersVerification();
 	}
 
 	/*

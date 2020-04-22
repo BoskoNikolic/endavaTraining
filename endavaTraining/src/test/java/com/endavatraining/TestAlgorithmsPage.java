@@ -165,6 +165,18 @@ public class TestAlgorithmsPage extends BaseTest {
 		algorithmsPage.paVerification();
 	}
 	
+	/*
+	 * *Test validates is containsKey: expected
+	 */
+	@Test
+	public void containsKeyVerification() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.containsKeyVerification();
+	}
+	
 	@AfterClass
 	
 	public void tearDown() {

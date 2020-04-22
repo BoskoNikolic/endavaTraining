@@ -500,8 +500,11 @@ public class AlgorithmsPage extends BasePage {
 	}
 	
 	public void containsKeyVerification(){
-		String str = getValue(plainText);
-		assertTrue(getStringFromString(plainText).equals(getStringFromString(reverseValue)));
+		if(getStringFromString(plainText).equals(getStringFromString(searchKey))) {
+			getStringFromString(containsKey).equals("true");
+		}
+		else
+			getStringFromString(containsKey).equals("false");
 	}
 	
 	public boolean containsLetters() {

@@ -492,8 +492,7 @@ public class AlgorithmsPage extends BasePage {
 	}
 	
 	public void revVerification(){
-		String str = getValue(plainText);
-		assertTrue(reverseVerification().equals(getStringFromString(reverseValue)));
+		reverseVerification().equals(getStringFromString(plainText));
 	}
 	
 	public void paVerification(){

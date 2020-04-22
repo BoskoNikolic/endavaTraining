@@ -140,6 +140,18 @@ public class TestAlgorithmsPage extends BaseTest {
 		// 2. Random string verification
 		algorithmsPage.randomStringVerification();
 	}
+
+	/*
+	 * *Test validates is Reverse: expected
+	 */
+	@Test
+	public void reverseVerification() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.revVerification();
+	}
 	
 	@AfterClass
 	

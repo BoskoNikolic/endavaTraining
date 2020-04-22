@@ -153,6 +153,18 @@ public class TestAlgorithmsPage extends BaseTest {
 		algorithmsPage.revVerification();
 	}
 	
+	/*
+	 * *Test validates is Palindrom: expected
+	 */
+	@Test
+	public void palindromeVerification() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.paVerification();
+	}
+	
 	@AfterClass
 	
 	public void tearDown() {

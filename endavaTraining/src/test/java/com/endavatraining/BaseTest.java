@@ -17,10 +17,9 @@ public class BaseTest {
 	public static final String ADMIN_PASSWORD = "password";
 	public static final String USER_USERNAME = "user";
 	public static final String USER_PASSWORD = "password";
-    private String browser = "chrome";
-	
+
 	@BeforeClass
-	//@Parameters({ "browser" })
+	@Parameters({ "browser" })
 	public void setUp(String browser) {
 		basePage = Utils.setUpWebBrowser(browser);
 	}

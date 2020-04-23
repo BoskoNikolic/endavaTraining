@@ -176,6 +176,18 @@ public class TestAlgorithmsPage extends BaseTest {
 		// 2. Random string verification
 		algorithmsPage.containsKeyVerification();
 	}
+
+	/*
+	 * *Test validates is containsLetters: expected
+	 */
+	@Test
+	public void containsLetters() {
+		// 1. precondition for generated prime numbers verification: enter and submit
+		// appropriate field value
+		testSubmitButtonFunctionality();
+		// 2. Random string verification
+		algorithmsPage.containsLettersVerification();
+	}
 	
 	@AfterClass
 	

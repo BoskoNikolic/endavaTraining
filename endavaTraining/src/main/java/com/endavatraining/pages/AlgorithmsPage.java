@@ -14,6 +14,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.primitives.Chars;
 import com.google.common.primitives.Ints;
 import com.google.common.primitives.Longs;
 
@@ -205,7 +207,6 @@ public class AlgorithmsPage extends BasePage {
 		Long arr = Optional.ofNullable(str)
 				 .map(Longs::tryParse)
 				 .orElse((long) 0);
-		//long arr = Long.parseLong(str);
 		return arr;
 	}
 
@@ -374,11 +375,14 @@ public class AlgorithmsPage extends BasePage {
 		String str = driver.findElement(field).getText();
 		return str;
 	} 
-
+// I have used https://www.javatpoint.com/java-string-to-char for consultation
 	public static char getLetterValue(By field) {
-		String str = driver.findElement(field).getText();
-		char ch = str.charAt(0);  
-		return ch;
+		String s = driver.findElement(field).getText();
+		for(int i=0; i<s.length();i++){  
+	        char ch = s.charAt(i);  
+	        return ch;
+	}
+		return 0;   
 	}
 	  
 	// This function returns the encrypted text 
@@ -518,9 +522,7 @@ public class AlgorithmsPage extends BasePage {
 	}
 	
 	public void containsLettersVerification(){
-		String data = getStringFromString(lettersValue); 
 		String str = String.valueOf(containsLetters());
-
 		assertTrue(str.equals(getStringFromString(containsLettersValue)));
 	}
 	

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -45,104 +46,15 @@ public class TestLoginPage extends BaseTest {
 				.until(ExpectedConditions.visibilityOfElementLocated(loginPage.getLoginButton()));
 	}
 	
-	@Test
-	public void testLoginWithFalseCredentials() {
+	@DataProvider(name = "data-provider")
+    public Object[][] dataProviderMethod() {
+        return new Object[][] { { "", "" }, { "", password }, { "", falsePassword }, { username, "" }, { falseUsername, "" }, { falseUsername, falsePassword }, { falseUsername, password }, {username, "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"}};
+    }
+	
+	@Test(dataProvider = "data-provider")
+	public void testLoginWithFalseCredentials(String falseUsername, String falsePassword) {
 		loginPage.userLogin(falseUsername, falsePassword);
 		loginPage.invalidCredentialVerification();
-	}
-	
-	@Test
-	public void testLoginWithEmptyUsernameCorrectPassword() {
-		
-		loginPage.userLogin("", password);
-		loginPage.invalidCredentialVerification();
-
-	}
-	
-	@Test
-	public void testLoginWithCorrectUsernameEmptyPassword() {
-
-		loginPage.userLogin(username, "");
-		loginPage.invalidCredentialVerification();
-
-	}
-	
-	@Test
-	public void testLoginWithEmptyUsernameFalsePassword() {
-		
-		loginPage.userLogin("", falsePassword);
-		loginPage.invalidCredentialVerification();
-		
-	}
-	
-	@Test
-	public void testLoginWithFalseUsernameEmptyPassword() {
-		
-		loginPage.userLogin(falseUsername, "");
-		loginPage.invalidCredentialVerification();
-
-	}
-	
-	@Test
-	public void testLoginWithFalseUsernameFalsePassword() {
-		
-		loginPage.userLogin(falseUsername, falseUsername);
-		loginPage.invalidCredentialVerification();
-		
-		loginPage.userLogin(falseUsername, password);
-		loginPage.invalidCredentialVerification();
-		
-		loginPage.userLogin(username, "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
-		loginPage.invalidCredentialVerification();
-
-	}
-	
-	@Test
-	public void testLoginWithFalseUsernameCorrectPassword() {
-		
-		loginPage.userLogin(falseUsername, password);
-		loginPage.invalidCredentialVerification();
-
-	}
-	
-	@Test
-	public void testLoginWithCorrectUsernameInvalidPassword() {
-		
-		loginPage.userLogin(falseUsername, password);
-		loginPage.invalidCredentialVerification();
-		
-		loginPage.userLogin(username, "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
-		loginPage.invalidCredentialVerification();
-
-	}
-
-	/**
-	 *
-	 * Test validates that username and password fields are populated with correct
-	 * credentials, by checking if they are visible in username and password text
-	 * boxes. Then test validates that username and password fields are NOT
-	 * populated after clicking log In, by checking if username and password text
-	 * boxes after clicking on Log In are empty.
-	 *
-	 * @author Jovan.Penic
-	 */
-	@Test
-	public void testRightUpperLoginButtonClearsCredentialsTextFields() {
-		loginPage.open();
-		loginPage.insertTextInUsernameAndPasswordLogInTextFields(username, password);
-		Assert.assertEquals(username, LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy),
-				"Entered text in username Log In field is NOT populated.");
-		Assert.assertEquals(password, LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy),
-				"Entered text in password Log In field is NOT populated. ");
-		log.info("Tested that username and password fields are populated with correct credentials");
-		loginPage.clickRightUpperLoginButton();
-		Assert.assertTrue(LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy).isEmpty(),
-				"Username Log In field IS populated. Expected empty text field, but got: "
-						+ LoginPage.getAttributeOfAnyTextField(loginPage.driver, userNameBy));
-		Assert.assertTrue(LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy).isEmpty(),
-				"Password Log In field IS populated. Expected empty text field, but got: "
-						+ LoginPage.getAttributeOfAnyTextField(loginPage.driver, passWordBy));
-		log.info("Tested that username and password fields are NOT populated after clicking Log In");
 	}
 
 	@AfterTest

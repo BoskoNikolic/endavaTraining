@@ -50,6 +50,71 @@ public class TestLoginPage extends BaseTest {
 		loginPage.userLogin(falseUsername, falsePassword);
 		loginPage.invalidCredentialVerification();
 	}
+	
+	@Test
+	public void testLoginWithEmptyUsernameCorrectPassword() {
+		
+		loginPage.userLogin("", password);
+		loginPage.invalidCredentialVerification();
+
+	}
+	
+	@Test
+	public void testLoginWithCorrectUsernameEmptyPassword() {
+
+		loginPage.userLogin(username, "");
+		loginPage.invalidCredentialVerification();
+
+	}
+	
+	@Test
+	public void testLoginWithEmptyUsernameFalsePassword() {
+		
+		loginPage.userLogin("", falsePassword);
+		loginPage.invalidCredentialVerification();
+		
+	}
+	
+	@Test
+	public void testLoginWithFalseUsernameEmptyPassword() {
+		
+		loginPage.userLogin(falseUsername, "");
+		loginPage.invalidCredentialVerification();
+
+	}
+	
+	@Test
+	public void testLoginWithFalseUsernameFalsePassword() {
+		
+		loginPage.userLogin(falseUsername, falseUsername);
+		loginPage.invalidCredentialVerification();
+		
+		loginPage.userLogin(falseUsername, password);
+		loginPage.invalidCredentialVerification();
+		
+		loginPage.userLogin(username, "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+		loginPage.invalidCredentialVerification();
+
+	}
+	
+	@Test
+	public void testLoginWithFalseUsernameCorrectPassword() {
+		
+		loginPage.userLogin(falseUsername, password);
+		loginPage.invalidCredentialVerification();
+
+	}
+	
+	@Test
+	public void testLoginWithCorrectUsernameInvalidPassword() {
+		
+		loginPage.userLogin(falseUsername, password);
+		loginPage.invalidCredentialVerification();
+		
+		loginPage.userLogin(username, "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890");
+		loginPage.invalidCredentialVerification();
+
+	}
 
 	/**
 	 *

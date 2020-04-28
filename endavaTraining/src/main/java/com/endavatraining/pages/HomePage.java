@@ -20,6 +20,7 @@ public class HomePage extends BasePage {
 	private By profileButton = By.linkText("Profile");
 	private By logOutTitle = By.xpath("//div[@class='alert alert-success']");
 	private By shareWithFriends = By.xpath("//*[text()='Share with friends!']");
+	private By startTesting = By.xpath("//*[text()='Start Testing!']");
 	private By title = By.className("panel-title text-center");
 	private By samsara = By.cssSelector("a.navbar-brand");
 	private By body = By.cssSelector("body");
@@ -106,6 +107,14 @@ public class HomePage extends BasePage {
 	 */
 	public void clickOnShareWithFriendsButton() {
 		driver.findElement(shareWithFriends).click();
+	}
+
+	/**
+	 * This method clicks on Start Testing button
+	 * 
+	 */
+	public void clickOnStratTestingButton() {
+		driver.findElement(startTesting).click();
 	}
 
 	/**

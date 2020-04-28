@@ -100,6 +100,23 @@ public class TestHomePage extends BaseTest {
 	}
 
 	/**
+	 * Test validates that Start Testing button works properly
+	 * 
+	 */
+	@Test
+	public void testStartTesting() {
+
+		loginPage.open();
+		homePage = loginPage.openAs(username, password);
+		homePage.clickOnSamsaraButton();
+		homePage.clickOnStratTestingButton();
+		String message = homePage.alertMethod();
+		Assert.assertEquals(message, "http://172.17.167.71:9010", "Provided link is not correct");
+		homePage.clickOnButton(homePage.getLogOutButton());
+
+	}
+
+	/**
 	 * Test validates that the Admin Tab is not present when logged in as a regular
 	 * User
 	 *

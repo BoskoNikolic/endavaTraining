@@ -41,8 +41,9 @@ public class TestHeroesPage extends BaseTest {
 		heroesPage = new HeroesPage(homePage.driver);
 		heroesPage.openHeroPage();
 
-		Assert.assertFalse(heroesPage.isHeroInTable(heroName), "Hero with this username already exists in table!");
-
+		// check if hero already exists in table and delete him, and it will be possible to enter him again
+		heroesPage.deleteHeroifExists(heroName);
+		
 		heroesPage.openAddNewHeroWindow();
 		heroesPage.insertHeroName(heroName);
 		heroesPage.insertHeroLevel(heroLevel);
@@ -51,6 +52,27 @@ public class TestHeroesPage extends BaseTest {
 
 		Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not added!");
 		log.info("Verifies that new hero is added (shown on table).");
+
+		heroesPage.logout();
+	}
+	@Test(priority = 0, dataProvider = "DataProvider")
+	public void testEditExistingHero(String heroName, String heroLevel, String heroClass) {
+
+		homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+
+		heroesPage = new HeroesPage(homePage.driver);
+		heroesPage.openHeroPage();
+
+		// check if hero already exists in table and edit him
+		heroesPage.editHeroifExists(heroName);
+		
+		heroesPage.editHeroName(heroName);
+		heroesPage.editHeroLevel(heroLevel);
+		heroesPage.editHeroClass(heroClass);
+		heroesPage.saveEditedHero();
+
+		Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not edited!");
+		log.info("Verifies that hero is edited (shown on table).");
 
 		heroesPage.logout();
 	}

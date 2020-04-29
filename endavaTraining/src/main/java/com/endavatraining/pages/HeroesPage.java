@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
@@ -17,15 +19,23 @@ public class HeroesPage extends BasePage {
 	private WebDriverWait wait = new WebDriverWait(driver, 3);
 	private By heroesButton = By.linkText("Heroes");
 	private By dropDownOnHeroesPage = By.id("pageSizeSelect");
-	private By heroTableBody = By.xpath("//table[@id=\"heroes-table\"]/tbody/tr");
-	private By deleteHeroButton = By.xpath("//*[@id=\"deleteHeroModal\"]/div/div/div[3]/form/button[2]");
+	private By heroTableBody = By.xpath("//table[@id='heroes-table']/tbody/tr");
+	private By deleteHeroButton = By.xpath("//div[@class='container']/div[1]/div[1]/div[@id='deleteHeroModalHolder']/div[@id='deleteHeroModal']");
+	private By editHeroButton = By.xpath("//div[@class='container']/div[1]/div[1]/div[@id='editHeroModalHolder']/div[@id='editHeroModal']");
+
 	public static By heroesPageTab = By.linkText("Heroes");
-	public static By addNewHeroButton = By.linkText("Add New Hero");
-	public static By addHeroName = By.xpath("//*[@id=\"name\"]");
-	public static By addHeroLevel = By.id("level");
-	public static By addHeroClass = By.id("type");
-	public static By addHeroSave = By.id("submitButton");
-	public static By logoutButton = By.xpath("//*[@id=\"headContainer\"]/nav/div/ul[2]/li[2]/a");
+	public static By addNewHeroButton = By.xpath("//div[@class='panel-body']/div[@class='row']/div[@class='text-right col-sm-6']/a[@href='#']/span[1]");
+	public static By addHeroName = By.xpath("//div[@class = 'panel panel-default']/div[@id='addHeroModalHolder']/div[@id='addHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='add-hero-form']/div[@class='modal-body']/div[@class='form-group']/input[@name='name']");
+	public static By addHeroLevel = By.xpath("//div[@class = 'panel panel-default']/div[@id='addHeroModalHolder']/div[@id='addHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='add-hero-form']/div[@class='modal-body']/div[@class='form-group']/input[@name='level']");
+	public static By addHeroClass = By.xpath("//div[@class = 'panel panel-default']/div[@id='addHeroModalHolder']/div[@id='addHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='add-hero-form']/div[@class='modal-body']/div[@class='form-group']/select[@id='type']");
+	public static By addHeroSave = By.xpath("//div[@class = 'panel panel-default']/div[@id='addHeroModalHolder']/div[@id='addHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='add-hero-form']/div[@class='modal-footer']/button[@type='submit']");
+	public static By editHeroName = By.xpath("//div[@class = 'panel panel-default']/div[@id='editHeroModalHolder']/div[@id='editHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='edit-hero-form']/div[@class='modal-body']/div[@class='form-group']/input[@name='name']");
+	public static By editHeroLevel = By.xpath("//div[@class = 'panel panel-default']/div[@id='editHeroModalHolder']/div[@id='editHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='edit-hero-form']/div[@class='modal-body']/div[@class='form-group']/input[@name='level']");
+	public static By editHeroClass = By.xpath("//div[@class = 'panel panel-default']/div[@id='editHeroModalHolder']/div[@id='editHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='edit-hero-form']/div[@class='modal-body']/div[@class='form-group']/select[@id='type']");
+	public static By editHeroSave = By.xpath("//div[@class = 'panel panel-default']/div[@id='editHeroModalHolder']/div[@id='editHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='edit-hero-form']/div[@class='modal-footer']/button[@type='submit']");
+	public static By deleteExistingHero = By.xpath("//div[@class = 'panel panel-default']/div[@id='deleteHeroModalHolder']/div[@id='deleteHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-footer']/form[@method='post']/button[@type='submit']");
+	
+	public static By logoutButton = By.xpath("//nav[@class='navbar navbar-default']/div[@class='container-fluid']/ul[@class='nav navbar-nav navbar-right']/li[@class='']/text=' Log Out'");
 	public static By heroLevelErrorMessage = By
 			.xpath("//div[@id='levelMessage'][contains(.,\"Level is a number between 0 and 80\")]");
 	public static By cancelAddHero = By.xpath("//*[@id=\"add-hero-form\"]/div[2]/button[1]");
@@ -100,6 +110,22 @@ public class HeroesPage extends BasePage {
 	}
 
 	/*
+	 * This method checks if the hero with given name already exists in table
+	 */
+	public void editExistingHero(String heroName) {
+		isHeroInTable(heroName);
+		rows = driver.findElements(heroTableBody);
+		for (int i = 0; i < rows.size(); i++) {
+			if (heroName.equals(
+					getTextOfElement(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[1]")))) {
+				clickOnButton(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[5]/a[2]"));
+				wait.until(ExpectedConditions.elementToBeClickable(editHeroButton));
+				clickOnButton(editHeroButton);
+			}
+		}
+	}
+
+	/*
 	 * This method deletes hero with given name from a table
 	 * 
 	 * @author Srboljub.Todorovic
@@ -114,6 +140,8 @@ public class HeroesPage extends BasePage {
 				clickOnButton(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[5]/a[3]"));
 				wait.until(ExpectedConditions.elementToBeClickable(deleteHeroButton));
 				clickOnButton(deleteHeroButton);
+				wait.until(ExpectedConditions.elementToBeClickable(deleteExistingHero));
+				clickOnButton(deleteExistingHero);
 			}
 		}
 	}
@@ -179,11 +207,27 @@ public class HeroesPage extends BasePage {
 		clickOnButton(addHeroSave);
 	}
 
+	public void editHeroName(String heroName) {
+		typeTextOnElement(editHeroName, heroName);
+	}
+	
+	public void editHeroLevel(String heroLevel) {
+		typeTextOnElement(editHeroLevel, heroLevel);
+	}
+	
+	public void editHeroClass(String heroClass) {
+		dropDownMenuSelect(editHeroClass, heroClass);
+	}
+	
+	public void saveEditedHero() {
+		clickOnButton(editHeroSave);
+	}
+
 	/*
 	 * This method does logout function
 	 * 
 	 * @author Srboljub.Todorovic
-	 */
+	 */	
 	public void logout() {
 		wait.until(ExpectedConditions.elementToBeClickable(logoutButton));
 		clickOnButton(logoutButton);
@@ -307,6 +351,30 @@ public class HeroesPage extends BasePage {
 		}
 		log.debug("Checked the number of users heroes on the My Heroes page");
 		return numberOfMyHeroes;
+	}
+
+	/**
+	 * This method check if hero already exists in table and delete him
+	 **/
+	public void deleteHeroifExists(String heroName) {
+
+		openHeroPage();
+
+		if(isHeroInTable(heroName)) {
+			deleteHeroInTable(heroName);
+		}
+	}
+
+	/**
+	 * This method check if hero already exists in table and edits him
+	 **/
+	public void editHeroifExists(String heroName) {
+
+		openHeroPage();
+
+		if(isHeroInTable(heroName)) {
+			deleteHeroInTable(heroName);
+		}
 	}
 
 }

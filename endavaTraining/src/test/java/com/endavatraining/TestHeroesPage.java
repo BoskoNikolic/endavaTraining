@@ -54,11 +54,56 @@ public class TestHeroesPage extends BaseTest {
 		log.info("Verifies that new hero is added (shown on table).");
 
 		heroesPage.logout();
+		
+	}@Test(priority = 0, dataProvider = "DataProvider")
+	public void testAdminAddingNewHero(String heroName, String heroLevel, String heroClass) {
+
+		homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
+
+		heroesPage = new HeroesPage(homePage.driver);
+		heroesPage.openHeroPage();
+
+		// check if hero already exists in table and delete him, and it will be possible to enter him again
+		heroesPage.deleteHeroifExists(heroName);
+		
+		heroesPage.openAddNewHeroWindow();
+		heroesPage.insertHeroName(heroName);
+		heroesPage.insertHeroLevel(heroLevel);
+		heroesPage.insertHeroClass(heroClass);
+		heroesPage.saveNewHero();
+
+		Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not added!");
+		log.info("Verifies that new hero is added (shown on table).");
+
+		heroesPage.logout();
 	}
+	
 	@Test(priority = 0, dataProvider = "DataProvider")
 	public void testEditExistingHero(String heroName, String heroLevel, String heroClass) {
 
 		homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+
+		heroesPage = new HeroesPage(homePage.driver);
+		heroesPage.openHeroPage();
+
+		// check if hero already exists in table and edit him
+		heroesPage.editHeroifExists(heroName);
+		
+		heroesPage.editHeroName(heroName);
+		heroesPage.editHeroLevel(heroLevel);
+		heroesPage.editHeroClass(heroClass);
+		heroesPage.saveEditedHero();
+
+		Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not edited!");
+		log.info("Verifies that hero is edited (shown on table).");
+
+		heroesPage.logout();
+	}
+	
+	@Test(priority = 0, dataProvider = "DataProvider")
+	public void testAdminEditExistingHero(String heroName, String heroLevel, String heroClass) {
+
+		homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
 
 		heroesPage = new HeroesPage(homePage.driver);
 		heroesPage.openHeroPage();
@@ -88,6 +133,21 @@ public class TestHeroesPage extends BaseTest {
 	public void deleteAddedHeroes(String heroName, String heroLevel, String heroClass) {
 
 		homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+
+		heroesPage = new HeroesPage(homePage.driver);
+		heroesPage.openHeroPage();
+
+		heroesPage.deleteHeroInTable(heroName);
+		log.info(
+				"Erasing inserted values so the previous test could be performed multiple times with same set of data");
+
+		heroesPage.logout();
+	}
+	
+	@Test(priority = 1, dataProvider = "DataProvider", dependsOnMethods = { "testAddingNewHero" })
+	public void deleteAdminAddedHeroes(String heroName, String heroLevel, String heroClass) {
+
+		homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
 
 		heroesPage = new HeroesPage(homePage.driver);
 		heroesPage.openHeroPage();

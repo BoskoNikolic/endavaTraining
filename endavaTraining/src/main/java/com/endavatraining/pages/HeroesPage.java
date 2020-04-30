@@ -35,7 +35,7 @@ public class HeroesPage extends BasePage {
 	public static By editHeroSave = By.xpath("//div[@class = 'panel panel-default']/div[@id='editHeroModalHolder']/div[@id='editHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='edit-hero-form']/div[@class='modal-footer']/button[@type='submit']");
 	public static By deleteExistingHero = By.xpath("//div[@class = 'panel panel-default']/div[@id='deleteHeroModalHolder']/div[@id='deleteHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-footer']/form[@method='post']/button[@type='submit']");
 	
-	public static By logoutButton = By.xpath("//nav[@class='navbar navbar-default']/div[@class='container-fluid']/ul[@class='nav navbar-nav navbar-right']/li[@class='']/text=' Log Out'");
+	public static By logoutButton = By.xpath("//header/nav/div/ul[2]/li[2]/a");
 	public static By heroLevelErrorMessage = By
 			.xpath("//div[@id='levelMessage'][contains(.,\"Level is a number between 0 and 80\")]");
 	public static By cancelAddHero = By.xpath("//*[@id=\"add-hero-form\"]/div[2]/button[1]");

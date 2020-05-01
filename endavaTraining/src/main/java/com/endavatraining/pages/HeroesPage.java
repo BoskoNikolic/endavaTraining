@@ -22,7 +22,10 @@ public class HeroesPage extends BasePage {
 	private By heroTableBody = By.xpath("//table[@id='heroes-table']/tbody/tr");
 	private By deleteHeroButton = By.xpath("//div[@class='container']/div[1]/div[1]/div[@id='deleteHeroModalHolder']/div[@id='deleteHeroModal']");
 	private By editHeroButton = By.xpath("//div[@class='container']/div[1]/div[1]/div[@id='editHeroModalHolder']/div[@id='editHeroModal']");
-
+	private By dropDownOnHerosPage = By.id("pageSizeSelect");
+	private By search = By.id("search");
+	private By searchIcon = By.cssSelector("button[class='btn btn-info btn-sm']");
+	
 	public static By heroesPageTab = By.linkText("Heroes");
 	public static By addNewHeroButton = By.xpath("//div[@class='panel-body']/div[@class='row']/div[@class='text-right col-sm-6']/a[@href='#']/span[1]");
 	public static By addHeroName = By.xpath("//div[@class = 'panel panel-default']/div[@id='addHeroModalHolder']/div[@id='addHeroModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='add-hero-form']/div[@class='modal-body']/div[@class='form-group']/input[@name='name']");
@@ -144,6 +147,37 @@ public class HeroesPage extends BasePage {
 				clickOnButton(deleteExistingHero);
 			}
 		}
+	}
+	
+	public void canNotDeleteOtherUserHeroInTable(String heroName, String userLogged){
+		rows = driver.findElements(heroTableBody);
+		for (int i = 0; i < rows.size() - 1; i++) {
+			if (heroName.equals(
+					getTextOfElement(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[1]")))) {
+				if(userLogged.equals(
+						getTextOfElement(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[4]")))) {
+				   clickOnButton(By.xpath("//table[@id=\"heroes-table\"]/tbody/tr[" + (i + 1) + "]/td[5]/a[3]"));
+				   wait.until(ExpectedConditions.elementToBeClickable(deleteHeroButton));
+				   clickOnButton(deleteHeroButton);
+				   wait.until(ExpectedConditions.elementToBeClickable(deleteExistingHero));
+				   clickOnButton(deleteExistingHero);
+				}
+			}
+		}
+		
+	}
+	
+	public void clickOnSearchIcon() {
+		driver.findElement(searchIcon).click();
+	}
+	
+	public void selectValueFromDropDownOnHerosPage(int index) {
+		Select dropdown = new Select(driver.findElement(dropDownOnHerosPage));
+		dropdown.selectByIndex(index);
+	}
+	
+	public void searchHero(String searchParameter) {
+		driver.findElement(search).sendKeys(searchParameter);
 	}
 
 	/*

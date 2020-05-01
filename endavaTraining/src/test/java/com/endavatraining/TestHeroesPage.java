@@ -55,7 +55,9 @@ public class TestHeroesPage extends BaseTest {
 
 		heroesPage.logout();
 		
-	}@Test(priority = 0, dataProvider = "DataProvider")
+	}
+	
+	@Test(priority = 0, dataProvider = "DataProvider")
 	public void testAdminAddingNewHero(String heroName, String heroLevel, String heroClass) {
 
 		homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
@@ -101,6 +103,26 @@ public class TestHeroesPage extends BaseTest {
 	}
 	
 	@Test(priority = 0, dataProvider = "DataProvider")
+	public void renameUserExistingHero(String heroName, String heroLevel, String heroClass) {
+
+		homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+
+		heroesPage = new HeroesPage(homePage.driver);
+		heroesPage.openHeroPage();
+
+		// check if hero already exists in table and edit him
+		heroesPage.editHeroifExists(heroName);
+		
+		heroesPage.editHeroName(heroName);
+		heroesPage.saveEditedHero();
+
+		Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not renamed!");
+		log.info("Verifies that hero is renamed (shown on table).");
+
+		heroesPage.logout();
+	}
+	
+	@Test(priority = 0, dataProvider = "DataProvider")
 	public void testAdminEditExistingHero(String heroName, String heroLevel, String heroClass) {
 
 		homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
@@ -121,6 +143,26 @@ public class TestHeroesPage extends BaseTest {
 
 		heroesPage.logout();
 	}
+	
+	@Test(priority = 0, dataProvider = "DataProvider")
+	public void renameAdminExistingHero(String heroName, String heroLevel, String heroClass) {
+
+		homePage = loginPage.openAs(ADMIN_USERNAME, ADMIN_PASSWORD);
+
+		heroesPage = new HeroesPage(homePage.driver);
+		heroesPage.openHeroPage();
+
+		// check if hero already exists in table and edit him
+		heroesPage.editHeroifExists(heroName);
+		
+		heroesPage.editHeroName(heroName);
+		heroesPage.saveEditedHero();
+
+		Assert.assertTrue(heroesPage.isHeroInTable(heroName), "Hero with this username is not renamed!");
+		log.info("Verifies that hero is renamed (shown on table).");
+
+		heroesPage.logout();
+	}
 
 	/*
 	 * Test erases inputs from previous test
@@ -130,7 +172,7 @@ public class TestHeroesPage extends BaseTest {
 	 * @param String heroName, String heroLevel, String heroClass
 	 */
 	@Test(priority = 1, dataProvider = "DataProvider", dependsOnMethods = { "testAddingNewHero" })
-	public void deleteAddedHeroes(String heroName, String heroLevel, String heroClass) {
+	public void deleteAddedHeroes(String heroName) {
 
 		homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
 
@@ -141,6 +183,23 @@ public class TestHeroesPage extends BaseTest {
 		log.info(
 				"Erasing inserted values so the previous test could be performed multiple times with same set of data");
 
+		heroesPage.logout();
+	}
+	
+	@Test(priority = 1, dataProvider = "DataProvider", dependsOnMethods = { "testAddingNewHero" })
+	public void canNotDeleteOtherUserHeroes(String heroName, String heroLevel, String heroClass) {
+
+		homePage = loginPage.openAs(USER_USERNAME, USER_PASSWORD);
+
+		heroesPage = new HeroesPage(homePage.driver);
+		heroesPage.openHeroPage();
+
+		heroesPage.canNotDeleteOtherUserHeroInTable(heroName, USER_USERNAME);
+		Assert.assertTrue(heroesPage.isHeroLevelErrorMessagePresent(),
+				"User can not delete heroes he does not own");
+		log.info("Verified that user can not delete heroes he does not own.");
+		log.info(
+				"Erasing inserted values so the previous test could be performed multiple times with same set of data");
 		heroesPage.logout();
 	}
 	
@@ -213,6 +272,29 @@ public class TestHeroesPage extends BaseTest {
 		usersPage.searchUser("admin");
 		log.info("Search for admin user");
 		usersPage.clickOnSearchIcon();
+		int heroCountForAdminOnUserPage = usersPage.heroCountForAdminUserOnUserPage();
+		log.info("Count the number of heroes for admin user on User page");
+		heroesPage = new HeroesPage(homePage.driver);
+		heroesPage.clickOnHeroesButton();
+		heroesPage.selectValueFromDropDownOnHeroesPage(3);
+		int heroCountForAdminOnHeroesPage = heroesPage.heroCountForAdminUserOnHeroesPage();
+		log.info("Count the number of heroes for admin user on Heroes page");
+		Assert.assertEquals(heroCountForAdminOnUserPage, heroCountForAdminOnHeroesPage,
+				" Hero count for admin user is not the same on Users page (list of users) and Hero Page(heroes list)");
+		heroesPage.logout();
+
+	}	
+	
+	@Test
+	public void isHeroCountCorrect3(String heroName) {
+
+		homePage = loginPage.openAs(BaseTest.USER_USERNAME, BaseTest.USER_PASSWORD);
+		homePage.clickOnUsersButton();
+		usersPage = new UsersPage(homePage.driver);
+		usersPage.selectValueFromDropDownOnUsersPage(3);
+		heroesPage.searchHero(heroName);
+		log.info("Search for hero");
+		heroesPage.clickOnSearchIcon();
 		int heroCountForAdminOnUserPage = usersPage.heroCountForAdminUserOnUserPage();
 		log.info("Count the number of heroes for admin user on User page");
 		heroesPage = new HeroesPage(homePage.driver);

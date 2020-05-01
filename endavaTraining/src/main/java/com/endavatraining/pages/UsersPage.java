@@ -7,13 +7,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.util.List;
 
 public class UsersPage extends BasePage {
 
 	private List<WebElement> rows;
+	public static By usersPageTab = By.linkText("Users");
 	public static By userDetails = By.id("userModal");
+	public static By addNewUserButton = By.xpath("//div[@class='panel-body']/div[@class='row']/div[@class='text-right col-sm-6']/a[@href='#']/span[1]");
+	public static By adminHomeTab = By.linkText("Admin");
 	private By userDetailsFirstname = By
 			.xpath("/html/body/div[1]/div/div/div[3]/div/div/div/div[2]/div/div[2]/p/span[4]");
 	private By userDetailsLastname = By
@@ -31,7 +35,26 @@ public class UsersPage extends BasePage {
 	private By dropDownOnUsersPage = By.id("pageSizeSelect");
 	private By searchIcon = By.cssSelector("button[class='btn btn-info btn-sm']");
 	private By heroCountField = By.xpath("//*[@id=\"users-table\"]/tbody/tr[1]/td[3]");
+	
+	private By userTableBody = By.xpath("//table");
+	private By deleteUserButton = By.xpath("//div[@class='container']/div[1]/div[1]/div[@id='deleteUserModalHolder']/div[@id='deleteUserModal']");
+	public static By deleteExistingUser = By.xpath("//div[@class = 'panel panel-default']/div[@id='deleteUserModalHolder']/div[@id='deleteUserModal']/div[@class='modal-dialog']/div[@class='modal-content']/div[@class='modal-footer']/form[@method='post']/button[@type='submit']");
 
+	
+	public static By addUserSave = By.xpath("//div[@class='modal-footer']/button[2]");
+	public static By addNewUserrepasword = By.xpath("//div[@class='container']/div[@class='mainbox col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2']/div[@class='panel panel-default']/div[@id='addUserModalHolder']/div[@id='addUserModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='add-user-form']/div[@class='modal-body']/div[@class='form-group'][8]/input[@id='repassword']");
+	public static By addNewUserpasword = By.xpath("//div[@class='container']/div[@class='mainbox col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2']/div[@class='panel panel-default']/div[@id='addUserModalHolder']/div[@id='addUserModal']/div[@class='modal-dialog']/div[@class='modal-content']/form[@id='add-user-form']/div[@class='modal-body']/div[@class='form-group'][7]/input[@id='password']']");    
+	public static By addUserName = By.xpath("//input[@id='username']");
+    public static By addUserFirstName = By.xpath("//input[@id='firstName']");
+    public static By addUserLastName = By.xpath("//input[@id='lastName']");
+    public static By addUserAbout = By.xpath("//input[@id='about']");
+    public static By addUserSecretQuestion = By.xpath("//input[@id='secretQuestion']");
+    public static By addUserSecretAnswer = By.xpath("//input[@id='secretAnswer']");
+
+
+
+    
+	
 	private WebDriverWait wait = new WebDriverWait(driver, 15);
 
 	public UsersPage(WebDriver driver) {
@@ -183,6 +206,39 @@ public class UsersPage extends BasePage {
 		return lastName;
 
 	}
+	
+	public void insertUserName(String userName) {
+		typeTextOnElement(addUserName, userName);
+	}
+	
+	public void insertUserFirstName(String firstName) {
+		typeTextOnElement(addUserFirstName, firstName);
+	}
+
+	public void insertUserLastName(String lastName) {
+		typeTextOnElement(addUserLastName, lastName);
+	}
+
+	public void insertUserAbout(String about) {
+		typeTextOnElement(addUserAbout, about);
+	}
+
+	public void insertUserSecretQuestion(String secretQuestion) {
+		typeTextOnElement(addUserSecretQuestion, secretQuestion);
+	}
+
+	public void insertUserSecretAnswer(String secretAnswer) {
+		typeTextOnElement(addUserSecretAnswer, secretAnswer);
+	}
+
+	public void insertUserPassword(String password) {
+		typeTextOnElement(addNewUserpasword, password);
+	}
+
+	public void insertUserConfirmPassword(String confirmPassword) {
+		typeTextOnElement(addNewUserrepasword, confirmPassword);
+	}
+	
 
 	/**
 	 * Method gets the first name of a user from the Details page
@@ -219,6 +275,11 @@ public class UsersPage extends BasePage {
 		String aboutMessage = driver.findElement(userDetailsAbout).getText();
 		return aboutMessage;
 	}
+	
+	public void openUsersPage() {
+		wait.until(ExpectedConditions.elementToBeClickable(usersPageTab));
+		clickOnButton(usersPageTab);
+	}
 
 	/**
 	 * Method gets the Creation time of a user from the Details page
@@ -254,6 +315,53 @@ public class UsersPage extends BasePage {
 		clickOnButton(UsersPage.adminHeroCountUsersTable);
 		rows = driver.findElements(userHeroesWindowBody);
 		return rows.size() - 1;
+	}
+	
+	public void openAddNewUserWindow() {
+		clickOnButton(addNewUserButton);
+	}
+	
+	public void saveNewUser() {
+		clickOnButton(addUserSave);
+	}
+	
+	public void deleteUserInTable(String userName) {
+		rows = driver.findElements(userTableBody);
+		for (int i = 0; i < rows.size() - 1; i++) {
+			if (userName.equals(
+					getTextOfElement(By.xpath("//table/tbody/tr[" + (i + 1) + "]/td[1]")))) {
+				clickOnButton(By.xpath("//table/tbody/tr[" + (i + 1) + "]/td[4]/a[3]"));
+				wait.until(ExpectedConditions.elementToBeClickable(deleteUserButton));
+				clickOnButton(deleteUserButton);
+				wait.until(ExpectedConditions.elementToBeClickable(deleteExistingUser));
+				clickOnButton(deleteExistingUser);
+			}
+		}
+	}
+	
+	public boolean isUserInTable(String userName) {
+		rows = driver.findElements(userTableBody);
+		for (int i = 0; i < rows.size(); i++) {
+			if (userName.equals(
+					getTextOfElement(By.xpath("//table/tbody/tr[" + (i + 1) + "]/td[1]")))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean openAdminPage() {
+		driver.findElements(adminHomeTab);
+		return false;
+	}
+	
+	public void deleteUserifExists(String userName) {
+
+		openUsersPage();
+
+		if(isUserInTable(userName)) {
+			deleteUserInTable(userName);
+		}
 	}
 
 	/**
